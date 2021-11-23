@@ -1,3 +1,16 @@
+BEGIN;
+set foreign_key_checks = 0;
+
+DROP TABLE IF EXISTS Accounts;
+DROP TABLE IF EXISTS Projects;
+DROP TABLE IF EXISTS Subprojects;
+DROP TABLE IF EXISTS Tasks;
+DROP TABLE IF EXISTS Teams;
+
+set foreign_key_checks = 1;
+
+
+
 create table Accounts
 (
     ID       int auto_increment,
@@ -92,3 +105,4 @@ create table Tasks
 alter table Tasks
     add primary key (ID);
 
+commit;
