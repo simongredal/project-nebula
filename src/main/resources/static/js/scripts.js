@@ -9,3 +9,7 @@ function passwordVisibility(){
         pass_element.type = "password";
     }
 }
+
+function fake(){
+    return 2;
+}
