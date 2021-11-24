@@ -37,7 +37,7 @@ public class SignupController {
         if (success) {
             log.info("Successful signup");
             return "redirect:/login?signupSuccess";
-        }
+        } else
 
         log.info("Unsuccessful signup");
         return "redirect:/signup?error";

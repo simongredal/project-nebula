@@ -21,6 +21,6 @@ public class SignupService {
                 request.email(),
                 passwordEncoder.encode(request.password()));
 
-        return accountRepository.addAccount(account);
+        return accountRepository.createAccount(account);
         }
 }

@@ -1,4 +1,4 @@
-package gruppe8.nebula;
+package gruppe8.nebula.services;
 
 
 import org.springframework.context.annotation.Scope;

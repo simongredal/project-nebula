@@ -1,6 +1,6 @@
 package gruppe8.nebula.repositories;
 
-import gruppe8.nebula.DatabaseManager;
+import gruppe8.nebula.services.DatabaseManager;
 import gruppe8.nebula.entities.TaskEntity;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +22,7 @@ public class TaskRepository {
     public List<TaskEntity> getTasksForProject(Long projectId) {
         List<TaskEntity> tasks = new ArrayList<>();
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "SELECT * FROM tasks WHERE tasks.project_id = ?";
+            String query = "SELECT * FROM Nebula.tasks WHERE tasks.project_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, projectId);
 
