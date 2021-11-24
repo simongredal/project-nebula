@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
@@ -45,7 +46,51 @@ public class AccountRepository implements UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    // Username is actually Account, but since it's an interface we cannot change the method name.
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        if (!accountExists(name)) throw new UsernameNotFoundException(name);
+
+        String query =  """
+                        SELECT id, email, name, password
+                        FROM Nebula.accounts
+                        WHERE email LIKE ?
+                        """;
+        Account account = null;
+
+        try (Connection connection = databaseManager.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, name);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next())  {
+                 account = new Account(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password")
+                );
+            }
+        } catch (SQLException e){
+            logger.error(e.getMessage());
+        }
+        return account;
     }
+
+    public boolean accountExists(String name) {
+        try (Connection connection = databaseManager.getConnection()) {
+            String query = "SELECT EXISTS(SELECT email FROM Nebula.Accounts WHERE email LIKE ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+            return resultSet.getInt(1) == 1;
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+        return false;
+    }
+
 }
+
