@@ -1,7 +1,7 @@
 package gruppe8.nebula.repositories;
 
 
-import gruppe8.nebula.DatabaseManager;
+import gruppe8.nebula.services.DatabaseManager;
 import gruppe8.nebula.models.Account;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class AccountRepository implements UserDetailsService {
         this.logger = LoggerFactory.getLogger(this.getClass());
     }
 
-    public boolean addAccount(Account account){
+    public boolean createAccount(Account account){
 
         try(Connection connection = databaseManager.getConnection()){
             String query = "insert into Nebula.Accounts (name, password, email) VALUES (?,?,?)";
@@ -35,7 +35,7 @@ public class AccountRepository implements UserDetailsService {
             preparedStatement.setString(3,account.getEmail());
 
             preparedStatement.execute();
-
+            return preparedStatement.getUpdateCount() == 1;
 
         }catch (SQLException e){
             logger.error(e.getMessage());
