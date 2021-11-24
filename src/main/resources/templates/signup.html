@@ -9,7 +9,7 @@
 <body>
 
 
-<form action="#" method="POST">
+<form th:action="@{/signup}" method="POST">
     <label>Name
         <input type="text" required>
     </label>
@@ -22,6 +22,10 @@
         <input type="password" id="password" required>
         <input type="checkbox" onclick="passwordVisibility()">
         <label>Toggle</label>
+    </label>
+
+    <label>
+        <input type="submit" value="Signup">
     </label>
 
 
