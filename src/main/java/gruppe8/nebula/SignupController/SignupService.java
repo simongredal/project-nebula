@@ -17,7 +17,7 @@ public class SignupService {
 
     public Boolean register(SignupRequest request) {
         Account account = new Account(
-                request.fullName(),
+                request.name(),
                 request.email(),
                 passwordEncoder.encode(request.password()));
 
