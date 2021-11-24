@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" th:src="@{../js/scripts.js}"></script>
+
+    <title>Login page</title>
+</head>
+<body>
+
+
+<form action="#" method="POST">
+    <label>Email
+        <input type="email" required>
+    </label>
+
+    <label for="password">Kodeord
+        <input type="password" id="password" required>
+        <input type="checkbox"  onclick="passwordVisibility()">
+        <label>Toggle</label>
+    </label>
+
+    <label>
+        <input type="submit" value="Login!">
+    </label>
+
+</form>
+
+</body>
+</html>
