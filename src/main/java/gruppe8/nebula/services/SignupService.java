@@ -1,7 +1,8 @@
-package gruppe8.nebula.SignupController;
+package gruppe8.nebula.services;
 
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.repositories.AccountRepository;
+import gruppe8.nebula.requests.SignupRequest;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,9 @@ public class SignupService {
         Account account = new Account(
                 request.name(),
                 request.email(),
-                passwordEncoder.encode(request.password()));
+                passwordEncoder.encode(request.password())
+        );
 
         return accountRepository.createAccount(account);
-        }
+    }
 }
