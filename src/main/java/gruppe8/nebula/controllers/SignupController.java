@@ -1,6 +1,8 @@
-package gruppe8.nebula.SignupController;
+package gruppe8.nebula.controllers;
 
 
+import gruppe8.nebula.services.SignupService;
+import gruppe8.nebula.requests.SignupRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
