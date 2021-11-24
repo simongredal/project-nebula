@@ -21,13 +21,4 @@ public class Task {
                 .filter(taskEntity -> task.id().equals(taskEntity.parent()))
                 .forEach( t -> this.subtasks.add(new Task(t, tasks)) );
     }
-
-    @Override
-    public String toString() {
-        return "Task {<br>\n" +
-                "id=" + id + "<br>\n" +
-                "name='" + name + "'<br>\n" +
-                "subtasks=" + subtasks + "<br>\n" +
-                "}";
-    }
 }

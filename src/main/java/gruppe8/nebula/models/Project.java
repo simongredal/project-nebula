@@ -22,15 +22,5 @@ public class Project {
         tasks.stream()
                 .filter(taskEntity -> taskEntity.parent() == 0L )
                 .forEach( t -> this.subtasks.add(new Task(t, tasks)));
-
-    }
-
-    @Override
-    public String toString() {
-        return "Project {<br>\n" +
-                "id=" + id + "<br>\n" +
-                "name='" + name + "'<br>\n" +
-                "subtasks=" + subtasks + "<br>\n" +
-                "}";
     }
 }
