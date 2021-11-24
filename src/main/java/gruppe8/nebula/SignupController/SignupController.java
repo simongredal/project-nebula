@@ -14,11 +14,11 @@ import java.util.Optional;
 @Controller
 public class SignupController {
     private final SignupService signupService;
-    private final Logger logger;
+    private final Logger log;
 
     public SignupController(SignupService registrationService) {
         this.signupService = registrationService;
-        this.logger = LoggerFactory.getLogger(this.getClass());
+        this.log = LoggerFactory.getLogger(this.getClass());
     }
 
     @GetMapping("/signup")
@@ -31,15 +31,15 @@ public class SignupController {
 
     @PostMapping("/signup")
     public String addUser(SignupRequest request) {
-        logger.info("Received SignupRequest");
+        log.info("Received SignupRequest: " + request.toString());
         Boolean success = signupService.register(request);
 
         if (success) {
-            logger.info("Successful signup");
+            log.info("Successful signup");
             return "redirect:/login?signupSuccess";
         }
 
-        logger.info("Unsuccessful signup");
+        log.info("Unsuccessful signup");
         return "redirect:/signup?error";
     }
 
