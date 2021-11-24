@@ -30,7 +30,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .anyRequest().permitAll();
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/login?success")
+                .failureForwardUrl("/login?error")
+                .usernameParameter("email")
+                .passwordParameter("password");
     }
 
 

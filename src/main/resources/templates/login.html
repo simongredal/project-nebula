@@ -9,13 +9,13 @@
 <body>
 
 
-<form action="#" method="POST">
+<form th:action="@{/login}" method="POST">
     <label>Email
-        <input type="email" required>
+        <input type="email" name="email" required>
     </label>
 
     <label for="password">Kodeord
-        <input type="password" id="password" required>
+        <input type="password" id="password" name="password" required>
         <input type="checkbox"  onclick="passwordVisibility()">
         <label>Toggle</label>
     </label>

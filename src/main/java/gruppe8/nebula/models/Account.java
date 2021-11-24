@@ -6,11 +6,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class Account implements UserDetails {
+    private Integer id;
     private String name;
     private String password;
     private String email;
 
     public Account(String name, String password, String email) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+    }
+
+    public Account(Integer id, String name, String password, String email) {
+        this.id = id;
         this.name = name;
         this.password = password;
         this.email = email;
