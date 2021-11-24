@@ -11,15 +11,15 @@
 
 <form th:action="@{/signup}" method="POST">
     <label>Name
-        <input type="text" required>
+        <input type="text" name="name" required>
     </label>
 
     <label>Email
-        <input type="email" required>
+        <input type="email" name="email" required>
     </label>
 
     <label>Password
-        <input type="password" id="password" required>
+        <input type="password" id="password" name="password" required>
         <input type="checkbox" onclick="passwordVisibility()">
         <label>Toggle</label>
     </label>
