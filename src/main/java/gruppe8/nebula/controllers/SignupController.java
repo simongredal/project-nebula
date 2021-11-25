@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Optional;
 
@@ -18,31 +20,27 @@ public class SignupController {
     private final SignupService signupService;
     private final Logger log;
 
-    public SignupController(SignupService registrationService) {
-        this.signupService = registrationService;
+    public SignupController(SignupService signupService) {
+        this.signupService = signupService;
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
     @GetMapping("/signup")
-    public String signup(@RequestParam Optional<String> error, Model model) {
-        if (error.isPresent()) {
-            model.addAttribute("error", true);
-        }
+    public String signup(Model model) {
+        log.info("GET /signup: Model=" + model);
+
         return "signup";
     }
 
     @PostMapping("/signup")
-    public String addUser(SignupRequest request) {
-        log.info("Received SignupRequest: " + request.toString());
-        Boolean success = signupService.register(request);
+    public RedirectView addUser(SignupRequest request, RedirectAttributes redirectAttributes) {
+        log.info("POST /signup: SignupRequest=" + request.toString());
 
-        if (success) {
-            log.info("Successful signup");
-            return "redirect:/login?signupSuccess";
-        } else
+        Boolean signupWasSuccessful = signupService.register(request);
+        redirectAttributes.addFlashAttribute("signupWasSuccessful", signupWasSuccessful);
 
-        log.info("Unsuccessful signup");
-        return "redirect:/signup?error";
+        if (signupWasSuccessful) { return new RedirectView("/login"); }
+        return new RedirectView("/signup");
     }
 
 }
