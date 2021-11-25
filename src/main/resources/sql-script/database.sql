@@ -26,13 +26,15 @@ CREATE TABLE memberships
     team_id    int    NOT NULL,
     account_id int    NOT NULL,
     accepted   binary NULL,
-    CONSTRAINT team_id_fkindex FOREIGN KEY (team_id) REFERENCES teams (id) ON DELETE CASCADE,
-    CONSTRAINT account_id_fkindex FOREIGN KEY (account_id) REFERENCES accounts (id)
+    CONSTRAINT memberships_teams_fkindex FOREIGN KEY (team_id) REFERENCES teams (id) ON DELETE CASCADE,
+    CONSTRAINT memberships_accounts_fkindex FOREIGN KEY (account_id) REFERENCES accounts (id)
 );
 CREATE TABLE projects
 (
-    id   int AUTO_INCREMENT PRIMARY KEY,
-    name varchar(255) NOT NULL
+    id      int AUTO_INCREMENT PRIMARY KEY,
+    team_id int          NOT NULL,
+    name    varchar(255) NOT NULL,
+    CONSTRAINT projects_teams_fkindex FOREIGN KEY (team_id) REFERENCES teams (id) ON DELETE CASCADE
 );
 CREATE TABLE tasks
 (
@@ -40,7 +42,7 @@ CREATE TABLE tasks
     project_id int          NOT NULL,
     parent_id  int          NULL,
     name       varchar(255) NULL,
-    CONSTRAINT project_id_fkindex FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
-    CONSTRAINT parent_id_fkindex FOREIGN KEY (parent_id) REFERENCES tasks (id) ON DELETE CASCADE
+    CONSTRAINT tasks_projects_fkindex FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
+    CONSTRAINT tasks_tasks_fkindex FOREIGN KEY (parent_id) REFERENCES tasks (id) ON DELETE CASCADE
 );
 COMMIT;
