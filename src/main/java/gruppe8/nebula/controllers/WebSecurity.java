@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,26 +29,26 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests()
-                .anyRequest().permitAll()
-                .and()
-                .formLogin()
+            .csrf().disable()
+            .authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/js/*", "/css/*", "/images/*", "/fonts/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/", "/login*", "/signup*").permitAll()
+                .antMatchers(HttpMethod.POST,"/login", "/signup").permitAll()
+                .anyRequest().authenticated()
+            .and().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/login?success")
                 .failureForwardUrl("/login?error")
                 .usernameParameter("email")
-                .passwordParameter("password");
+                .passwordParameter("password")
+                .permitAll();
     }
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
-
-
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {

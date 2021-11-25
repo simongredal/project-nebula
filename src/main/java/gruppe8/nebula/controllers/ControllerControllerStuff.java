@@ -1,0 +1,13 @@
+package gruppe8.nebula.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class ControllerControllerStuff {
+
+    @GetMapping("/project_page")
+    public String stuff() {
+        return "project_page";
+    }
+}
