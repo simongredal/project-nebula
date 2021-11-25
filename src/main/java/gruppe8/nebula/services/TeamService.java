@@ -2,9 +2,12 @@ package gruppe8.nebula.services;
 
 import gruppe8.nebula.entities.TaskEntity;
 import gruppe8.nebula.entities.TeamEntity;
+import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Team;
+
 import gruppe8.nebula.repositories.TeamRepository;
 import gruppe8.nebula.requests.TeamRequest;
+import gruppe8.nebula.requests.TeamDeletionRequest;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +25,12 @@ public class TeamService {
 
     public Boolean addTeam(TeamRequest request) {
         Team team = new Team(
-                request.id(),
                 request.name()
         );
 
         return teamRepository.createTeam(team);
     }
-    public Boolean deleteTeam(TeamRequest request) {
+    public Boolean deleteTeam(TeamDeletionRequest request) {
         Team team = new Team(
                 request.id(),
                 request.name()
@@ -36,7 +38,7 @@ public class TeamService {
 
         return teamRepository.deleteTeam(team);
     }
-    public Boolean updateTeam(TeamRequest request, Team teamNew) {
+    public Boolean updateTeam(TeamDeletionRequest request, Team teamNew) {
         Team teamOld = new Team(
                 request.id(),
                 request.name()
