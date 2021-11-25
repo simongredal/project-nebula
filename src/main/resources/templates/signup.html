@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <th:block th:insert="fragments/components :: head">head</th:block>
-    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
+
     <script type="text/javascript" th:src="@{../js/scripts.js}"></script>
 
     <title>Sign up page</title>
@@ -10,29 +12,31 @@
 <body>
 <header th:replace="fragments/components :: navbar"></header>
 
+<main>
 
-<form th:action="@{/signup}" method="POST">
-    <label>Name
-        <input type="text" name="name" required>
-    </label>
+    <form th:action="@{/signup}" method="POST">
+        <div class="form-wrapper">
+            <label for="name">Name</label>
+            <input type="text" size="35" id="name" name="name" class="form-control" required>
+        </div>
 
-    <label>Email
-        <input type="email" name="email" required>
-    </label>
+        <div class="form-wrapper">
+            <label for="email">Email</label>
+            <input type="email" size="35" id="email" name="email" class="form-control" required>
+        </div>
 
-    <label>Password
-        <input type="password" id="password" name="password" required>
-        <input type="checkbox" onclick="passwordVisibility()">
-        <label>Toggle</label>
-    </label>
+        <div class="form-wrapper">
+            <label for="password">Password</label>
+            <input type="password" size="35" id="password" name="password" class="form-control"required>
+            <button type="button" id="password-toggle" class="bi-eye-slash" onclick="passwordVisibility()"></button>
+        </div>
 
-    <label>
         <input type="submit" value="Signup">
-    </label>
 
+    </form>
 
+</main>
 
-</form>
 
 </body>
 </html>
