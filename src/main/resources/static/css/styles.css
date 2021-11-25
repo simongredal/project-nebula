@@ -1,0 +1,30 @@
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 3em;
+    transform: translateY(15em);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+.form-wrapper {
+    margin-bottom: 17px; }
+.form-wrapper label {
+    margin-bottom: 9px;
+    display: block; }
+
+.form-control {
+    border: 1px solid #ccc;
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 20px;
+    background: none; }
+
+.form-control:focus {
+    border: 1px solid #ae3c33; }

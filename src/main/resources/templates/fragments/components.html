@@ -16,6 +16,7 @@
 
             <header class="navbar" th:if="${account} == null">
                     <div class="navbar-text">
+                        <a th:href="@{/}">Home</a>
                         <a th:href="@{/signup}">Signup!</a>
                         <a th:href="@{/login}">Login</a>
                     </div>
@@ -32,7 +33,19 @@
         </div>
     </nav>
 
+    <footer th:fragment="footer">
+        <div>
+            <span>
+                ©Copyright Nebula
+            </span>
+            <a th:href="@{/#}">Contact Nebula</a>
+            <a th:href="@{#}">About us</a>
+            <a th:href="@{#}">Terms of Use</a>
+        </div>
 
+
+
+    </footer>
 
 </body>
 </html>
