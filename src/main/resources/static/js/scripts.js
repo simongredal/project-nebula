@@ -1,12 +1,13 @@
 function passwordVisibility(){
+    const password_input = document.querySelector("#password")
+    const password_toggle = document.querySelector("#password-toggle")
 
-    var pass_element = document.getElementById("password")
-
-    if (pass_element.type === "password"){
-        pass_element.type = "text"
-    }
-    else{
-        pass_element.type = "password";
+    if (password_input.type === "password") {
+        password_input.type = "text"
+        password_toggle.className = "bi-eye"
+    } else{
+        password_input.type = "password";
+        password_toggle.className = "bi-eye-slash"
     }
 }
 
