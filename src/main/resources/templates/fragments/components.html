@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" th:href="@{../css/css_reset.css}">
+    <link rel="stylesheet" th:href="@{../css/navigation.css}">
+    <link rel="stylesheet" th:href="@{../css/styles.css}">
+</head>
+<body>
+
+    <nav class="container">
+
+        <div th:fragment="navbar" th:with="account=${account} ?: null" th:remove="tag">
+
+            <header class="navbar" th:if="${account} == null">
+                    <div class="navbar-text">
+                        <a th:href="@{/signup}">Signup!</a>
+                        <a th:href="@{/login}">Login</a>
+                    </div>
+
+            </header>
+
+            <header th:unless="${account} == null">
+                    <div class="navbar-text">
+                        <a th:href="@{/#}">Home page</a>
+                        <a th:href="@{#}" th:text="${account.getName()}"></a>
+                        <a th:href="@{/logout}">Log Ud</a>
+                    </div>
+            </header>
+        </div>
+    </nav>
+
+
+
+</body>
+</html>

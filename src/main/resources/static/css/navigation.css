@@ -1,0 +1,39 @@
+@import "globals.css";
+
+.container{
+  width: 80%;
+  margin: 0 auto  ;
+}
+
+/* Navbar */
+.navbar {
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1.5rem 1rem;
+
+  background-color: var(--navbar-color);
+
+}
+
+.navbar-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: sans-serif;
+  float: right;
+}
+
+.navbar-text a{
+  color: var(--primary-text-color);
+  text-decoration: none;
+  font-size: 1.1em;
+  margin: 0 2em;
+}
+
+.navbar-text a:hover{
+  color: black;
+  opacity: 50%;
+}
+
+
+
