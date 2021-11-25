@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" th:src="@{../js/scripts.js}"></script>
+
+    <title>Sign up page</title>
+</head>
+<body>
+
+
+<form th:action="@{/teams}" method="POST">
+    <label>Name
+        <input type="text" name="name" required>
+    </label>
+
+    <label>
+        <input type="submit" value="Add team">
+    </label>
+
+
+
+</form>
+
+</body>
+</html>
