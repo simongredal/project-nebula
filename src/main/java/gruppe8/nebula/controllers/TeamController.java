@@ -1,6 +1,6 @@
 package gruppe8.nebula.controllers;
 
-import gruppe8.nebula.requests.TeamRequest;
+import gruppe8.nebula.requests.TeamCreationRequest;
 import gruppe8.nebula.services.TeamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,21 +17,23 @@ public class TeamController {
         this.teamService = teamService;
         this.log = LoggerFactory.getLogger(this.getClass());
     }
+
     @GetMapping("/teams")
     public String teams() {
         return "teams";
     }
 
-    @PostMapping("/teams")
-    public String addTeam(TeamRequest request) {
-        log.info("Received AddTeamRequest: " + request.toString());
+    @PostMapping("/teams/create")
+    public String addTeam(TeamCreationRequest request) {
+        log.info("POST /teams/create: TeamCreationRequest=" + request.toString());
+
         Boolean success = teamService.addTeam(request);
         if (success) {
             log.info("Successful team add");
             return "redirect:/teams";
-        } else
-            log.info("Unsuccessful team add");
+        }
+
+        log.info("Unsuccessful team add");
         return "redirect:/teams";
     }
-
 }

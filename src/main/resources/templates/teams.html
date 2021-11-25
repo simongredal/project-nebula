@@ -7,20 +7,22 @@
     <title>Sign up page</title>
 </head>
 <body>
+    <form action="/teams/create" method="POST">
+        <div>
+        <label for="name">Team Name</label>
+        <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="team-members">Invite Team Members</label>
+            <div id="team-members">
+                <input type="email" name="invitations" autocomplete="off">
+            </div>
+            <button type="button" id="team-members-button" onclick="addTeamInvitation()"> Invite more Team Members...</button>
+        </div>
 
+        <label for="submit" >Submit</label>
+        <button type="submit" id="submit" >Create Team</button>
 
-<form th:action="@{/teams}" method="POST">
-    <label>Name
-        <input type="text" name="name" required>
-    </label>
-
-    <label>
-        <input type="submit" value="Add team">
-    </label>
-
-
-
-</form>
-
+    </form>
 </body>
 </html>

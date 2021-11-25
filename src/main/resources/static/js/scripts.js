@@ -1,4 +1,4 @@
-function passwordVisibility(){
+function passwordVisibility() {
     const password_input = document.querySelector("#password")
     const password_toggle = document.querySelector("#password-toggle")
 
@@ -9,6 +9,18 @@ function passwordVisibility(){
         password_input.type = "password";
         password_toggle.className = "bi-eye-slash"
     }
+}
+
+function addTeamInvitation() {
+    const invitations_div = document.querySelector("#team-members");
+    const invitation_button = document.querySelector("#team-members-button");
+    const invitation_input = document.createElement("input");
+
+    invitation_input.name = "invitations";
+    invitation_input.type = "email";
+    invitation_input.autocomplete = "off";
+
+    invitations_div.insertBefore(invitation_input, null);
 }
 
 function addRowToTable(elemId) {
