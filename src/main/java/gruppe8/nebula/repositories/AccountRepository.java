@@ -52,7 +52,7 @@ public class AccountRepository implements UserDetailsService {
 
         String query =  """
                         SELECT id, email, name, password
-                        FROM Nebula.accounts
+                        FROM accounts
                         WHERE email LIKE ?
                         """;
         Account account = null;
@@ -65,7 +65,7 @@ public class AccountRepository implements UserDetailsService {
 
             while (resultSet.next())  {
                  account = new Account(
-                        resultSet.getInt("id"),
+                        resultSet.getLong("id"),
                         resultSet.getString("name"),
                         resultSet.getString("email"),
                         resultSet.getString("password")
@@ -79,7 +79,7 @@ public class AccountRepository implements UserDetailsService {
 
     public boolean accountExists(String name) {
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "SELECT EXISTS(SELECT email FROM Nebula.Accounts WHERE email LIKE ?)";
+            String query = "SELECT EXISTS(SELECT email FROM accounts WHERE email LIKE ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();

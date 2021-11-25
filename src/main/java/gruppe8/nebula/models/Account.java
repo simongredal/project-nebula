@@ -1,27 +1,31 @@
 package gruppe8.nebula.models;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class Account implements UserDetails {
-    private Integer id;
+    private Long id;
     private String name;
-    private String password;
     private String email;
+    private String password;
 
-    public Account(String name, String password, String email) {
+
+    public Account(Long id, String name, String email, String password) {
+        this.id = id;
         this.name = name;
         this.password = password;
         this.email = email;
     }
 
-    public Account(Integer id, String name, String password, String email) {
-        this.id = id;
+    public Account(String name, String email, String password) {
         this.name = name;
-        this.password = password;
         this.email = email;
+        this.password = password;
     }
 
     public String getName() {
@@ -34,7 +38,7 @@ public class Account implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     public String getPassword() {
@@ -43,27 +47,27 @@ public class Account implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public void setPassword(String password) {
