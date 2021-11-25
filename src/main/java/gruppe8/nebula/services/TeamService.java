@@ -1,6 +1,7 @@
 package gruppe8.nebula.services;
 
 import gruppe8.nebula.entities.TeamEntity;
+import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Team;
 import gruppe8.nebula.repositories.TeamRepository;
 import gruppe8.nebula.requests.TeamDeletionRequest;
@@ -12,17 +13,28 @@ import java.util.List;
 @Service
 public class TeamService {
     private final TeamRepository teamRepository;
+    private final MembershipService membershipService;
+    private final AccountService accountService;
 
-    public TeamService(TeamRepository teamRepository){
+    public TeamService(TeamRepository teamRepository, MembershipService membershipService, AccountService accountService) {
         this.teamRepository = teamRepository;
+        this.membershipService = membershipService;
+        this.accountService = accountService;
     }
 
-    public Boolean addTeam(TeamCreationRequest request) {
-        Team team = new Team(
-                request.name()
-        );
+    public Boolean createTeam(Account currentAccount, TeamCreationRequest request) {
+        TeamEntity team = teamRepository.createTeamWithName(request.name());
+        if (team == null) { return false; }
 
-        return teamRepository.createTeam(team);
+        membershipService.addMembership(team, currentAccount);
+        for (String email : request.invitations()) {
+            Account account = accountService.getAccountByEmail(email);
+            if (account != null) {
+                membershipService.sendInvitation(team, account);
+            }
+        }
+
+        return true;
     }
     public Boolean deleteTeam(TeamDeletionRequest request) {
         Team team = new Team(

@@ -25,7 +25,7 @@ public class AccountRepository implements UserDetailsService {
     }
 
     public boolean createAccount(Account account){
-        try(Connection connection = databaseManager.getConnection()){
+        try (Connection connection = databaseManager.getConnection()){
             String query = "insert into Nebula.Accounts (name, password, email) VALUES (?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
@@ -39,6 +39,27 @@ public class AccountRepository implements UserDetailsService {
             log.error(e.getMessage());
         }
         return false;
+    }
+
+    public Account getAccountByEmail(String email) {
+        try (Connection connection = databaseManager.getConnection()) {
+            String query = "SELECT * FROM accounts WHERE email LIKE ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return new Account(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password")
+                );
+            }
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+        return null;
     }
 
 

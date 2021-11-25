@@ -25,4 +25,8 @@ public class AccountService {
 
         return accountRepository.createAccount(account);
     }
+
+    public Account getAccountByEmail(String email) {
+        return accountRepository.getAccountByEmail(email);
+    }
 }

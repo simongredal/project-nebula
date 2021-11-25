@@ -1,5 +1,7 @@
 package gruppe8.nebula.services;
 
+import gruppe8.nebula.entities.TeamEntity;
+import gruppe8.nebula.models.Membership;
 import gruppe8.nebula.models.Team;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.repositories.MembershipRepository;
@@ -10,25 +12,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class MembershipService {
     private final MembershipRepository membershipRepository;
-    private final Argon2PasswordEncoder passwordEncoder;
 
-    public MembershipService(MembershipRepository membershipRepository, Argon2PasswordEncoder passwordEncoder){
+    public MembershipService(MembershipRepository membershipRepository){
         this.membershipRepository = membershipRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
-    public Boolean addMembership(MembershipRequest request) {
-        Team team = new Team(
-                request.team_id(),
-                null
-        );
-        Account account = new Account(
-                request.account_id(),
-                "",
-                "",
-                ""
-        );
+    public Boolean addMembership(TeamEntity from, Account to) {
+        return membershipRepository.createMembership(from, to, true);
+    }
 
-        return membershipRepository.createMembership(team,account);
+    public Boolean sendInvitation(TeamEntity from, Account to) {
+        return membershipRepository.createMembership(from, to, false);
     }
 }
