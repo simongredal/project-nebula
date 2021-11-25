@@ -2,6 +2,8 @@ package gruppe8.nebula.repositories;
 
 import gruppe8.nebula.services.DatabaseManager;
 import gruppe8.nebula.entities.ProjectEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -12,9 +14,11 @@ import java.sql.SQLException;
 @Repository
 public class ProjectRepository {
     private final DatabaseManager databaseManager;
+    private final Logger log;
 
     public ProjectRepository(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
+        this.log = LoggerFactory.getLogger(this.getClass());
     }
 
     public ProjectEntity getProjectById(Long id) {
@@ -32,7 +36,7 @@ public class ProjectRepository {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
 
         return null;
