@@ -1,6 +1,5 @@
 package gruppe8.nebula.repositories;
 
-
 import gruppe8.nebula.services.DatabaseManager;
 import gruppe8.nebula.models.Account;
 import org.slf4j.Logger;
@@ -18,15 +17,14 @@ import java.sql.SQLException;
 @Repository
 public class AccountRepository implements UserDetailsService {
     private final DatabaseManager databaseManager;
-    private final Logger logger;
+    private final Logger log;
 
     public AccountRepository(DatabaseManager databaseManager){
         this.databaseManager = databaseManager;
-        this.logger = LoggerFactory.getLogger(this.getClass());
+        this.log = LoggerFactory.getLogger(this.getClass());
     }
 
     public boolean createAccount(Account account){
-
         try(Connection connection = databaseManager.getConnection()){
             String query = "insert into Nebula.Accounts (name, password, email) VALUES (?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -37,9 +35,8 @@ public class AccountRepository implements UserDetailsService {
 
             preparedStatement.execute();
             return preparedStatement.getUpdateCount() == 1;
-
-        }catch (SQLException e){
-            logger.error(e.getMessage());
+        } catch (SQLException e){
+            log.error(e.getMessage());
         }
         return false;
     }
@@ -47,34 +44,30 @@ public class AccountRepository implements UserDetailsService {
 
     @Override
     // Username is actually Account, but since it's an interface we cannot change the method name.
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        if (!accountExists(name)) throw new UsernameNotFoundException(name);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        if (!accountExists(username)) throw new UsernameNotFoundException(username);
 
-        String query =  """
-                        SELECT id, email, name, password
-                        FROM accounts
-                        WHERE email LIKE ?
-                        """;
-        Account account = null;
+        String query =  "SELECT id, email, name, password FROM accounts WHERE email LIKE ?";
 
         try (Connection connection = databaseManager.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, name);
+            preparedStatement.setString(1, username);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next())  {
-                 account = new Account(
+            if (resultSet.next())  {
+                 return new Account(
                         resultSet.getLong("id"),
                         resultSet.getString("name"),
                         resultSet.getString("email"),
                         resultSet.getString("password")
                 );
             }
-        } catch (SQLException e){
-            logger.error(e.getMessage());
+        } catch (SQLException e) {
+            log.error(e.getMessage());
         }
-        return account;
+
+        return null;
     }
 
     public boolean accountExists(String name) {
@@ -87,7 +80,7 @@ public class AccountRepository implements UserDetailsService {
             resultSet.next();
             return resultSet.getInt(1) == 1;
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
         }
         return false;
     }
