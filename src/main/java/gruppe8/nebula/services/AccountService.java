@@ -6,6 +6,8 @@ import gruppe8.nebula.requests.AccountCreationRequest;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountService {
     private final AccountRepository accountRepository;
@@ -26,6 +28,9 @@ public class AccountService {
         return accountRepository.createAccount(account);
     }
 
+    public List<Account> getAllAccounts() {
+        return accountRepository.getAllAccounts();
+    }
     public Account getAccountByEmail(String email) {
         return accountRepository.getAccountByEmail(email);
     }
