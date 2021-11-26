@@ -16,18 +16,15 @@
 
     <form th:action="@{/signup}" method="POST">
         <div class="form-wrapper">
-            <label for="name">Name</label>
-            <input type="text" size="35" id="name" name="name" class="form-control" required>
+            <input placeholder="Name" type="text" size="35" id="name" name="name" class="form-control" required>
         </div>
 
         <div class="form-wrapper">
-            <label for="email">Email</label>
-            <input type="email" size="35" id="email" name="email" class="form-control" required>
+            <input placeholder="Email" type="email" size="35" id="email" name="email" class="form-control" required>
         </div>
 
         <div class="form-wrapper">
-            <label for="password">Password</label>
-            <input type="password" size="35" id="password" name="password" class="form-control"required>
+            <input placeholder="Password" type="password" size="35" id="password" name="password" class="form-control" required>
             <button type="button" id="password-toggle" class="bi-eye-slash" onclick="passwordVisibility()"></button>
         </div>
 

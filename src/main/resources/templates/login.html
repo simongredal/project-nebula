@@ -15,13 +15,11 @@
 
     <form th:action="@{/login}" method="POST">
         <div class="form-wrapper">
-            <label for="email">Email</label>
-            <input size="35" type="email" id="email" name="email" class="form-control" required>
+            <input placeholder="Email" size="35" type="email" id="email" name="email" class="form-control" required>
         </div>
 
         <div class="form-wrapper">
-            <label for="password">Password</label>
-            <input type="password" size="35" id="password" name="password" class="form-control" required>
+            <input placeholder="Password" type="password" size="35" id="password" name="password" class="form-control" required>
             <button type="button" id="password-toggle" class="bi-eye-slash" onclick="passwordVisibility()"></button>
         </div>
 
