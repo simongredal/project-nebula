@@ -2,12 +2,14 @@ package gruppe8.nebula.controllers;
 
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.requests.TeamCreationRequest;
+import gruppe8.nebula.services.AccountService;
 import gruppe8.nebula.services.TeamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -17,15 +19,18 @@ import java.security.Principal;
 public class TeamController {
     private final TeamService teamService;
     private final Logger log;
+    private final AccountService accountService;
 
-    public TeamController(TeamService teamService) {
+    public TeamController(TeamService teamService, AccountService accountService) {
         this.teamService = teamService;
+        this.accountService = accountService;
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
     @GetMapping("/teams")
-    public String teams(Authentication authentication) {
+    public String teams(Authentication authentication, Model model) {
         Account account = (Account) authentication.getPrincipal();
+        model.addAttribute("accountList",accountService.getAllAccounts());
         log.info("GET /teams: Account=%s".formatted(account));
         return "teams";
     }

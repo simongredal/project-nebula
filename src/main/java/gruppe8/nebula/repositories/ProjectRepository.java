@@ -64,7 +64,7 @@ public class ProjectRepository {
 
     public boolean deleteProject(Project project, Account account) {
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "DELETE FROM wishlists WHERE (name = ? AND id = ?);";
+            String query = "DELETE FROM projects WHERE (name = ? AND id = ?);";
             connection.setAutoCommit(false);
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);

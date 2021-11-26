@@ -24,7 +24,7 @@ public class Project {
                 .filter(taskEntity -> taskEntity.parent() == 0L )
                 .forEach( t -> this.subtasks.add(new Task(t, tasks)));
     }
-
+/*
     public static Long getId() {
         return id;
     }
@@ -47,6 +47,28 @@ public class Project {
 
     public String getName() {
         return name;
+    }
+
+    public List<Task> getSubtasks() {
+        return subtasks;
+    }
+
+ */
+
+    public static Long getId() {
+        return id;
+    }
+
+    public static void setId(Long id) {
+        Project.id = id;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static void setName(String name) {
+        Project.name = name;
     }
 
     public List<Task> getSubtasks() {

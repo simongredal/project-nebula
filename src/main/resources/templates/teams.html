@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" th:src="@{../js/scripts.js}"></script>
@@ -7,22 +7,27 @@
     <title>Sign up page</title>
 </head>
 <body>
-    <form action="/teams/create" method="POST">
-        <div>
+<form action="/teams/create" method="POST">
+    <div>
         <label for="name">Team Name</label>
         <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-            <label for="team-members">Invite Team Members</label>
-            <div id="team-members">
-                <input type="email" name="invitations" autocomplete="off">
-            </div>
-            <button type="button" id="team-members-button" onclick="addTeamInvitation()"> Invite more Team Members...</button>
-        </div>
+    </div>
+    <div>
+        <label for="team-members">Invite Team Members</label>
+        <div id="team-members">
+            <!-- <input type="email" name="invitations" autocomplete="off"> -->
+            <input type="text" list="accounts" placeholder="Search">
+            <datalist id="accounts">
+                <option th:each="account : ${accountList}" th:text="${account.getName()}"></option> <!-- TODO: remove name after selection -->
+            </datalist>
 
-        <label for="submit" >Submit</label>
-        <button type="submit" id="submit" >Create Team</button>
+        </div>
+        <button type="button" id="team-members  -button" onclick="addTeamInvitation()"> Invite more Team Members...</button>
+    </div>
 
-    </form>
+    <label for="submit" >Submit</label>
+    <button type="submit" id="submit" >Create Team</button>
+
+</form>
 </body>
 </html>
