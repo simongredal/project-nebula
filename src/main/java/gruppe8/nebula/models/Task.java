@@ -21,4 +21,16 @@ public class Task {
                 .filter(taskEntity -> task.id().equals(taskEntity.parent()))
                 .forEach( t -> this.subtasks.add(new Task(t, tasks)) );
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Task> getSubtasks() {
+        return subtasks;
+    }
 }

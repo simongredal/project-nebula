@@ -40,4 +40,16 @@ public class Project {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Task> getSubtasks() {
+        return subtasks;
+    }
 }
