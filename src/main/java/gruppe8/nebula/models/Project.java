@@ -7,12 +7,15 @@ import java.util.*;
 
 public class Project {
 
-    private static Long id;
-    private static String name;
+    private Long id;
+    private String name;
     private final List<Task> subtasks = new ArrayList<>();
 
-    public Project() {
+    public Project(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
+
 
     public void setProjectEntity(ProjectEntity projectEntity) {
         id = projectEntity.id();
@@ -24,8 +27,8 @@ public class Project {
                 .filter(taskEntity -> taskEntity.parent() == 0L )
                 .forEach( t -> this.subtasks.add(new Task(t, tasks)));
     }
-/*
-    public static Long getId() {
+
+    public Long getId() {
         return id;
     }
 
@@ -33,42 +36,12 @@ public class Project {
         this.id = id;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Task> getSubtasks() {
-        return subtasks;
-    }
-
- */
-
-    public static Long getId() {
-        return id;
-    }
-
-    public static void setId(Long id) {
-        Project.id = id;
-    }
-
-    public static String getName() {
-        return name;
-    }
-
-    public static void setName(String name) {
-        Project.name = name;
     }
 
     public List<Task> getSubtasks() {

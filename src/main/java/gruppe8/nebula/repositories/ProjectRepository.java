@@ -47,8 +47,8 @@ public class ProjectRepository {
             String query = "INSERT INTO projects (name, id) VALUES (?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, Project.getName());
-            preparedStatement.setLong(2, Project.getId());
+            preparedStatement.setString(1, project.getName());
+            preparedStatement.setLong(2, project.getId());
 
             int updatedRows = preparedStatement.executeUpdate();
             if (updatedRows != 1) {
@@ -68,8 +68,8 @@ public class ProjectRepository {
             connection.setAutoCommit(false);
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, Long.parseLong(Project.getName()));
-            preparedStatement.setLong(2, Project.getId());
+            preparedStatement.setLong(1, Long.parseLong(project.getName()));
+            preparedStatement.setLong(2, project.getId());
 
             System.out.println("deletion of project initialized");
             int changedRows = preparedStatement.executeUpdate();

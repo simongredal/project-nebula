@@ -23,6 +23,19 @@ function addTeamInvitation() {
     invitations_div.insertBefore(invitation_input, null);
 }
 
+function addField(){
+    const add_field_div = document.querySelector("#add-field");
+    const add_field_btn = document.querySelector("#add-field-btn");
+    const field_input = document.createElement("input");
+
+    field_input.name = "task"
+    field_input.type = "text";
+    field_input.placeholder = "Set a task";
+
+
+    add_field_div.insertBefore(field_input,null);
+}
+
 function addRowToTable(elemId) {
     var totalRowCount = elem.rows.length; // 5
     var row = table.insertRow(totalRowCount);

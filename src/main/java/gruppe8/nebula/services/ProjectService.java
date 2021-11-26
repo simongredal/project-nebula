@@ -2,6 +2,7 @@ package gruppe8.nebula.services;
 
 import gruppe8.nebula.entities.ProjectEntity;
 import gruppe8.nebula.entities.TaskEntity;
+import gruppe8.nebula.entities.TeamEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Project;
 import gruppe8.nebula.repositories.ProjectRepository;
@@ -21,8 +22,8 @@ public class ProjectService {
         this.projectRepository = projectRepository;
         this.taskService = taskService;
     }
-
-    public Project getProjectById(Long id) {
+    // TODO: FIX ME
+    /*public Project getProjectById(Long id) {
         ProjectEntity projectEntity = projectRepository.getProjectById(id);
         List<TaskEntity> taskEntities = taskService.getTasksForUser(id);
 
@@ -33,17 +34,19 @@ public class ProjectService {
         return project;
     }
 
-    public boolean createProject(Account account, CreateProjectRequest request) {
-        Project project = new Project();
-        request.name();
+     */
+    // TODO: FIX ME
+    public Boolean createProject(Account account, Project project) {
 
-        return projectRepository.createProject(project, account);
+        return false;
     }
 
-    public boolean deleteProject(Account account, DeleteProjectRequest request) {
+    /*public boolean deleteProject(Account account, DeleteProjectRequest request) {
         Project project = new Project();
                 request.ProjectId();
 
         return projectRepository.deleteProject(project, account);
     }
+
+     */
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" th:src="@{../js/scripts.js}"></script>
+    <title>Task</title>
+</head>
+<body>
+
+
+<form action="/task" method="POST">
+    <div id="add-field">
+        <!-- Create new input field. Should be made a list -->
+    <button type="button" id="add-field-btn  -button" onclick="addField()">Add another task!</button>
+        <input type="text" list="accounts" placeholder="Set a task">
+        <!-- TODO:: Set whose responsible for each task. Maybe with a Datalist-->
+
+    </div>
+        <input type="submit" value="Submit task!">
+
+</form>
+
+</body>
+</html>
