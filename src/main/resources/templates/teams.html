@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" th:src="@{../js/scripts.js}"></script>
@@ -15,7 +15,13 @@
         <div>
             <label for="team-members">Invite Team Members</label>
             <div id="team-members">
-                <input type="email" name="invitations" autocomplete="off">
+                <!-- <input type="email" name="invitations" autocomplete="off"> -->
+                <input type="text" list="accounts" placeholder="Search">
+                <datalist id="accounts">
+                    <option th:each="account : ${accountList}"></option>
+                </datalist>
+
+
             </div>
             <button type="button" id="team-members-button" onclick="addTeamInvitation()"> Invite more Team Members...</button>
         </div>
