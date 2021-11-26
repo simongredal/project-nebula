@@ -31,8 +31,9 @@ public class TeamController {
     @GetMapping("/teams")
     public String teams(Authentication authentication, Model model) {
         Account account = (Account) authentication.getPrincipal();
-       // model.addAttribute("accountList",accountService.getAllAccounts());
+        model.addAttribute("accountList",accountService.getAllAccounts());
         log.info("GET /teams: Account=%s".formatted(account));
+        log.info(model.toString());
         return "teams";
     }
 

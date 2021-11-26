@@ -112,12 +112,11 @@ public class AccountRepository implements UserDetailsService {
     public List<Account> getAllAccounts() {
         List<Account> accounts = new ArrayList<>();
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "SELECT (id, name, email) FROM accounts";
+            String query = "SELECT * FROM accounts";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 accounts.add(new Account(
                         resultSet.getLong("id"),
                         resultSet.getString("name"),

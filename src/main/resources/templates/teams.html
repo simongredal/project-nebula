@@ -18,13 +18,12 @@
                 <!-- <input type="email" name="invitations" autocomplete="off"> -->
                 <input type="text" list="accounts" placeholder="Search">
                 <datalist id="accounts">
-                    <option th:each="account : ${accountList}"></option>
+                    <option th:each="account : ${accountList}" th:text="${account.getName()}"></option> <!-- TODO: remove name after selection -->
                 </datalist>
 
-
             </div>
-            <button type="button" id="team-members-button" onclick="addTeamInvitation()"> Invite more Team Members...</button>
-        </div>
+                <button type="button" id="team-members  -button" onclick="addTeamInvitation()"> Invite more Team Members...</button>
+            </div>
 
         <label for="submit" >Submit</label>
         <button type="submit" id="submit" >Create Team</button>
