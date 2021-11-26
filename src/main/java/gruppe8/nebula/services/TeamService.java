@@ -1,5 +1,6 @@
 package gruppe8.nebula.services;
 
+import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.entities.TeamEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Team;
@@ -55,4 +56,14 @@ public class TeamService {
     public List<TeamEntity> getAllTeams() {
         return teamRepository.getAllTeams();
     }
+
+    public List<MembershipEntity> getTeamsForAccount(Account account) {
+        return membershipService.getMembershipsForAccount(account, true);
+    }
+
+    public List<MembershipEntity> getInvitationsForAccount(Account account) {
+        return membershipService.getMembershipsForAccount(account, false);
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package gruppe8.nebula.controllers;
 
+import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.requests.TeamCreationRequest;
 import gruppe8.nebula.services.AccountService;
@@ -7,13 +8,12 @@ import gruppe8.nebula.services.TeamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class TeamController {
@@ -30,8 +30,16 @@ public class TeamController {
     @GetMapping("/teams")
     public String teams(Authentication authentication, Model model) {
         Account account = (Account) authentication.getPrincipal();
-        model.addAttribute("accountList",accountService.getAllAccounts());
-        log.info("GET /teams: Account=%s".formatted(account));
+        List<MembershipEntity> teams = teamService.getTeamsForAccount(account);
+        List<MembershipEntity> invitations = teamService.getInvitationsForAccount(account);
+        List<Account> allAccounts = accountService.getAllAccounts();
+
+        model.addAttribute("account", account);
+        model.addAttribute("teams", teams);
+        model.addAttribute("invitations", invitations);
+        model.addAttribute("allAccounts",accountService.getAllAccounts());
+
+        log.info("GET /teams: Model=%s".formatted(model));
         return "teams";
     }
 

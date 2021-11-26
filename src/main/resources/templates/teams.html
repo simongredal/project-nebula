@@ -1,33 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <script type="text/javascript" th:src="@{../js/scripts.js}"></script>
-
-    <title>Sign up page</title>
-</head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+    <title>Teams</title>
+    </head>
 <body>
-<form action="/teams/create" method="POST">
-    <div>
-        <label for="name">Team Name</label>
-        <input type="text" id="name" name="name" required>
-    </div>
-    <div>
-        <label for="team-members">Invite Team Members</label>
-        <div id="team-members">
-            <!-- <input type="email" name="invitations" autocomplete="off"> -->
-            <input type="text" list="accounts" placeholder="Search">
-            <datalist id="accounts">
-                <option th:each="account : ${accountList}" th:text="${account.getName()}"></option> <!-- TODO: remove name after selection -->
-            </datalist>
-
+    <header></header>
+    <main class="container">
+        <div class="row">
+            <h1>Teams</h1>
         </div>
-        <button type="button" id="team-members  -button" onclick="addTeamInvitation()"> Invite more Team Members...</button>
-    </div>
+        <div class="row">
+            <div class="col-xs-12 my-xs-5 col-lg-4">
+                <div class="row"><h2>All Your Teams</h2></div>
+                <div class="row" th:each="team : ${teams}">
+                    <strong th:text="${team.teamName()}"></strong>
+                    <p th:text="${team.membershipCount()}"></p>
+                </div>
+            </div>
+            <div class="col-xs-12 my-xs-5 col-lg-4">
+                <div class="row"><h2>All Your Invitations</h2></div>
+                <div class="row" th:each="invitation : ${invitations}">
+                    <strong th:text="${invitation.teamName()}"></strong>
+                    <p th:text="${invitation.membershipCount()}"></p>
+                </div>
+            </div>
+            <div class="col-xs-12 my-xs-5 col-lg-4">
+                <div class="row"><h2>Create a New Team</h2></div>
+                <form class="row" th:action="@{/teams/create}" method="POST">
+                    <label for="name">Team Name</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="team-members">Invite Team Members</label>
+                    <div id="team-members">
+                        <input type="email" list="accounts" name="invitations" autocomplete="off">
+                        <datalist id="accounts">
+                            <option th:each="account : ${allAccounts}" th:text="${account.getName()}+' <'+${account.getEmail()}+'>'"></option>
+                        </datalist>
+                    <button type="button" id="team-members-button" onclick="addTeamInvitation()"> Invite more Team Members...</button>
 
-    <label for="submit" >Submit</label>
-    <button type="submit" id="submit" >Create Team</button>
-
-</form>
+                    <label for="submit" >Submit</label>
+                    <button type="submit" id="submit" >Create Team</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer></footer>
 </body>
 </html>
