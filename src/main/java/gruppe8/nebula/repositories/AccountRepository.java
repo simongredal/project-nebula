@@ -13,6 +13,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Repository
 public class AccountRepository implements UserDetailsService {
@@ -106,5 +109,27 @@ public class AccountRepository implements UserDetailsService {
         return false;
     }
 
+    public List<Account> getAllAccounts() {
+        List<Account> accounts = new ArrayList<>();
+        try (Connection connection = databaseManager.getConnection()) {
+            String query = "SELECT (id, name, email) FROM accounts";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                accounts.add(new Account(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        null
+                ));
+            }
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+
+        return Collections.unmodifiableList( accounts );
+    }
 }
 
