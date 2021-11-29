@@ -29,7 +29,7 @@ public class AccountRepository implements UserDetailsService {
 
     public boolean createAccount(Account account){
         try (Connection connection = databaseManager.getConnection()){
-            String query = "insert into Accounts (name, password, email) VALUES (?,?,?)";
+            String query = "insert into accounts (name, password, email) VALUES (?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1,account.getName());
