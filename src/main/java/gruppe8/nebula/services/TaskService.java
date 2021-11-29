@@ -28,12 +28,10 @@ public class TaskService {
 
     }
 
-    /*
-    public List<Task> getTasksFromProject(Long projectId) {
-        Project project = projectService.getProjectById(projectId);
 
-        return taskRepository.getTasksForProject();
-    }*/
+    public List<TaskEntity> getTasksFromProject(Long projectId) {
+        return taskRepository.getTasksForProject(projectId);
+    }
 
     public Boolean createTask(TaskCreationRequest request) {
         Task task = new Task(new TaskEntity(request.id(),request.projectId(), request.parentId(), request.name()));
