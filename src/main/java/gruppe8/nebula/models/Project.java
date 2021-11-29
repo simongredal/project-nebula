@@ -4,6 +4,7 @@ import gruppe8.nebula.entities.ProjectEntity;
 import gruppe8.nebula.entities.TaskEntity;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Project {
 
@@ -46,6 +47,11 @@ public class Project {
 
     public List<Task> getSubtasks() {
         return subtasks;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{"+ name +"} : ["+subtasks.toString()+"]";
     }
 }
 
