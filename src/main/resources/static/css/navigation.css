@@ -59,6 +59,22 @@
   text-shadow: 0 0 10px blue;
 
   color: var(--primary-text-color);
+
+}
+
+@media (max-width: 810px) {
+  .nebula {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.5em;
+  }
+}
+@media (max-width: 680px) {
+  .nebula {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: .9em;
+  }
 }
 
 
