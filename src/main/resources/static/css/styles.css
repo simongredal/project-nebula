@@ -94,6 +94,10 @@ body {
     padding: 0.8em 1em;
     background: linear-gradient(45deg, #f35252 0%, #2388CB 49%, #f35252 100%);
 }
+.btn:hover{
+     background: linear-gradient(45deg, #e53e3e 0%, #1478b9 49%, #e53e3e 100%);
+
+}
 
 
 .container{
