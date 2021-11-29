@@ -45,7 +45,3 @@ function addRowToTable(elemId) {
     cell1.innerHTML = " ";
     cell2.innerHTML = " ";
 }
-function fake(){
-    return 2;
-}
-
