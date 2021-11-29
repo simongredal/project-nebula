@@ -17,6 +17,8 @@ function addTeamInvitation() {
     const invitation_input = document.createElement("input");
 
     invitation_input.name = "invitations";
+    invitation_input.className = "w-12";
+    invitation_input.setAttribute("list", "accounts");
     invitation_input.type = "email";
     invitation_input.setAttribute("list","accounts");
     invitation_input.autocomplete = "off";

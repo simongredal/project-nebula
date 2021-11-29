@@ -1,33 +1,46 @@
 @import "globals.css";
 
-.container{
-  width: 80%;
-  margin: 0 auto  ;
-}
-
 /* Navbar */
 .navbar {
-  overflow: hidden;
-  box-sizing: border-box;
   width: 100%;
   padding: 1.5rem 1rem;
   background-color: var(--navbar-color);
   -webkit-box-shadow:  1px 12px 15px 0 var(--navbar-color);
   box-shadow:  1px 12px 15px 0 var(--navbar-color);
+  height: var(--navbar-height);
+  padding: 0 2rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
 }
 .navbar-text {
   font-size: 1.2rem;
   font-weight: bold;
-  font-family: sans-serif;
-  float: right;
+
+  background-color: var(--navbar-color);
+}
+
+.navbar-spacer {
+  flex-grow: 1;
+}
+
+.navbar > * {
+  padding: 0 1rem;
+}
+
+.navbar> :first-child {
+  padding-left: 0;
+}
+
+.navbar > :last-child {
+  padding-right: 0;
 }
 
 .navbar-text a{
   color: var(--primary-text-color);
   text-decoration: none;
-  font-size: 1.1em;
-  margin: 0 2em;
 }
 
 .navbar-text a:hover{
