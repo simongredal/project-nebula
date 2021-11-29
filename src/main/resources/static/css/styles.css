@@ -86,18 +86,16 @@ body {
 .w-12 { width: 100.0000%; }
 
 .btn {
-    background-color: transparent;
+
     border: 2px solid #ccc !important;
     border-radius: 20px;
-    color: rgba(0, 0, 0, 50%);
-    padding: 0.8em 1em;
-}
-
-.btn:hover {
     color: var(--primary-text-color);
     background: #1C6EA4;
+    padding: 0.8em 1em;
     background: linear-gradient(45deg, #f35252 0%, #2388CB 49%, #f35252 100%);
 }
+
+
 .container{
     display: flex;
     flex-direction: row;

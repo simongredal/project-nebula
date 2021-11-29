@@ -14,7 +14,7 @@
         <div class="navbar-spacer"></div>
         <div th:if="${account} == null" class="navbar-text"><a th:href="@{/signup}">Signup!</a></div>
         <div th:if="${account} == null" class="navbar-text"><a th:href="@{/login}">Login</a></div>
-        <div th:unless="${account} == null" class="navbar-text"><a th:text="${account.getName()}"></a></div>
+        <div th:unless="${account} == null" class="navbar-text"><a th:text="'Welcome '+ ${account.getName()}"></a></div>
         <div th:unless="${account} == null" class="navbar-text"><a href="/teams">Teams</a></div>
         <div th:unless="${account} == null" class="navbar-text"><a href="/logout">Logout</a></div>
     </header>
