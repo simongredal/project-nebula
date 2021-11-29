@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" th:href="@{/css/css_reset.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
     <link rel="stylesheet" th:href="@{/css/navigation.css}">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
@@ -18,17 +18,14 @@
         <div th:unless="${account} == null" class="navbar-text"><a href="/logout">Logout</a></div>
     </header>
 
-            <header th:unless="${account} == null">
-                    <div class="navbar-text">
-                        <a th:href="@{/#}">Home page</a>
-                        <a th:href="@{#}" th:text="${account.getName()}"></a>
-                        <a th:href="@{/logout}">Log Ud</a>
-                    </div>
-            </header>
+    <div th:fragment="membership-card(membership)">
+        <a th:href="'/teams/'+${membership.teamId()}"><strong th:text="${membership.teamName()}"></strong></a>
+        <div class="membercount">
+            <p th:inline="text">
+                <span class="bi-people"></span>
+                <span th:text="${membership.membershipCount()}" th:remove="tag"></span>
+            </p>
         </div>
-    </nav>
-
-
-
+    </div>
 </body>
 </html>

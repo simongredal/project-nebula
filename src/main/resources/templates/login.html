@@ -3,32 +3,29 @@
 <head>
     <th:block th:insert="fragments/components :: head">head</th:block>
 
-    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
-
     <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
 
     <title>Login page</title>
 </head>
 <body>
 <header th:replace="fragments/components :: navbar"></header>
-<main>
-
-    <form th:action="@{/login}" method="POST">
-        <div class="form-wrapper">
-            <input placeholder="Email" size="35" type="email" id="email" name="email" class="form-control" required>
-        </div>
-
-        <div class="form-wrapper">
-            <input placeholder="Password" type="password" size="35" id="password" name="password" class="form-control" required>
-            <button type="button" id="password-toggle" class="bi-eye-slash password-visibility" onclick="passwordVisibility()"></button>
-        </div>
-
-        <input type="submit" class="btn" value="Login!">
-
-    </form>
-
+<main class="main center">
+<div class="row w-6 center">
+<form class="col form-wrapper" th:action="@{/login}" method="POST">
+    <div class="row form-control">
+        <label for="email">Email</label>
+        <input placeholder="user@example.com" autocomplete="email" type="email" id="email" name="email" required>
+    </div>
+    <div class="row form-control">
+        <label for="password">Password</label>
+        <input placeholder="••••••••••" autocomplete="current-password" type="password" id="password" name="password" required>
+        <button type="button" id="password-toggle" class="bi-eye-slash" onclick="passwordVisibility()"></button>
+    </div>
+    <div class="row form-control">
+        <button class="w-12" type="submit">Log In</button>
+    </div>
+</form>
+</div>
 </main>
-
-
 </body>
 </html>

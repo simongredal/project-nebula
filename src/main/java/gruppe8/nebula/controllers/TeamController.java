@@ -1,5 +1,6 @@
 package gruppe8.nebula.controllers;
 
+import com.google.gson.Gson;
 import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.requests.TeamCreationRequest;
@@ -11,11 +12,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/teams")
 public class TeamController {
     private final TeamService teamService;
     private final Logger log;
@@ -27,7 +31,7 @@ public class TeamController {
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
-    @GetMapping("/teams")
+    @GetMapping
     public String teams(Authentication authentication, Model model) {
         Account account = (Account) authentication.getPrincipal();
         List<MembershipEntity> teams = teamService.getTeamsForAccount(account);
@@ -36,14 +40,20 @@ public class TeamController {
 
         model.addAttribute("account", account);
         model.addAttribute("teams", teams);
-        model.addAttribute("invitations", invitations);
+        model.addAttribute("invites", invitations);
         model.addAttribute("allAccounts",accountService.getAllAccounts());
 
         log.info("GET /teams: Model=%s".formatted(model));
         return "teams";
     }
 
-    @PostMapping("/teams/create")
+    @GetMapping("/{teamId}")
+    public String teams(@PathVariable Long teamId, Authentication authentication, Model model) {
+        log.info("GET /teams/"+teamId);
+        return "team_page";
+    }
+
+    @PostMapping("/create")
     public String addTeam(TeamCreationRequest request, Authentication authentication) {
         Account account = (Account) authentication.getPrincipal();
         log.info("POST /teams/create: TeamCreationRequest=%s, Account=%s".formatted(request, account));
