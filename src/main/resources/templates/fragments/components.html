@@ -9,19 +9,14 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-
-    <nav class="container">
-
-        <div th:fragment="navbar" th:with="account=${account} ?: null" th:remove="tag">
-
-            <header class="navbar" th:if="${account} == null">
-                    <div class="navbar-text">
-                        <a th:href="@{/signup}">Signup!</a>
-                        <a th:href="@{/login}">Login</a>
-                        <a th:href="@{/teams}">Teams</a>
-                    </div>
-
-            </header>
+    <header class="navbar" th:fragment="navbar" th:with="account=${account} ?: null">
+        <div class="navbar-spacer"></div>
+        <div th:if="${account} == null" class="navbar-text"><a th:href="@{/signup}">Signup!</a></div>
+        <div th:if="${account} == null" class="navbar-text"><a th:href="@{/login}">Login</a></div>
+        <div th:unless="${account} == null" class="navbar-text"><a th:text="${account.getName()}"></a></div>
+        <div th:unless="${account} == null" class="navbar-text"><a href="/teams">Teams</a></div>
+        <div th:unless="${account} == null" class="navbar-text"><a href="/logout">Logout</a></div>
+    </header>
 
             <header th:unless="${account} == null">
                     <div class="navbar-text">
