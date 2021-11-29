@@ -18,6 +18,7 @@ function addTeamInvitation() {
 
     invitation_input.name = "invitations";
     invitation_input.type = "email";
+    invitation_input.setAttribute("list","accounts");
     invitation_input.autocomplete = "off";
 
     invitations_div.insertBefore(invitation_input, null);
