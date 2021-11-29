@@ -19,15 +19,10 @@ import java.util.List;
 @Service
 public class TaskService {
     private final TaskRepository taskRepository;
-    private final ProjectService projectService;
 
-
-    public TaskService(TaskRepository taskRepository, ProjectService projectService) {
+    public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
-        this.projectService = projectService;
-
     }
-
 
     public List<TaskEntity> getTasksFromProject(Long projectId) {
         return taskRepository.getTasksForProject(projectId);

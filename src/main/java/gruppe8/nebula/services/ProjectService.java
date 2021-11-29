@@ -40,7 +40,7 @@ public class ProjectService {
     }
 
     public boolean deleteProject(Account account, DeleteProjectRequest request) {
-        Project project = new Project(request.ProjectId(), null);
+        Project project = new Project(request.id(), null);
         return projectRepository.deleteProject(project, account);
     }
 
