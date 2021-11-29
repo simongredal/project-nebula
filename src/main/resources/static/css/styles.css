@@ -16,6 +16,7 @@ body {
 
 .form-control {
     display: flex;
+    align-items: baseline;
 }
 
 .form-control label {
