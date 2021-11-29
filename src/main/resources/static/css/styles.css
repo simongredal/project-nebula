@@ -85,9 +85,9 @@ body {
 .w-11 { width:  91.6666%; }
 .w-12 { width: 100.0000%; }
 
-.btn{
+.btn {
     background-color: transparent;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc !important;
     border-radius: 20px;
     color: rgba(0, 0, 0, 50%);
     padding: 0.8em 1em;
