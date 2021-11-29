@@ -49,5 +49,21 @@ form{
     background: #1C6EA4;
     background: linear-gradient(45deg, #f35252 0%, #2388CB 49%, #f35252 100%);
 }
+.container{
+    display: flex;
+    flex-direction: row;
 
+    margin: 2em 1em;
+    width: 100%;
+}
 
+.column{
+    margin: auto auto;
+}
+.column > p {
+    text-align: center;
+
+}
+main{
+    margin: 0 1em;
+}

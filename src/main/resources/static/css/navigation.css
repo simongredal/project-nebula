@@ -11,11 +11,11 @@
   box-sizing: border-box;
   width: 100%;
   padding: 1.5rem 1rem;
-
   background-color: var(--navbar-color);
+  -webkit-box-shadow:  1px 12px 15px 0 var(--navbar-color);
+  box-shadow:  1px 12px 15px 0 var(--navbar-color);
 
 }
-
 .navbar-text {
   font-size: 1.2rem;
   font-weight: bold;
@@ -34,6 +34,20 @@
   color: black;
   opacity: 50%;
 }
+
+.nebula{
+  font-family: 'Anton', sans-serif;
+  font-weight: 900;
+  font-size: 2em;
+  font-style: oblique;
+
+  margin: 0 2em;
+
+  text-shadow: 0 0 10px blue;
+
+  color: var(--primary-text-color);
+}
+
 
 
 

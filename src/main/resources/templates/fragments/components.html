@@ -15,7 +15,9 @@
         <div th:fragment="navbar" th:with="account=${account} ?: null" th:remove="tag">
 
             <header class="navbar" th:if="${account} == null">
+                        <a class="nebula" th:href="@{/}">Nebula Project Manager</a>
                     <div class="navbar-text">
+                        <a th:href="@{/}">Home</a>
                         <a th:href="@{/signup}">Signup!</a>
                         <a th:href="@{/login}">Login</a>
                         <a th:href="@{/teams}">Teams</a>
@@ -24,6 +26,7 @@
             </header>
 
             <header th:unless="${account} == null">
+                        <a class="nebula" th:href="@{/}">Nebula Project Manager</a>
                     <div class="navbar-text">
                         <a th:href="@{/#}">Home page</a>
                         <a th:href="@{#}" th:text="${account.getName()}"></a>
