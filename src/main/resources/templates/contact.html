@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:insert="fragments/components :: head">head</th:block>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
+
+    <script type="text/javascript" th:src="@{../js/scripts.js}"></script>
+    <title>Contact Nebula</title>
+    <style>
+        textarea{
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+
+<header th:replace="fragments/components :: navbar"></header>
+<link rel="stylesheet" th:href="@{../css/navigations.css}">
+<!-- Thanks you https://formsubmit.co/, we can submit forms through their server -->
+<main class="main center">
+    <div class="row w-6 center">
+        <form class="col form-wrapper" action="https://formsubmit.co/31e4e52724b6ecafaf97c26d18b70a96" method="POST">
+            <div class="row form-control">
+                <label for="name"></label>
+                <input placeholder="Name" type="text" id="name" name="name" required>
+            </div>
+
+            <div class="row form-control">
+                <label for="email"></label>
+                <input placeholder="user@example.com" type="email" id="email" name="email" required>
+            </div>
+
+            <div class="row form-control">
+                <label for="subject"></label>
+                <input type="hidden" id="subject" name="_subject" value="New submission!">
+            </div>
+
+            <div class="row form-control">
+                <label for="message"></label>
+                <textarea placeholder="Rant all you want" id="message" cols="35" name="message"></textarea>
+            </div>
+
+            <input type="hidden" name="_captcha" value="false">
+            <!-- To be changed to Heruokos front page-->
+            <input type="hidden" name="_next" value="http://localhost:8080/">
+            <input type="submit" id="send-message" onclick="thankYou()" class="btn" value="Send message!">
+
+        </form>
+
+    </div>
+
+</main>
+
+
+<footer th:replace="fragments/components :: footer"></footer>
+
+</body>
+</html>

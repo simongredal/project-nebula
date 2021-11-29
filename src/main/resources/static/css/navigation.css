@@ -8,13 +8,15 @@
   -webkit-box-shadow:  1px 12px 15px 0 var(--navbar-color);
   box-shadow:  1px 12px 15px 0 var(--navbar-color);
   height: var(--navbar-height);
-  padding: 0 2rem;
+
 
   display: flex;
   flex-direction: row;
   align-items: center;
-
+  position: fixed;
+  top: 0;
 }
+
 .navbar-text {
   font-size: 1.2rem;
   font-weight: bold;
@@ -30,7 +32,7 @@
   padding: 0 1rem;
 }
 
-.navbar> :first-child {
+.navbar > :first-child {
   padding-left: 0;
 }
 
@@ -53,6 +55,8 @@
   font-weight: 900;
   font-size: 2em;
   font-style: oblique;
+  display: flex;
+  flex-wrap: wrap;
 
   margin: 0 2em;
 
@@ -61,22 +65,50 @@
   color: var(--primary-text-color);
 
 }
-
+/* Making the Nebula link in the header responsive */
 @media (max-width: 810px) {
   .nebula {
-    display: flex;
-    flex-wrap: wrap;
     font-size: 1.5em;
   }
 }
 @media (max-width: 680px) {
   .nebula {
-    display: flex;
-    flex-wrap: wrap;
     font-size: .9em;
   }
 }
+/* Footer */
 
+.footer{
+  display: flex;
+  flex-direction: row;
+  /* Genius to make the page responsive! */
+  flex-wrap: wrap;
 
+  background: var(--navbar-color);
+  width: 100%;
+  padding: 1.5rem 1rem;
+  -webkit-box-shadow: 0 -2px 10px 0 var(--navbar-color);
+  box-shadow: 0 -2px 10px 0 var(--navbar-color);
 
+  bottom: 0;
+  margin-top: auto;
+}
+
+.footer-text{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.footer-text > a{
+  color: var(--primary-text-color);
+  text-decoration: none;
+
+}
+.footer-text a:hover{
+    color: black;
+    opacity: 50%;
+}
+
+.footer * {
+  padding: 0 1rem;
+}
 

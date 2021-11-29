@@ -103,9 +103,8 @@ body {
 .container{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;    
-
-    margin: 2em 1em;
+    flex-wrap: wrap;
+    margin: 5em 1em 0;
     width: 100%;
 }
 

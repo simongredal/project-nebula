@@ -39,6 +39,18 @@ function addField(){
     add_field_div.insertBefore(field_input,null);
 }
 
+function thankYou(){
+    const thx = document.getElementById("send-message").value
+    const name = document.getElementById("name").value
+    const email = document.getElementById("email").value
+    const message = document.getElementById("message").value
+
+    if (name && email && message !== ""){
+        alert("Thank you for your message!\nWe aim to answer as soon as possible!")
+    }
+}
+
+
 function addRowToTable(elemId) {
     var totalRowCount = elem.rows.length; // 5
     var row = table.insertRow(totalRowCount);
