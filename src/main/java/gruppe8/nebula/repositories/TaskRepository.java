@@ -29,7 +29,7 @@ public class TaskRepository {
     public List<TaskEntity> getTasksForProject(Long projectId) {
         List<TaskEntity> tasks = new ArrayList<>();
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "SELECT * FROM Nebula.tasks WHERE tasks.project_id = ?";
+            String query = "SELECT * FROM tasks WHERE project_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, projectId);
 
@@ -39,7 +39,7 @@ public class TaskRepository {
                 tasks.add(new TaskEntity(
                         resultSet.getLong("id"),
                         resultSet.getLong("project_id"),
-                        resultSet.getLong("parent"),
+                        resultSet.getLong("parent_id"),
                         resultSet.getString("name")
                 ));
             }
@@ -50,13 +50,13 @@ public class TaskRepository {
         return tasks;
     }
 
-    public boolean createTask(Task task,Task parent,Project project){
+    public boolean createTask(Task task,Long parentId,Long projectId){
         try(Connection connection = databaseManager.getConnection()){
             String query = "insert into Nebula.tasks (project_id,parent_id,name) VALUES (?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setLong(1,project.getId());
-            preparedStatement.setLong(2,parent.getId());
+            preparedStatement.setLong(1,projectId);
+            preparedStatement.setLong(2,parentId);
             preparedStatement.setString(2,task.getName());
 
             preparedStatement.execute();
@@ -68,13 +68,14 @@ public class TaskRepository {
         }
         return false;
     }
-    public boolean deleteTask(Task task) {
+
+    public boolean deleteTask(Long taskId) {
         try (Connection connection = databaseManager.getConnection()) {
             String query = "DELETE FROM tasks WHERE (id = ?);";
             connection.setAutoCommit(false);
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, task.getId());
+            preparedStatement.setLong(1, taskId);
 
             int changedRows = preparedStatement.executeUpdate();
             if (changedRows == 1) {

@@ -8,7 +8,6 @@ import gruppe8.nebula.models.Project;
 import gruppe8.nebula.repositories.ProjectRepository;
 import gruppe8.nebula.requests.CreateProjectRequest;
 import gruppe8.nebula.requests.DeleteProjectRequest;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,15 +25,14 @@ public class ProjectService {
 
     public Project getProjectById(Long id) {
         ProjectEntity projectEntity = projectRepository.getProjectById(id);
-        List<TaskEntity> taskEntities = taskService.getTasksForUser(id);
+        List<TaskEntity> taskEntities = taskService.getTasksFromProject(id);
 
-        Project project = new Project(null,"");
+        Project project = new Project(id,projectEntity.name());
         project.setProjectEntity(projectEntity);
         project.setSubtasks(taskEntities);
 
         return project;
     }
-
 
     public Boolean createProject(Account account, CreateProjectRequest request) {
         Project project = new Project(request.id(), request.name());
