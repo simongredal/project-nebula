@@ -10,4 +10,9 @@ public class ControllerControllerStuff {
     public String stuff() {
         return "project_page";
     }
+
+    @GetMapping("/gantt_test")
+    public String gantt() {
+        return "gantt";
+    }
 }
