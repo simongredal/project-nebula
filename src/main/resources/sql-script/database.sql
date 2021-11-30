@@ -29,13 +29,18 @@ create table if not exists projects (
 );
 
 create table if not exists tasks (
-    id         int auto_increment primary key,
-    project_id int          not null,
-    parent_id  int          null,
-    name       varchar(255) null,
-    constraint tasks_projects_fkindex foreign key (project_id) references projects (id) on delete cascade,
-    constraint tasks_tasks_fkindex foreign key (parent_id) references tasks (id) on delete cascade
+                       id         int auto_increment primary key,
+                       project_id int          not null,
+                       parent_id  int          null,
+                       name       varchar(255) null,
+                       startDate  datetime not null,
+                       endDate    datetime not null,
+                       constraint tasks_projects_fkindex foreign key (project_id) references projects (id)
+                           on delete cascade,
+                       constraint tasks_tasks_fkindex foreign key (parent_id) references tasks (id)
+                           on delete cascade
 );
+
 
 create or replace view membership_counts as
 select `nebula`.`teams`.`id`                 AS `team_id`,
