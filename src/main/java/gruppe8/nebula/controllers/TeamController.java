@@ -3,6 +3,7 @@ package gruppe8.nebula.controllers;
 import com.google.gson.Gson;
 import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.models.Account;
+import gruppe8.nebula.requests.MembershipUpdateRequest;
 import gruppe8.nebula.requests.TeamCreationRequest;
 import gruppe8.nebula.services.AccountService;
 import gruppe8.nebula.services.TeamService;
@@ -11,10 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class TeamController {
     }
 
     @GetMapping
-    public String teams(Authentication authentication, Model model) {
+    public String index(Authentication authentication, Model model) {
         Account account = (Account) authentication.getPrincipal();
         List<MembershipEntity> teams = teamService.getTeamsForAccount(account);
         List<MembershipEntity> invitations = teamService.getInvitationsForAccount(account);
@@ -51,6 +49,21 @@ public class TeamController {
     public String teams(@PathVariable Long teamId, Authentication authentication, Model model) {
         log.info("GET /teams/"+teamId);
         return "team_page";
+    }
+
+    @PostMapping("/accept")
+    public String acceptMembership(MembershipUpdateRequest request, Authentication authentication) {
+        log.info("POST /teams/accept request="+request);
+        return "redirect:/teams";
+    }
+
+    @PostMapping("/reject")
+    public String rejectMembership(MembershipUpdateRequest request, Authentication authentication) {
+        Account account = (Account) authentication.getPrincipal();
+        log.info("POST /teams/reject request="+request);
+
+        Boolean success = teamService.rejectMembership(account, request);
+        return "redirect:/teams";
     }
 
     @PostMapping("/create")

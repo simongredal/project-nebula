@@ -6,6 +6,7 @@ public record MembershipEntity(
         String accountEmail,
         Long teamId,
         String teamName,
+        Long membershipId,
         Boolean membershipAccepted,
         Integer membershipCount) {
 }

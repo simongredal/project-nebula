@@ -3,50 +3,60 @@
 <head>
     <th:block th:insert="fragments/components :: head"></th:block>
     <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
-    <title>Teams</title>
-    </head>
+    <title>Teams | Nebula</title>
+</head>
 <body>
-    <header th:replace="fragments/components :: navbar"></header>
-    <main class="main">
-        <div class="row">
-            <div class="col">
-                <div class="row"><h2>All Your Teams</h2></div>
-                <div class="row" th:each="team : ${teams}">
-                    <div th:replace="fragments/components :: membership-card(${team})"></div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="row"><h2>All Your Invitations</h2></div>
-                <div class="row" th:each="invite : ${invites}">
-                    <div th:replace="fragments/components :: membership-card(${invite})"></div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="row"><h2>Create a New Team</h2></div>
-                <div class="row">
-                    <form class="col form-wrapper" th:action="@{/teams/create}" method="POST">
-                        <div class="row form-control">
-                            <label for="name">Team Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="row w-12"><div class="col form-control" id="team-members">
-                            <div class="row">
-                                <label for="team-member">Invite Team Members</label>
-                                <button type="button" id="team-members-button" onclick="addTeamInvitation()"> Invite more...</button>
-                            </div>
-                            <input class="w-12" id="team-member" type="email" list="accounts" name="invitations" autocomplete="off">
-
-                            <datalist id="accounts">
-                                <option th:each="account : ${allAccounts}" th:text="${account.getName()}+' <'+${account.getEmail()}+'>'"></option>
-                            </datalist>
-                        </div></div>
-                        <div class="row form-control">
-                            <button class="w-12" type="submit" id="submit" >Create Team</button>
-                        </div>
-                    </form>
-                </div>
+<header th:replace="fragments/components :: navbar"></header>
+<main class="main">
+    <div class="row">
+        <div class="col">
+            <h2>All Your Teams</h2>
+            <div th:each="team : ${teams}" th:remove="tag">
+                <div th:replace="fragments/components :: membership-card(${team})"></div>
             </div>
         </div>
-    </main>
+        <div class="col">
+            <h2>All Your Invitations</h2>
+            <div th:each="invite : ${invites}" th:remove="tag">
+                <div th:replace="fragments/components :: membership-card(${invite})"></div>
+            </div>
+        </div>
+        <div class="col">
+            <h2>Create a New Team</h2>
+            <div class="row">
+            <div class="card">
+                <form class="col form-wrapper" th:action="@{/teams/create}" method="POST">
+                    <div class="row form-control">
+                        <label for="name">Team Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="row w-12">
+                        <div class="col">
+                            <div class="form-control">
+                                <label for="team-member">Invite Team Members</label>
+                                <button type="button" id="team-members-button" onclick="addTeamInvitation()">Invite more...</button>
+                            </div>
+                            <div class="w-12">
+                                <div class="col" id="team-members">
+                                    <div class="form-control">
+                                        <input class="w-12" id="team-member" type="email" list="accounts" name="invitations" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                            <datalist id="accounts">
+                                <option th:each="account : ${allAccounts}"
+                                        th:text="${account.getName()}+' <'+${account.getEmail()}+'>'"></option>
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="row form-control">
+                        <button class="w-12" type="submit" id="submit">Create Team</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

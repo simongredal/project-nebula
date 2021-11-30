@@ -3,25 +3,41 @@
 /* Navbar */
 .navbar {
   width: 100%;
-  padding: 1.5rem 1rem;
-  background-color: var(--navbar-color);
-  -webkit-box-shadow:  1px 12px 15px 0 var(--navbar-color);
-  box-shadow:  1px 12px 15px 0 var(--navbar-color);
   height: var(--navbar-height);
+  position: fixed;
+  top: 0;
 
+  padding: 0 2rem;
+
+  background-color: var(--navbar-color);
+  color: var(--primary-text-color);
 
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: fixed;
-  top: 0;
 }
 
 .navbar-text {
   font-size: 1.2rem;
   font-weight: bold;
+}
 
-  background-color: var(--navbar-color);
+.navbar * {
+  color: inherit;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.navbar-logo {
+  width: 3rem;
+  height: 3rem;
+}
+
+.navbar-text {
 }
 
 .navbar-spacer {
@@ -40,44 +56,39 @@
   padding-right: 0;
 }
 
-.navbar-text a{
-  color: var(--primary-text-color);
+.navbar a {
   text-decoration: none;
 }
 
-.navbar-text a:hover{
+.navbar a:hover {
   color: black;
   opacity: 50%;
 }
 
-.nebula{
+.nebula {
   font-family: 'Anton', sans-serif;
   font-weight: 900;
-  font-size: 2em;
+  font-size: 1.4em;
   font-style: oblique;
-  display: flex;
-  flex-wrap: wrap;
-
-  margin: 0 2em;
-
-  text-shadow: 0 0 10px blue;
-
-  color: var(--primary-text-color);
-
+  text-shadow: 0 0 2px blue;
+  text-decoration: underline;
 }
+
 /* Making the Nebula link in the header responsive */
 @media (max-width: 810px) {
   .nebula {
     font-size: 1.5em;
   }
 }
+
+
 @media (max-width: 680px) {
   .nebula {
     font-size: .9em;
   }
 }
-/* Footer */
 
+/* Footer */
 .footer{
   display: flex;
   flex-direction: row;

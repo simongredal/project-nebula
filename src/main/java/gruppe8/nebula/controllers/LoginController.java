@@ -23,7 +23,7 @@ public class LoginController {
                         Model model) {
             log.info("GET /login: Model=" + model);
 
-            if (success.isPresent()) { return "redirect:/project_page"; }
+            if (success.isPresent()) { return "redirect:/"; }
             if (error.isPresent()) { model.addAttribute("loginError", true); }
 
             return "login";

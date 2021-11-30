@@ -1,29 +1,35 @@
 function passwordVisibility() {
-    const password_input = document.querySelector("#password")
-    const password_toggle = document.querySelector("#password-toggle")
+    const password_input = document.querySelector("#password");
+    const password_repeat = document.querySelector("#repeat-password");
+    const password_toggle = document.querySelector("#password-toggle");
 
     if (password_input.type === "password") {
-        password_input.type = "text"
-        password_toggle.className = "bi-eye"
+        password_input.type = "text";
+        password_repeat.type = "text";
+        password_toggle.className = "bi-eye-slash";
     } else{
         password_input.type = "password";
-        password_toggle.className = "bi-eye-slash"
+        password_repeat.type = "password";
+        password_toggle.className = "bi-eye"
     }
 }
 
 function addTeamInvitation() {
     const invitations_div = document.querySelector("#team-members");
     const invitation_button = document.querySelector("#team-members-button");
-    const invitation_input = document.createElement("input");
+    const input_wrapper = document.createElement("div");
+    input_wrapper.className = "form-control";
 
+
+    const invitation_input = document.createElement("input");
     invitation_input.name = "invitations";
     invitation_input.className = "w-12";
-    invitation_input.setAttribute("list", "accounts");
     invitation_input.type = "email";
     invitation_input.setAttribute("list","accounts");
     invitation_input.autocomplete = "off";
 
-    invitations_div.insertBefore(invitation_input, null);
+    input_wrapper.appendChild(invitation_input)
+    invitations_div.insertBefore(input_wrapper, null);
 }
 
 function addField(){

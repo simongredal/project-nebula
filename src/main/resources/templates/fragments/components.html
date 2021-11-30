@@ -5,27 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
-    <link rel="stylesheet" th:href="@{/css/navigation.css}">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
 </head>
 <body>
-    <header class="navbar" th:fragment="navbar" th:with="account=${account} ?: null">
-        <div> <a class="nebula" th:href="@{/}">Nebula Project Manager</a> </div>
-        <div class="navbar-spacer"></div>
-        <div th:if="${account} == null" class="navbar-text"><a th:href="@{/signup}">Signup!</a></div>
-        <div th:if="${account} == null" class="navbar-text"><a th:href="@{/login}">Login</a></div>
-        <div th:unless="${account} == null" class="navbar-text"><a th:text="'Welcome '+ ${account.getName()}"></a></div>
-        <div th:unless="${account} == null" class="navbar-text"><a href="/teams">Teams</a></div>
-        <div th:unless="${account} == null" class="navbar-text"><a href="/logout">Logout</a></div>
-    </header>
+<header class="navbar" th:fragment="navbar" th:with="account=${account} ?: null">
+    <!--/*@thymesVar id="account" type="gruppe8.nebula.models.Account"*/-->
+    <a href="/">
+        <div class="navbar-brand">
+            <img class="navbar-logo" src="/images/starry-round-logo.png" alt="logo">
+            <div class="navbar-text">
+                <span class="nebula">Nebula Project Manager</span>
+            </div>
+        </div>
+    </a>
+    <div class="navbar-spacer"></div>
+    <div th:if="${account} == null" class="navbar-text"><a th:href="@{/signup}">Signup!</a></div>
+    <div th:if="${account} == null" class="navbar-text"><a th:href="@{/login}">Login</a></div>
+    <div th:unless="${account} == null" class="navbar-text">
+        <a th:text="'Welcome '+ ${account.getName()}"></a></div>
+    <div th:unless="${account} == null" class="navbar-text"><a href="/projects">Projects</a></div>
+    <div th:unless="${account} == null" class="navbar-text"><a href="/teams">Teams</a></div>
+    <div th:unless="${account} == null" class="navbar-text"><a href="/logout">Logout</a></div>
+</header>
 
-    <div th:fragment="membership-card(membership)">
-        <a th:href="'/teams/'+${membership.teamId()}"><strong th:text="${membership.teamName()}"></strong></a>
-        <div class="membercount">
-            <p th:inline="text">
-                <span class="bi-people"></span>
-                <span th:text="${membership.membershipCount()}" th:remove="tag"></span>
-            </p>
+<div class="row" th:fragment="membership-card(membership)">
+    <div class="card">
+        <div class="row">
+            <a th:href="'/teams/'+${membership.teamId()}"><strong th:text="${membership.teamName()}"></strong></a>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <span class="bi-people"></span>
+                    <span th:text="${membership.membershipCount()}"
+                          th:remove="tag"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <span class="bi-envelope"></span> <span th:text="${membership.membershipCount()}"
+                                                            th:remove="tag"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <span class="bi-briefcase"></span><span th:text="${membership.membershipCount()}"
+                                                            th:remove="tag"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row" th:unless="${membership.membershipAccepted()}">
+            <form class="col form-control" method="post" action="/teams/accept">
+                <input type="hidden" name="membershipId" th:value="${membership.membershipId()}">
+                <button class="btn btn-success w-12" type="submit">Accept Invitation</button>
+            </form>
+            <form class="col form-control" method="post" action="/teams/reject">
+                <input type="hidden" name="membershipId" th:value="${membership.membershipId()}">
+                <button class="btn btn-danger w-12" type="submit">Reject Invitation</button>
+            </form>
         </div>
     </div>
 

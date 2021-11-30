@@ -5,6 +5,7 @@ import gruppe8.nebula.entities.TeamEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Team;
 import gruppe8.nebula.repositories.TeamRepository;
+import gruppe8.nebula.requests.MembershipUpdateRequest;
 import gruppe8.nebula.requests.TeamDeletionRequest;
 import gruppe8.nebula.requests.TeamCreationRequest;
 import org.springframework.stereotype.Service;
@@ -66,4 +67,13 @@ public class TeamService {
     }
 
 
+    public Boolean rejectMembership(Account account, MembershipUpdateRequest request) {
+        Boolean allowed = membershipService.accountOwnsMembership(account, request);
+
+        if (!allowed) { return false; }
+
+        Boolean success = membershipService.rejectInvitation(request);
+
+        return null;
+    }
 }
