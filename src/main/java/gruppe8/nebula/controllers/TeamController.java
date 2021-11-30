@@ -51,20 +51,6 @@ public class TeamController {
         return "team_page";
     }
 
-    @PostMapping("/accept")
-    public String acceptMembership(MembershipUpdateRequest request, Authentication authentication) {
-        log.info("POST /teams/accept request="+request);
-        return "redirect:/teams";
-    }
-
-    @PostMapping("/reject")
-    public String rejectMembership(MembershipUpdateRequest request, Authentication authentication) {
-        Account account = (Account) authentication.getPrincipal();
-        log.info("POST /teams/reject request="+request);
-
-        Boolean success = teamService.rejectMembership(account, request);
-        return "redirect:/teams";
-    }
 
     @PostMapping("/create")
     public String addTeam(TeamCreationRequest request, Authentication authentication) {
@@ -78,6 +64,24 @@ public class TeamController {
         }
 
         log.info("Unsuccessful Team create");
+        return "redirect:/teams";
+    }
+
+    @PostMapping("/accept")
+    public String acceptMembership(MembershipUpdateRequest request, Authentication authentication) {
+        Account account = (Account) authentication.getPrincipal();
+        log.info("POST /teams/accept request="+request);
+
+        Boolean success = teamService.acceptMembership(account, request);
+        return "redirect:/teams";
+    }
+
+    @PostMapping("/reject")
+    public String rejectMembership(MembershipUpdateRequest request, Authentication authentication) {
+        Account account = (Account) authentication.getPrincipal();
+        log.info("POST /teams/reject request="+request);
+
+        Boolean success = teamService.rejectMembership(account, request);
         return "redirect:/teams";
     }
 }

@@ -91,9 +91,24 @@ public class MembershipRepository{
         return false;
     }
 
-    public Boolean rejectInvitation(Long membershipId) {
+    public Boolean acceptMembership(Long membershipId) {
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "DELETE FROM memberships WHERE id =?;";
+            String query = "UPDATE memberships SET accepted = TRUE WHERE id = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, membershipId);
+
+            preparedStatement.execute();
+            return preparedStatement.getUpdateCount() == 1;
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+
+        return false;
+    }
+
+    public Boolean rejectMembership(Long membershipId) {
+        try (Connection connection = databaseManager.getConnection()) {
+            String query = "DELETE FROM memberships WHERE id = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, membershipId);
 

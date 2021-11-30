@@ -66,11 +66,21 @@ public class TeamService {
         return membershipService.getMembershipsForAccount(account, false);
     }
 
+    public Boolean acceptMembership(Account account, MembershipUpdateRequest request) {
+        Boolean allowed = membershipService.accountOwnsMembership(account, request);
+
+        if (!allowed) { return false; }
+
+        return membershipService.acceptMembership(request);
+    }
+
     public Boolean rejectMembership(Account account, MembershipUpdateRequest request) {
         Boolean allowed = membershipService.accountOwnsMembership(account, request);
 
         if (!allowed) { return false; }
 
-        return membershipService.rejectInvitation(request);
+        return membershipService.rejectMembership(request);
     }
+
+
 }
