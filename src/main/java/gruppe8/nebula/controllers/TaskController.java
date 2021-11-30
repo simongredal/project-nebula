@@ -29,6 +29,7 @@ public class TaskController {
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
+    /*
     @GetMapping("/task")
     public String task(Authentication authentication, Model model) {
         Account account = (Account) authentication.getPrincipal();
@@ -36,5 +37,5 @@ public class TaskController {
         log.info("GET /teams: Account=%s".formatted(account));
         System.out.println(projectService.getProjectById(1L));
         return "task";
-    }
+    }*/
 }
