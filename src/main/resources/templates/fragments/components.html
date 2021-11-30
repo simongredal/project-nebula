@@ -47,7 +47,7 @@
             <div class="col">
                 <div class="row tooltip">
                     <span class="bi-envelope"></span>
-                    <span th:text="'You have currently invited XXX members'" class="tooltip-text"></span>
+                    <span th:text="'You have currently invited ' + ${membership.invitationCount()} + ' members'" class="tooltip-text"></span>
                     <span th:text="${membership.invitationCount()}"
                                                             th:remove="tag"></span>
                 </div>
@@ -55,8 +55,8 @@
             <div class="col">
                 <div class="row tooltip">
                     <span class="bi-briefcase"></span>
-                    <span th:text="'Your team currently have XXX projects'" class="tooltip-text"></span>
-                    <span th:text="${membership.membershipCount()}"
+                    <span th:text="'Your team currently have ' + ${membership.projectCount()} + ' projects'" class="tooltip-text"></span>
+                    <span th:text="${membership.projectCount()}"
                                                             th:remove="tag"></span>
                 </div>
             </div>

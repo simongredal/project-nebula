@@ -9,5 +9,6 @@ public record MembershipEntity(
         Long membershipId,
         Boolean membershipAccepted,
         Integer membershipCount,
-        Integer invitationCount) {
+        Integer invitationCount,
+        Integer projectCount) {
 }

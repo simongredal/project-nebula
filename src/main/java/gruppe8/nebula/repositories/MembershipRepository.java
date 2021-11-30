@@ -62,7 +62,9 @@ public class MembershipRepository{
                         resultSet.getLong("membership_id"),
                         resultSet.getBoolean("membership_accepted"),
                         resultSet.getInt("membership_count"),
-                        resultSet.getInt("invitation_count")
+                        resultSet.getInt("invitation_count"),
+                        resultSet.getInt("project_count")
+
                 ));
             }
 
