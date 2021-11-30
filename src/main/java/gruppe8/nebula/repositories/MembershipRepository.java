@@ -59,6 +59,7 @@ public class MembershipRepository{
                         resultSet.getString("account_email"),
                         resultSet.getLong("team_id"),
                         resultSet.getString("team_name"),
+                        resultSet.getLong("membership_id"),
                         resultSet.getBoolean("membership_accepted"),
                         resultSet.getInt("membership_count")
                 ));
@@ -69,5 +70,39 @@ public class MembershipRepository{
         }
 
         return Collections.unmodifiableList(memberships);
+    }
+
+    public Boolean accountOwnsMembership(Long accountId, Long membershipId) {
+        try (Connection connection = databaseManager.getConnection()) {
+            String query = "SELECT EXISTS(SELECT id FROM memberships WHERE (id = ? AND account_id = ?));";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, membershipId);
+            preparedStatement.setLong(2, accountId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1) == 1;
+            }
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+
+        return false;
+    }
+
+    public Boolean rejectInvitation(Long membershipId) {
+        try (Connection connection = databaseManager.getConnection()) {
+            String query = "DELETE FROM memberships WHERE id =?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, membershipId);
+
+            preparedStatement.execute();
+            return preparedStatement.getUpdateCount() == 1;
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+
+        return false;
     }
 }

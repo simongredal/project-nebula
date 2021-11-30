@@ -72,8 +72,6 @@ public class TeamService {
 
         if (!allowed) { return false; }
 
-        Boolean success = membershipService.rejectInvitation(request);
-
-        return null;
+        return membershipService.rejectInvitation(request);
     }
 }
