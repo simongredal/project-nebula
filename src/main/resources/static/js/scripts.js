@@ -46,7 +46,6 @@ function addField(){
 }
 
 function thankYou(){
-    const thx = document.getElementById("send-message").value
     const name = document.getElementById("name").value
     const email = document.getElementById("email").value
     const message = document.getElementById("message").value

@@ -124,7 +124,7 @@ p {
 
 .btn-danger { background-color: hsl(0, 90%, 40%); color: aliceblue }
 .btn-danger:hover { background-color: hsl(0, 90%, 44%); }
-.btn-danger:active { background-color: hsl(0, 90%, 36%); }
+.btn-danger:act ive { background-color: hsl(0, 90%, 36%); }
 
 
 .btn-wow {
@@ -143,7 +143,7 @@ p {
 
 .container{
     display: flex;
-    flex-direction: row;
+    flex-direction: row;                                            
     flex-wrap: wrap;
     margin: 5em 1em 0;
     width: 100%;
@@ -156,6 +156,15 @@ p {
     text-align: center;
 
 }
+
+.team-name{
+    text-decoration: none;
+    color: blue;
+}
+.team-name:hover{
+    text-decoration: underline;  
+}
+
 
 /* Tooltip container */
 .tooltip {
