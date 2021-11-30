@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org" th:include="fragments/layout :: layout">
 <head>
     <meta charset="UTF-8">
-    <title th:fragment="page" th:text="'Team Page for ' + ${team.getName()} + '">Team Page</title>
+    <title th:fragment="page" th:inline="text">[['Team '+${team.getName()}]]</title>
 </head>
 <body>
 <main th:fragment="content">
