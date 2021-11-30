@@ -84,6 +84,18 @@
 
     </footer>
 
+<div class="row" th:fragment="task">
+ <table>
+     <tr>
+         <td th:text="${task.getId()}"></td>
+         <td th:text="${task.getName()}"></td>
+     </tr>
+ </table>
+    <div th:each="task : ${task.getSubtasks()}">
+        <div th:replace="fragments/components :: task"></div>
+    </div>
+</div>
+
 
 </body>
 </html>
