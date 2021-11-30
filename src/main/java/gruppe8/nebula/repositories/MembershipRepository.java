@@ -123,4 +123,23 @@ public class MembershipRepository{
 
         return false;
     }
+
+    public Boolean accountHasMembershipInTeam(Long accountId, Long teamId) {
+        try (Connection connection = databaseManager.getConnection()) {
+            String query = "SELECT EXISTS(SELECT id FROM memberships WHERE (accepted = TRUE AND  team_id = ? AND account_id = ?));";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, teamId);
+            preparedStatement.setLong(2, accountId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1) == 1;
+            }
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+
+        return false;
+    }
 }

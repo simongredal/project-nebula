@@ -1,33 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:include="fragments/layout :: layout">
 <head>
-    <th:block th:insert="fragments/components :: head">head</th:block>
-
-    <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
-
-    <title>Log in! | Nebula</title>
+    <meta charset="UTF-8">
+    <title th:fragment="page">Log in!</title>
 </head>
 <body>
-<header th:replace="fragments/components :: navbar"></header>
-<main class="main center">
-<div class="row w-6 center">
-    <div class="col"><div class="card">
-        <form id="login" class="col form-wrapper" th:action="@{/login}" method="POST">
-            <div class="row form-control">
-                <label for="email">Email</label>
-                <input placeholder="user@example.com" autocomplete="email" type="email" id="email" name="email" required>
-            </div>
-            <div class="row form-control">
-                <label for="password">Password</label>
-                <input placeholder="••••••••••" autocomplete="current-password" type="password" id="password" name="password" required>
-                <button type="button" id="password-toggle" class="bi-eye" onclick="passwordVisibility()"></button>
-            </div>
-            <div class="row form-control">
-                <button class="btn-wow w-12" type="submit">Log In</button>
-            </div>
-        </form>
-    </div></div>
-</div>
+<main th:fragment="content">
+    <div class="col center">
+    <div class="row">
+        <div class="card">
+            <form id="login" class="col form-wrapper" th:action="@{/login}" method="POST">
+                <div class="row form-control">
+                    <label for="email">Email</label>
+                    <input placeholder="user@example.com" autocomplete="email" type="email" id="email" name="email" required>
+                </div>
+                <div class="row form-control">
+                    <label for="password">Password</label>
+                    <input placeholder="••••••••••" type="password" autocomplete="current-password" id="password" name="password" required>
+                    <button type="button" id="password-toggle" class="btn" onclick="passwordVisibility()"><i class="bi-eye"></i></button>
+                </div>
+                <div class="row form-control">
+                    <button class="btn btn-wow w-12" type="submit">Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
 </main>
 </body>
 </html>

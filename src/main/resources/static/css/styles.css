@@ -31,21 +31,26 @@ p {
     margin-right: 1rem;
 }
 
-.form-control button {
-    border: none;
-}
-
-.form-control input {
+.form-control input, .form-control textarea {
     flex-grow: 1;
+    margin: 0;
     border: none;
     outline: none;
     border-bottom-color: #999999;
     border-bottom-style: solid;
     border-bottom-width: 2pt;
+    resize: none;
 }
+.form-control input:focus, .form-control textarea:focus { border-bottom-color: hsl(215, 100%, 50%); }
 
-.form-control input:focus {
-    border-bottom-color: #0d6efd;
+.main {
+    background-color: #f2f2f2;
+    width: 100%;
+    min-height: calc(100vh - 2 * var(--navbar-height));
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .center {
@@ -53,41 +58,46 @@ p {
     align-self : center;
 }
 
-.main {
-    background-color: #f2f2f2;
-    width: 100%;
-    min-height: calc(100vh - var(--navbar-height));
-    padding: 2rem;
-
-    display: flex;
-    flex-direction: column;
-}
-
 .card {
     flex-grow: 1;
     background-color: white;
-    border-radius: 0.5rem;
+    border-radius: 0.6rem;
     margin: 0.25rem;
     padding: 1rem;
     box-shadow: var(--shadow-elevation-medium);
 }
 
-.shadow-1 {
-    box-shadow: var(--shadow-elevation-low);
-}
-.shadow-2 {
+.btn {
+    border: none;
+    border-radius: 0.6rem;
+    padding: 0.25rem 0.5rem;
+    color: var(--primary-text-color);
     box-shadow: var(--shadow-elevation-medium);
 }
-.shadow-3 {
-    box-shadow: var(--shadow-elevation-high);
-}
+
+.btn { background-color: hsl(0, 0%, 60%); }
+.btn:hover { background-color: hsl(0, 0%, 63%); }
+.btn:active { background-color: hsl(0, 0%, 57%); box-shadow: var(--shadow-elevation-low); }
+
+.btn-success { background-color: hsl(120, 90%, 30%); }
+.btn-success:hover { background-color: hsl(120, 90%, 33%); }
+.btn-success:active { background-color: hsl(120, 90%, 27%);}
+
+.btn-danger { background-color: hsl(0, 90%, 40%); }
+.btn-danger:hover { background-color: hsl(0, 90%, 43%); }
+.btn-danger:active { background-color: hsl(0, 90%, 37%); }
+
+.btn-wow { background: linear-gradient(45deg, hsl(0, 90%, 65%) 0%, hsl(205, 70%, 50%) 50%, hsl(0, 90%, 65%) 100%); }
+.btn-wow:hover { background: linear-gradient(45deg, hsl(0, 92%, 68%) 0%, hsl(205, 72%, 53%) 50%, hsl(0, 92%, 68%) 100%); }
+.btn-wow:active { background: linear-gradient(45deg, hsl(0, 90%, 62%) 0%, hsl(205, 70%, 47%) 50%, hsl(0, 90%, 62%) 100%); }
 
 .row {
     padding: 0.5rem 0;
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     flex: 0 1 auto;
-    flex-wrap: wrap;
+    align-items: baseline;
 }
 .row:first-child { padding-top: 0; }
 .row:last-child { padding-bottom: 0; }
@@ -96,6 +106,7 @@ p {
     padding: 0 0.5rem;
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     flex: 1 0 0;
 }
 .col:first-child { padding-left: 0; }
@@ -114,48 +125,16 @@ p {
 .w-11 { width:  91.6666%; }
 .w-12 { width: 100.0000%; }
 
-.btn {
-    border-radius: 0.5rem;
-    padding: 0.25rem;
-}
+.shadow-1 { box-shadow: var(--shadow-elevation-low); }
+.shadow-2 { box-shadow: var(--shadow-elevation-medium); }
+.shadow-3 { box-shadow: var(--shadow-elevation-high); }
 
-.btn-success { background-color: hsl(120, 90%, 30%); color: aliceblue; }
-.btn-success:hover { background-color: hsl(120, 90%, 33%); }
-.btn-success:active { background-color: hsl(120, 90%, 27%); }
+.space-evenly { justify-content: space-evenly; }
+.space-around { justify-content: space-around; }
+.space-between { justify-content: space-between; }
 
-.btn-danger { background-color: hsl(0, 90%, 40%); color: aliceblue }
-.btn-danger:hover { background-color: hsl(0, 90%, 44%); }
-.btn-danger:act ive { background-color: hsl(0, 90%, 36%); }
-
-
-.btn-wow {
-    border: 2px solid #ccc !important;
-    border-radius: 20px;
-    color: var(--primary-text-color);
-    background: #1C6EA4;
-    padding: 0.8rem 1rem;
-    background: linear-gradient(45deg, #f35252 0%, #2388CB 49%, #f35252 100%);
-    font-size: 1rem;
-}
-.btn-wow:hover{
-     background: linear-gradient(45deg, #e53e3e 0%, #1478b9 49%, #e53e3e 100%);
-}
-
-
-.container{
-    display: flex;
-    flex-direction: row;                                            
+.wrap {
     flex-wrap: wrap;
-    margin: 5em 1em 0;
-    width: 100%;
-}
-
-.column{
-    margin: auto auto;
-}
-.column > p {
-    text-align: center;
-
 }
 
 .team-name{
@@ -178,14 +157,15 @@ p {
 
 /* Tooltip text */
 .tooltip .tooltip-text {
+    font-size: 0.8rem;
     visibility: hidden;
-    width: auto;
+    width: 150%;
     background-color: rgba(0,0,0, 70%);
 
     color: #fff;
     text-align: center;
-    padding: .8rem .8rem;
-    border-radius: 6px;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
 
     /* Position the tooltip text - see examples below! */
     position: absolute;

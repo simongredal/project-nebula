@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout">
+<head>
+    <th:block th:include="fragments/components :: includes"></th:block>
+    <title><th:block th:include="this :: page"></th:block> | Nebula</title>
+</head>
+<body>
+    <header th:replace="fragments/components :: navbar"></header>
+    <main class="main" th:include="this :: content"></main>
+    <footer th:replace="fragments/components :: footer"></footer>
+</body>
+</html>

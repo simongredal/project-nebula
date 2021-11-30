@@ -1,45 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      th:include="fragments/layout :: layout">
 <head>
-    <th:block th:insert="fragments/components :: head">head</th:block>
-
-    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
-
-    <script type="text/javascript" th:src="@{../js/scripts.js}"></script>
-
-    <title>Sign up! | Nebula</title>
+    <meta charset="UTF-8">
+    <title th:fragment="page">Sign up!</title>
 </head>
 <body>
-<header th:replace="fragments/components :: navbar"></header>
-<main class="main center">
-    <div class="row w-6 center">
-        <div class="col"><div class="card">
-        <form class="col form-wrapper" th:action="@{/signup}" method="POST">
-            <div class="row form-control">
-                <label for="name">Name</label>
-                <input placeholder="Name" autocomplete="name" type="text" id="name" name="name" required>
-            </div>
+<main th:fragment="content">
+    <div class="col center">
+        <div class="row">
+        <div class="card">
+            <form class="col form-wrapper" th:action="@{/signup}" method="POST">
+                <div class="row form-control">
+                    <label for="name">Name</label>
+                    <input placeholder="Name" autocomplete="name" type="text" id="name" name="name" required>
+                </div>
 
-            <div class="row form-control">
-                <label for="email">Email</label>
-                <input placeholder="user@example.com" autocomplete="email" type="email" id="email" name="email" required>
-            </div>
+                <div class="row form-control">
+                    <label for="email">Email</label>
+                    <input placeholder="user@example.com" autocomplete="email" type="email" id="email" name="email"
+                           required>
+                </div>
 
-            <div class="row form-control">
-                <label for="password">Password</label>
-                <input placeholder="••••••••••" type="password" autocomplete="new-password" id="password" name="password" required>
-                <button type="button" id="password-toggle" class="bi-eye" onclick="passwordVisibility()"></button>
-            </div>
+                <div class="row form-control">
+                    <label for="password">Password</label>
+                    <input placeholder="••••••••••" type="password" autocomplete="new-password" id="password"
+                           name="password" required>
+                    <button type="button" id="password-toggle" class="btn" onclick="passwordVisibility()"><i
+                            class="bi-eye"></i></button>
+                </div>
 
-            <div class="row form-control">
-                <!-- TODO: I don't do anything yet-->
-                <label for="repeat-password">Repeat password</label>
-                <input placeholder="••••••••••" type="password" autocomplete="new-password" id="repeat-password" required>
-            </div>
+                <div class="row form-control">
+                    <!-- TODO: I don't do anything yet-->
+                    <label for="repeat-password">Repeat password</label>
+                    <input placeholder="••••••••••" type="password" autocomplete="new-password" id="repeat-password"
+                           required>
+                </div>
 
-            <div class="row form-control"><button type="submit" class="btn-wow w-12">Sign up</button></div>
-        </form>
-        </div></div></div>
+                <div class="row form-control">
+                    <button type="submit" class="btn btn-wow w-12">Sign up</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
 </main>
 </body>
 </html>

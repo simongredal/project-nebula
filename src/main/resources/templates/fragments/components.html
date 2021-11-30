@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head th:fragment="head">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fragments</title>
+    <th:block th:fragment="includes">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+        <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
+        <link rel="stylesheet" th:href="@{/css/styles.css}">
+        <link rel="stylesheet" th:href="@{/css/navigation.css}">
+
+        <script th:src="@{/js/scripts.js}"></script>
+    </th:block>
 </head>
 <body>
 <header class="navbar" th:fragment="navbar" th:with="account=${account} ?: null">
@@ -22,8 +28,7 @@
     <div class="navbar-spacer"></div>
     <div th:if="${account} == null" class="navbar-text"><a th:href="@{/signup}">Signup!</a></div>
     <div th:if="${account} == null" class="navbar-text"><a th:href="@{/login}">Login</a></div>
-    <div th:unless="${account} == null" class="navbar-text">
-        <p th:text="'Welcome '+ ${account.getName()}"></p></div>
+    <div th:unless="${account} == null" class="navbar-text"><p th:text="'Welcome '+ ${account.getName()}"></p></div>
     <div th:unless="${account} == null" class="navbar-text"><a href="/projects">Projects</a></div>
     <div th:unless="${account} == null" class="navbar-text"><a href="/teams">Teams</a></div>
     <div th:unless="${account} == null" class="navbar-text"><a href="/logout">Logout</a></div>
@@ -35,30 +40,18 @@
         <div class="row">
             <a class="team-name" th:href="'/teams/'+${membership.teamId()}"><strong th:text="${membership.teamName()}"></strong></a>
         </div>
-        <div class="row">
-            <div class="col ">
-                <div class="row tooltip">
-                    <span class="bi-people"></span>
-                    <span th:text="'You currently have ' + ${membership.membershipCount()} + ' member in your team'" class="tooltip-text"></span>
-                    <span th:text="${membership.membershipCount()}"
-                          th:remove="tag"></span>
-                </div>
+        <div class="row space-evenly">
+            <div class="tooltip">
+                <span th:text="${membership.membershipCount()}" th:remove="tag"></span><i class="bi-people"></i>
+                <span th:text="'You currently have ' + ${membership.membershipCount()} + ' member in your team'" class="tooltip-text"></span>
             </div>
-            <div class="col">
-                <div class="row tooltip">
-                    <span class="bi-envelope"></span>
-                    <span th:text="'You have currently invited ' + ${membership.invitationCount()} + ' members'" class="tooltip-text"></span>
-                    <span th:text="${membership.invitationCount()}"
-                                                            th:remove="tag"></span>
-                </div>
+            <div class="tooltip">
+                <span th:text="${membership.invitationCount()}" th:remove="tag"></span><i class="bi-envelope"></i>
+                <span th:text="'You have currently invited ' + ${membership.invitationCount()} + ' members'" class="tooltip-text"></span>
             </div>
-            <div class="col">
-                <div class="row tooltip">
-                    <span class="bi-briefcase"></span>
-                    <span th:text="'Your team currently have ' + ${membership.projectCount()} + ' projects'" class="tooltip-text"></span>
-                    <span th:text="${membership.projectCount()}"
-                                                            th:remove="tag"></span>
-                </div>
+            <div class="tooltip">
+                <span th:text="${membership.projectCount()}" th:remove="tag"></span><i class="bi-bar-chart-steps"></i>
+                <span th:text="'Your team currently have ' + ${membership.projectCount()} + ' projects'" class="tooltip-text"></span>
             </div>
         </div>
         <div class="row" th:unless="${membership.membershipAccepted()}">
@@ -74,21 +67,19 @@
     </div>
 </div>
 
+<div class="row" th:fragment="project-card(project)">
+    <!--/*@thymesVar id="project" type="gruppe8.nebula.models.Project"*/-->
+    <div class="card">
+        <a th:href="'/projects/'+${project.getId()}" class="team-name"><strong th:text="${project.getName()}"></strong></a>
+    </div>
+</div>
 
-
-
-    <footer class="footer" th:fragment="footer">
-        <div class="navbar-spacer"></div>
-        <div class="footer-text"> <a th:href="@{/contact}">Contact page</a></div>
-        <div class="footer-text"> <a th:href="@{/#}">About Nebula</a> </div>
-        <div class="footer-text"> <a th:href="@{/#}">Terms Of Use</a> </div>
-
-
-
-
-
-
-    </footer>
+<footer class="footer" th:fragment="footer">
+    <div class="navbar-spacer"></div>
+    <div class="footer-text"> <a th:href="@{/contact}">Contact page</a></div>
+    <div class="footer-text"> <a th:href="@{/#}">About Nebula</a> </div>
+    <div class="footer-text"> <a th:href="@{/#}">Terms Of Use</a> </div>
+</footer>
 
 <div th:fragment="task">
  <table>
@@ -111,7 +102,6 @@
         <div th:replace="fragments/components :: task"></div>
     </div>
 </div>
-
 
 </body>
 </html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:include="fragments/layout :: layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:fragment="page" th:text="'Team Page for ' + ${team.getName()} + '">Team Page</title>
+</head>
+<body>
+<main th:fragment="content">
+    <div class="row wrap">
+        <div class="col">
+            <div class="row center">
+                <h2>Projects</h2>
+            </div>
+
+            <div th:each="project : ${team.getProjects()}" th:remove="tag">
+                <div th:replace="fragments/components :: project-card(${project})"></div>
+            </div>
+
+            <div class="row">
+                <div class="card">
+                    <div class="row"><strong>Create More Projects</strong></div>
+                    <div class="row">
+                        <form action="" method="post" class="col form-wrapper">
+                            <div class="row form-control">
+                                <label for="name">Project Name</label>
+                                <input type="text" id="name" name="name" autocomplete="off" placeholder="My Awesome Project">
+                            </div>
+                            <div class="row form-control">
+                                <button type="submit" class="w-12 btn btn-wow">Create Project</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row center">
+                <h2>Memberships</h2>
+            </div>
+            <div class="row">
+                <!--            TODO: Generate a list of members and invited members here so we can handle their memberships status -->
+                <!--            Example -->
+                <div class="card">
+                    <div class="row">
+                        <strong>Current Members</strong>
+                    </div>
+                    <div class="row space-between">
+                        <span>Member Name 1 (member1@mail.dk)</span>
+                        <button class="btn btn-danger"><i class="bi-trash"></i></button>
+                    </div>
+                    <div class="row space-between">
+                        <span>Member Name 2 (member2@mail.dk)</span>
+                        <button class="btn btn-danger"><i class="bi-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!--            TODO: Generate a list of members and invited members here so we can handle their memberships status -->
+                <!--            Example -->
+                <div class="card">
+                    <div class="row">
+                        <strong>Active Invitations</strong>
+                    </div>
+                    <div class="row space-between">
+                        <span>Member Name 3 (member3@mail.dk)</span>
+                        <button class="btn btn-danger"><i class="bi-trash"></i></button>
+                    </div>
+                    <div class="row space-between">
+                        <span>Member Name 4 (member4@mail.dk)</span>
+                        <button class="btn btn-danger"><i class="bi-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card">
+                    <div class="row"><strong>Send More Invitations</strong></div>
+                    <div class="row">
+                        <form action="" method="post" class="col form-wrapper">
+                            <div class="row form-control">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" autocomplete="off" placeholder="user@example.com">
+                            </div>
+                            <div class="row form-control">
+                                <button type="submit" class="w-12 btn btn-wow">Send Invitation</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

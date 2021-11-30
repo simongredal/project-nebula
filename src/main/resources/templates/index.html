@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:include="fragments/layout :: layout">
 <head>
-    <th:block th:insert="fragments/components :: head"></th:block>
-    <title>Nebula Project Manager</title>
+    <meta charset="UTF-8">
+    <title th:fragment="page">Nebula Project Manager</title>
 </head>
 <body>
-<header th:replace="fragments/components :: navbar"></header>
-
-<main class="main center">
+<main th:fragment="content">
     <div class="row">
         <div class="col">
             <div class="card">
@@ -97,10 +95,5 @@
         </div>
     </div>
 </main>
-
-
-
-<footer th:replace="fragments/components :: footer"></footer>
-
 </body>
 </html>

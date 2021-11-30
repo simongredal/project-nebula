@@ -2,7 +2,6 @@ package gruppe8.nebula.services;
 
 import gruppe8.nebula.entities.ProjectEntity;
 import gruppe8.nebula.entities.TaskEntity;
-import gruppe8.nebula.entities.TeamEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Project;
 import gruppe8.nebula.repositories.ProjectRepository;
@@ -10,7 +9,7 @@ import gruppe8.nebula.requests.CreateProjectRequest;
 import gruppe8.nebula.requests.DeleteProjectRequest;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,4 +43,17 @@ public class ProjectService {
         return projectRepository.deleteProject(project, account);
     }
 
+    public List<Project> getProjectsByTeamId(Long teamId) {
+        List<ProjectEntity> projectEntities = projectRepository.getProjectsByTeamId(teamId);
+
+        List<Project> projects = new ArrayList<>();
+        for (ProjectEntity projectEntity : projectEntities) {
+            Project project = new Project();
+            project.setProjectEntity(projectEntity);
+            project.setSubtasks(taskService.getTasksFromProject(projectEntity.id()));
+            projects.add(project);
+        }
+
+        return projects;
+    }
 }

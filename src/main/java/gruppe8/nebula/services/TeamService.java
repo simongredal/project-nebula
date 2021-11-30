@@ -3,6 +3,7 @@ package gruppe8.nebula.services;
 import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.entities.TeamEntity;
 import gruppe8.nebula.models.Account;
+import gruppe8.nebula.models.Project;
 import gruppe8.nebula.models.Team;
 import gruppe8.nebula.repositories.TeamRepository;
 import gruppe8.nebula.requests.MembershipUpdateRequest;
@@ -17,11 +18,13 @@ public class TeamService {
     private final TeamRepository teamRepository;
     private final MembershipService membershipService;
     private final AccountService accountService;
+    private final ProjectService projectService;
 
-    public TeamService(TeamRepository teamRepository, MembershipService membershipService, AccountService accountService) {
+    public TeamService(TeamRepository teamRepository, MembershipService membershipService, AccountService accountService, ProjectService projectService) {
         this.teamRepository = teamRepository;
         this.membershipService = membershipService;
         this.accountService = accountService;
+        this.projectService = projectService;
     }
 
     public Boolean createTeam(Account currentAccount, TeamCreationRequest request) {
@@ -39,20 +42,17 @@ public class TeamService {
         return true;
     }
     public Boolean deleteTeam(TeamDeletionRequest request) {
-        Team team = new Team(
-                request.id(),
-                request.name()
-        );
+        return teamRepository.deleteTeam(request.id());
 
-        return teamRepository.deleteTeam(team);
     }
     public Boolean updateTeam(TeamDeletionRequest request, Team teamNew) {
-        Team teamOld = new Team(
-                request.id(),
-                request.name()
-        );
+        assert false : "updateTeam does not work anymore";
+//        Team teamOld = new Team(
+//                request.id(),
+//                request.name()
+//        );
 
-        return teamRepository.updateTeam(teamOld, teamNew);
+        return teamRepository.updateTeam(null, teamNew);
     }
     public List<TeamEntity> getAllTeams() {
         return teamRepository.getAllTeams();
@@ -82,5 +82,17 @@ public class TeamService {
         return membershipService.rejectMembership(request);
     }
 
+    public Team getTeam(Account account, Long teamId) {
+        Boolean allowed = membershipService.accountHasMembershipInTeam(account, teamId);
 
+        if (!allowed) { return null; };
+
+        TeamEntity teamEntity = teamRepository.getTeamById(teamId);
+        List<Project> projects = projectService.getProjectsByTeamId(teamId);
+
+        Team team = new Team(teamEntity);
+        team.getProjects().addAll(projects);
+
+        return team;
+    }
 }

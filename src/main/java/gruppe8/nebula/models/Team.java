@@ -1,15 +1,24 @@
 package gruppe8.nebula.models;
 
+import gruppe8.nebula.entities.TeamEntity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Team {
     private Long id;
     private String name;
+    private final List<Project> projects = new ArrayList<>();
 
-    public Team(Long id,String name) {
-        this.id = id;
-        this.name = name;
+    public Team() {}
+
+    public Team(TeamEntity teamEntity) {
+        this.id = teamEntity.id();
+        this.name = teamEntity.name();
     }
-    public Team(String name) {
-        this.name = name;
+
+    public List<Project> getProjects() {
+        return projects;
     }
 
     public String getName() {

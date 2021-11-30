@@ -1,11 +1,12 @@
 package gruppe8.nebula.controllers;
 
-import com.google.gson.Gson;
 import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.models.Account;
+import gruppe8.nebula.models.Team;
 import gruppe8.nebula.requests.MembershipUpdateRequest;
 import gruppe8.nebula.requests.TeamCreationRequest;
 import gruppe8.nebula.services.AccountService;
+import gruppe8.nebula.services.ProjectService;
 import gruppe8.nebula.services.TeamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +23,12 @@ public class TeamController {
     private final TeamService teamService;
     private final Logger log;
     private final AccountService accountService;
+    private final ProjectService projectService;
 
-    public TeamController(TeamService teamService, AccountService accountService) {
+    public TeamController(TeamService teamService, AccountService accountService, ProjectService projectService) {
         this.teamService = teamService;
         this.accountService = accountService;
+        this.projectService = projectService;
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
@@ -48,9 +51,16 @@ public class TeamController {
     @GetMapping("/{teamId}")
     public String teams(@PathVariable Long teamId, Authentication authentication, Model model) {
         log.info("GET /teams/"+teamId);
-        return "team_page";
-    }
 
+        Account account = (Account) authentication.getPrincipal();
+        Team team = teamService.getTeam(account, teamId);
+
+        model.addAttribute("account", account);
+        model.addAttribute("team", team);
+
+        log.info("Model="+model);
+        return "team";
+    }
 
     @PostMapping("/create")
     public String addTeam(TeamCreationRequest request, Authentication authentication) {

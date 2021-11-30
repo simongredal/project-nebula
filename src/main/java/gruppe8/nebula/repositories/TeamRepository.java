@@ -59,18 +59,18 @@ public class TeamRepository {
         return null;
     }
 
-    public boolean deleteTeam(Team team) {
+    public boolean deleteTeam(Long teamId) {
         try (Connection connection = databaseManager.getConnection()) {
             String query = "DELETE FROM teams WHERE (id = ?);";
             connection.setAutoCommit(false);
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, team.getId());
+            preparedStatement.setLong(1, teamId);
 
             int changedRows = preparedStatement.executeUpdate();
             if (changedRows == 1) {
                 connection.commit();
-                System.out.println("team deleted: " + team.getName());
+                System.out.println("team deleted: " + teamId);
                 return true;
             }
             connection.rollback();

@@ -12,6 +12,9 @@ public class Project {
     private String name;
     private final List<Task> subtasks = new ArrayList<>();
 
+    public Project() {
+    }
+
     public Project(Long id, String name) {
         this.id = id;
         this.name = name;

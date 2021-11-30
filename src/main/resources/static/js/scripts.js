@@ -5,12 +5,12 @@ function passwordVisibility() {
 
     if (password_input.type === "password") {
         password_input.type = "text";
-        password_repeat.type = "text";
-        password_toggle.className = "bi-eye-slash";
-    } else{
+        password_toggle.children.item(0).className = "bi-eye-slash";
+        if (password_repeat) { password_repeat.type = "text"; }
+    } else {
         password_input.type = "password";
-        password_repeat.type = "password";
-        password_toggle.className = "bi-eye"
+        password_toggle.children.item(0).className = "bi-eye"
+        if (password_repeat) { password_repeat.type = "password"; }
     }
 }
 

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,4 +87,26 @@ public class ProjectRepository {
         return false;
     }
 
+    public List<ProjectEntity> getProjectsByTeamId(Long teamId) {
+        List<ProjectEntity> projectEntities = new ArrayList<>();
+
+        try (Connection connection = databaseManager.getConnection()) {
+            String query = "SELECT * FROM Nebula.projects WHERE projects.team_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, teamId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                projectEntities.add(new ProjectEntity(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return projectEntities;
+    }
 }

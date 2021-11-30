@@ -29,60 +29,60 @@ create table if not exists projects (
 );
 
 create table if not exists tasks (
-                       id         int auto_increment primary key,
-                       project_id int          not null,
-                       parent_id  int          null,
-                       name       varchar(255) null,
-                       startDate  datetime not null,
-                       endDate    datetime not null,
-                       constraint tasks_projects_fkindex foreign key (project_id) references projects (id)
-                           on delete cascade,
-                       constraint tasks_tasks_fkindex foreign key (parent_id) references tasks (id)
-                           on delete cascade
+    id         int auto_increment primary key,
+    project_id int          not null,
+    parent_id  int          null,
+    name       varchar(255) null,
+    startDate  datetime not null,
+    endDate    datetime not null,
+    constraint tasks_projects_fkindex foreign key (project_id) references projects (id)
+       on delete cascade,
+    constraint tasks_tasks_fkindex foreign key (parent_id) references tasks (id)
+       on delete cascade
 );
 
-
 create or replace view membership_counts as
-select `nebula`.`teams`.`id`                 AS `team_id`,
-       (select `counter`.`number`
-        from (select count(0) AS `number`
-              from (select `nebula`.`teams`.`id` AS `id`, `nebula`.`memberships`.`accepted` AS `membership_accepted`
-                    from (`nebula`.`teams`
-                             join `nebula`.`memberships`
-                                  on ((`nebula`.`memberships`.`team_id` = `nebula`.`teams`.`id`)))) `ic`
-              where ((`ic`.`membership_accepted` = true) and (`ic`.`id` = `nebula`.`memberships`.`team_id`))
-              group by `ic`.`id`) `counter`) AS `members`,
-       (select `counter`.`number`
-        from (select count(0) AS `number`
-              from (select `nebula`.`teams`.`id` AS `id`, `nebula`.`memberships`.`accepted` AS `membership_accepted`
-                    from (`nebula`.`teams`
-                             join `nebula`.`memberships`
-                                  on ((`nebula`.`memberships`.`team_id` = `nebula`.`teams`.`id`)))) `ic`
-              where ((`ic`.`membership_accepted` = false) and (`ic`.`id` = `nebula`.`memberships`.`team_id`))
-              group by `ic`.`id`) `counter`) AS `invitations`
-from (`nebula`.`teams`
-         join `nebula`.`memberships` on ((`nebula`.`memberships`.`team_id` = `nebula`.`teams`.`id`)))
-group by `nebula`.`memberships`.`team_id`;
+select teams.id                        as team_id,
+       (select counter.number
+        from (select count(0) as number
+              from (select teams.id as id, memberships.accepted as membership_accepted
+                    from teams
+                             join memberships on memberships.team_id = teams.id) as ic
+              where ic.membership_accepted = true
+                and ic.id = memberships.team_id
+              group by ic.id) counter) as members,
+       (select counter.number
+        from (select count(0) as number
+              from (select teams.id as id, memberships.accepted as membership_accepted
+                    from teams
+                             join memberships on memberships.team_id = teams.id) as ic
+              where ic.membership_accepted = false
+                and ic.id = memberships.team_id
+              group by ic.id) counter) as invitations
+from teams
+         join memberships on memberships.team_id = teams.id
+group by memberships.team_id;
 
 create or replace view membership_view as
-select `nebula`.`accounts`.`id`                                                 AS `account_id`,
-       `nebula`.`accounts`.`name`                                               AS `account_name`,
-       `nebula`.`accounts`.`email`                                              AS `account_email`,
-       `nebula`.`teams`.`id`                                                    AS `team_id`,
-       `nebula`.`teams`.`name`                                                  AS `team_name`,
-       `nebula`.`memberships`.`id`                                              AS `membership_id`,
-       `nebula`.`memberships`.`accepted`                                        AS `membership_accepted`,
+select accounts.id                                  as account_id,
+       accounts.name                                as account_name,
+       accounts.email                               as account_email,
+       teams.id                                     as team_id,
+       teams.name                                   as team_name,
+       memberships.id                               as membership_id,
+       memberships.accepted                         as membership_accepted,
        (select count(0)
-        from `nebula`.`projects`
-        where (`nebula`.`projects`.`team_id` = `nebula`.`teams`.`id`))          AS `project_count`,
-       (select `nebula`.`membership_counts`.`members`
-        from `nebula`.`membership_counts`
-        where (`nebula`.`membership_counts`.`team_id` = `nebula`.`teams`.`id`)) AS `membership_count`,
-       (select `nebula`.`membership_counts`.`invitations`
-        from `nebula`.`membership_counts`
-        where (`nebula`.`membership_counts`.`team_id` = `nebula`.`teams`.`id`)) AS `invitation_count`
-from ((`nebula`.`teams` join `nebula`.`memberships` on ((`nebula`.`memberships`.`team_id` = `nebula`.`teams`.`id`)))
-         join `nebula`.`accounts` on ((`nebula`.`accounts`.`id` = `nebula`.`memberships`.`account_id`)));
+        from projects
+        where projects.team_id = teams.id)          as project_count,
+       (select membership_counts.members
+        from membership_counts
+        where membership_counts.team_id = teams.id) as membership_count,
+       (select membership_counts.invitations
+        from membership_counts
+        where membership_counts.team_id = teams.id) as invitation_count
+from teams
+         join memberships on memberships.team_id = teams.id
+         join accounts on accounts.id = memberships.account_id;
 
 
 

@@ -40,4 +40,8 @@ public class MembershipService {
     public Boolean rejectMembership(MembershipUpdateRequest request) {
         return membershipRepository.rejectMembership(request.membershipId());
     }
+
+    public Boolean accountHasMembershipInTeam(Account account, Long teamId) {
+        return membershipRepository.accountHasMembershipInTeam(account.getId(), teamId);
+    }
 }
