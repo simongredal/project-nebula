@@ -35,22 +35,27 @@
             <a th:href="'/teams/'+${membership.teamId()}"><strong th:text="${membership.teamName()}"></strong></a>
         </div>
         <div class="row">
-            <div class="col">
-                <div class="row">
+            <div class="col ">
+                <div class="row tooltip">
                     <span class="bi-people"></span>
+                    <span th:text="'You currently have ' + ${membership.membershipCount()} + ' member in your team'" class="tooltip-text"></span>
                     <span th:text="${membership.membershipCount()}"
                           th:remove="tag"></span>
                 </div>
             </div>
             <div class="col">
-                <div class="row">
-                    <span class="bi-envelope"></span> <span th:text="${membership.membershipCount()}"
+                <div class="row tooltip">
+                    <span class="bi-envelope"></span>
+                    <span th:text="'You have currently invited XXX members'" class="tooltip-text"></span>
+                    <span th:text="${membership.membershipCount()}"
                                                             th:remove="tag"></span>
                 </div>
             </div>
             <div class="col">
-                <div class="row">
-                    <span class="bi-briefcase"></span><span th:text="${membership.membershipCount()}"
+                <div class="row tooltip">
+                    <span class="bi-briefcase"></span>
+                    <span th:text="'Your team currently have XXX projects'" class="tooltip-text"></span>
+                    <span th:text="${membership.membershipCount()}"
                                                             th:remove="tag"></span>
                 </div>
             </div>

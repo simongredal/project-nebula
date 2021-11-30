@@ -57,11 +57,11 @@ public class TeamService {
     public List<TeamEntity> getAllTeams() {
         return teamRepository.getAllTeams();
     }
-
+    // Accepted invites
     public List<MembershipEntity> getTeamsForAccount(Account account) {
         return membershipService.getMembershipsForAccount(account, true);
     }
-
+    // Not accepted invites
     public List<MembershipEntity> getInvitationsForAccount(Account account) {
         return membershipService.getMembershipsForAccount(account, false);
     }
