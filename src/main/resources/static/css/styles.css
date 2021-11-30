@@ -172,6 +172,7 @@ p {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin: 0 .5rem;
 }
 
 /* Tooltip text */
@@ -182,7 +183,7 @@ p {
 
     color: #fff;
     text-align: center;
-    padding: 5px 0;
+    padding: .8rem .8rem;
     border-radius: 6px;
 
     /* Position the tooltip text - see examples below! */
