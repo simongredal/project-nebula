@@ -87,6 +87,7 @@ p {
     display: flex;
     flex-direction: row;
     flex: 0 1 auto;
+    flex-wrap: wrap;
 }
 .row:first-child { padding-top: 0; }
 .row:last-child { padding-bottom: 0; }
