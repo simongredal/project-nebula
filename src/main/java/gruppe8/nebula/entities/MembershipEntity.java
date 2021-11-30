@@ -8,5 +8,6 @@ public record MembershipEntity(
         String teamName,
         Long membershipId,
         Boolean membershipAccepted,
-        Integer membershipCount) {
+        Integer membershipCount,
+        Integer invitationCount) {
 }

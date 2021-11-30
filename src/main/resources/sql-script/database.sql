@@ -38,21 +38,43 @@ create table if not exists tasks (
 );
 
 create or replace view membership_view as
-select accounts.id          as account_id,
-       accounts.name        as account_name,
-       accounts.email       as account_email,
-       teams.id             as team_id,
-       teams.name           as team_name,
-       memberships.accepted as membership_accepted,
-       memberships.id       as membership_id,
-       (select ic.count
-       from (select teams.id as id, count(0) as count
-              from teams
-                  join memberships on memberships.team_id = teams.id
-              where memberships.accepted = true
-              group by teams.id) ic
-        where ic.id = memberships.team_id) as membership_count
-from teams
-    join memberships on memberships.team_id = teams.id
-    join accounts on accounts.id = memberships.account_id;
+select `nebula`.`accounts`.`id`                                                 AS `account_id`,
+       `nebula`.`accounts`.`name`                                               AS `account_name`,
+       `nebula`.`accounts`.`email`                                              AS `account_email`,
+       `nebula`.`teams`.`id`                                                    AS `team_id`,
+       `nebula`.`teams`.`name`                                                  AS `team_name`,
+       `nebula`.`memberships`.`id`                                              AS `membership_id`,
+       `nebula`.`memberships`.`accepted`                                        AS `membership_accepted`,
+       (select `nebula`.`membership_counts`.`members`
+        from `nebula`.`membership_counts`
+        where (`nebula`.`membership_counts`.`team_id` = `nebula`.`teams`.`id`)) AS `membership_count`,
+       (select `nebula`.`membership_counts`.`invitations`
+        from `nebula`.`membership_counts`
+        where (`nebula`.`membership_counts`.`team_id` = `nebula`.`teams`.`id`)) AS `invitation_count`
+from ((`nebula`.`teams` join `nebula`.`memberships` on ((`nebula`.`memberships`.`team_id` = `nebula`.`teams`.`id`)))
+         join `nebula`.`accounts` on ((`nebula`.`accounts`.`id` = `nebula`.`memberships`.`account_id`)));
+
+create or replace view membership_counts as
+select `nebula`.`teams`.`id`                 AS `team_id`,
+       (select `counter`.`number`
+        from (select count(0) AS `number`
+              from (select `nebula`.`teams`.`id` AS `id`, `nebula`.`memberships`.`accepted` AS `membership_accepted`
+                    from (`nebula`.`teams`
+                             join `nebula`.`memberships`
+                                  on ((`nebula`.`memberships`.`team_id` = `nebula`.`teams`.`id`)))) `ic`
+              where ((`ic`.`membership_accepted` = true) and (`ic`.`id` = `nebula`.`memberships`.`team_id`))
+              group by `ic`.`id`) `counter`) AS `members`,
+       (select `counter`.`number`
+        from (select count(0) AS `number`
+              from (select `nebula`.`teams`.`id` AS `id`, `nebula`.`memberships`.`accepted` AS `membership_accepted`
+                    from (`nebula`.`teams`
+                             join `nebula`.`memberships`
+                                  on ((`nebula`.`memberships`.`team_id` = `nebula`.`teams`.`id`)))) `ic`
+              where ((`ic`.`membership_accepted` = false) and (`ic`.`id` = `nebula`.`memberships`.`team_id`))
+              group by `ic`.`id`) `counter`) AS `invitations`
+from (`nebula`.`teams`
+         join `nebula`.`memberships` on ((`nebula`.`memberships`.`team_id` = `nebula`.`teams`.`id`)))
+group by `nebula`.`memberships`.`team_id`;
+
+
 

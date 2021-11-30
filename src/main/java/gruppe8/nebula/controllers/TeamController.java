@@ -33,12 +33,12 @@ public class TeamController {
     public String index(Authentication authentication, Model model) {
         Account account = (Account) authentication.getPrincipal();
         List<MembershipEntity> teams = teamService.getTeamsForAccount(account);
-        List<MembershipEntity> invitations = teamService.getInvitationsForAccount(account);
+        List<MembershipEntity> invites = teamService.getInvitationsForAccount(account);
         List<Account> allAccounts = accountService.getAllAccounts();
 
         model.addAttribute("account", account);
         model.addAttribute("teams", teams);
-        model.addAttribute("invites", invitations);
+        model.addAttribute("invites", invites);
         model.addAttribute("allAccounts",accountService.getAllAccounts());
 
         log.info("GET /teams: Model=%s".formatted(model));
@@ -73,6 +73,7 @@ public class TeamController {
         log.info("POST /teams/accept request="+request);
 
         Boolean success = teamService.acceptMembership(account, request);
+        // TODO: Send some kind of error message along if it wasn successful
         return "redirect:/teams";
     }
 
@@ -82,6 +83,7 @@ public class TeamController {
         log.info("POST /teams/reject request="+request);
 
         Boolean success = teamService.rejectMembership(account, request);
+        // TODO: Send some kind of error message along if it wasn successful
         return "redirect:/teams";
     }
 }

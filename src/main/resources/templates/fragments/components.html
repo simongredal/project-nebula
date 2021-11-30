@@ -30,6 +30,7 @@
 </header>
 
 <div class="row" th:fragment="membership-card(membership)">
+    <!--/*@thymesVar id="membership" type="gruppe8.nebula.entities.MembershipEntity"*/-->
     <div class="card">
         <div class="row">
             <a class="team-name" th:href="'/teams/'+${membership.teamId()}"><strong th:text="${membership.teamName()}"></strong></a>
@@ -47,7 +48,7 @@
                 <div class="row tooltip">
                     <span class="bi-envelope"></span>
                     <span th:text="'You have currently invited XXX members'" class="tooltip-text"></span>
-                    <span th:text="${membership.membershipCount()}"
+                    <span th:text="${membership.invitationCount()}"
                                                             th:remove="tag"></span>
                 </div>
             </div>
