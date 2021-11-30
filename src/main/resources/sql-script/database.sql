@@ -44,6 +44,7 @@ select accounts.id          as account_id,
        teams.id             as team_id,
        teams.name           as team_name,
        memberships.accepted as membership_accepted,
+       memberships.id       as membership_id,
        (select ic.count
        from (select teams.id as id, count(0) as count
               from teams

@@ -132,8 +132,9 @@ p {
     border-radius: 20px;
     color: var(--primary-text-color);
     background: #1C6EA4;
-    padding: 0.8em 1em;
+    padding: 0.8rem 1rem;
     background: linear-gradient(45deg, #f35252 0%, #2388CB 49%, #f35252 100%);
+    font-size: 1rem;
 }
 .btn-wow:hover{
      background: linear-gradient(45deg, #e53e3e 0%, #1478b9 49%, #e53e3e 100%);
