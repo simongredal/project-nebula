@@ -40,7 +40,9 @@ public class TaskRepository {
                         resultSet.getLong("id"),
                         resultSet.getLong("project_id"),
                         resultSet.getLong("parent_id"),
-                        resultSet.getString("name")
+                        resultSet.getString("name"),
+                        resultSet.getDate("startDate"),
+                        resultSet.getDate("endDate")
                 ));
             }
         } catch (SQLException e) {
@@ -52,12 +54,14 @@ public class TaskRepository {
 
     public boolean createTask(Task task,Long parentId,Long projectId){
         try(Connection connection = databaseManager.getConnection()){
-            String query = "insert into Nebula.tasks (project_id,parent_id,name) VALUES (?,?,?)";
+            String query = "insert into tasks (project_id,parent_id,name,startDate,endDate) VALUES (?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setLong(1,projectId);
             preparedStatement.setLong(2,parentId);
-            preparedStatement.setString(2,task.getName());
+            preparedStatement.setString(3,task.getName());
+            preparedStatement.setDate(4,task.getStartDate());
+            preparedStatement.setDate(5,task.getEndDate());
 
             preparedStatement.execute();
 

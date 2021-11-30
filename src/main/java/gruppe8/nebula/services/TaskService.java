@@ -29,13 +29,13 @@ public class TaskService {
     }
 
     public Boolean createTask(TaskCreationRequest request) {
-        Task task = new Task(new TaskEntity(request.id(),request.projectId(), request.parentId(), request.name()));
+        Task task = new Task(new TaskEntity(request.id(),request.projectId(), request.parentId(), request.name(),request.startDate(),request.endDate()));
         return taskRepository.createTask(task, request.parentId(), request.projectId());
 
     }
 
     public Boolean deleteTask(TaskDeletionRequest request) {
-        return taskRepository.deleteTask(request.id());
+        return taskRepository.deleteTask(request.taskId());
 
     }
 
