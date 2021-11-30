@@ -4,8 +4,9 @@
 .navbar {
   width: 100%;
   height: var(--navbar-height);
-  position: fixed;
-  top: 0;
+  /*TODO: Navbar hides some of main this way*/
+  /*position: fixed;*/
+  /*top: 0;*/
 
   padding: 0 2rem;
 

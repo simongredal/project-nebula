@@ -66,7 +66,6 @@ public class TeamService {
         return membershipService.getMembershipsForAccount(account, false);
     }
 
-
     public Boolean rejectMembership(Account account, MembershipUpdateRequest request) {
         Boolean allowed = membershipService.accountOwnsMembership(account, request);
 
