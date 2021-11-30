@@ -45,7 +45,10 @@
                             </div>
                             <datalist id="accounts">
                                 <option th:each="account : ${allAccounts}"
-                                        th:text="${account.getName()}+' <'+${account.getEmail()}+'>'"></option>
+                                        th:text="${account.getEmail()}"></option>
+                                <!-- TODO: MAKE IT POSSIBLE TO ALSO GE THE NAME
+                                    https://stackoverflow.com/questions/29882361/show-datalist-labels-but-submit-the-actual-value/61328832#61328832
+                                -->
                             </datalist>
 
                         </div>
