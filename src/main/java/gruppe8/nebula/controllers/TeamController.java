@@ -3,9 +3,7 @@ package gruppe8.nebula.controllers;
 import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Team;
-import gruppe8.nebula.requests.MembershipUpdateRequest;
-import gruppe8.nebula.requests.TeamCreationRequest;
-import gruppe8.nebula.requests.TeamDeletionRequest;
+import gruppe8.nebula.requests.*;
 import gruppe8.nebula.services.AccountService;
 import gruppe8.nebula.services.MembershipService;
 import gruppe8.nebula.services.ProjectService;
@@ -17,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 @Controller
@@ -50,21 +49,48 @@ public class TeamController {
         return "teams";
     }
 
-    @GetMapping("/{teamId}")
+    @GetMapping("{teamId}")
     public String teams(@PathVariable Long teamId, Authentication authentication, Model model) {
         log.info("GET /teams/" + teamId);
 
         Account account = (Account) authentication.getPrincipal();
         Team team = teamService.getTeam(account, teamId);
+        List<MembershipEntity> members = teamService.getMembersForTeam(account, teamId);
+        List<MembershipEntity> invites = teamService.getInvitationsForTeam(account, teamId);
 
         model.addAttribute("account", account);
         model.addAttribute("team", team);
+        model.addAttribute("members", members);
+        model.addAttribute("invites", invites);
 
         log.info("Model=" + model);
         return "team";
     }
 
-    @PostMapping("/create")
+    // Creates a new Invitation for a Team
+    @PostMapping("invite")
+    public String invite(InvitationCreationRequest request, Authentication authentication, Model model) {
+        log.info("POST /teams/invite");
+
+        Account account = (Account) authentication.getPrincipal();
+        Boolean success = teamService.createInvitation(account, request);
+        // TODO: Send some kind of error message along if it wasn successful
+
+        return "redirect:/teams/"+request.teamId();
+    }
+    // Remove a Membership from a Team whether it was accepted or not
+    @PostMapping("uninvite")
+    public String invite(MembershipDeletionRequest request, Authentication authentication, Model model) {
+        log.info("POST /teams/uninvite");
+
+        Account account = (Account) authentication.getPrincipal();
+        Boolean success = teamService.removeMembershipFromTeam(account, request);
+        // TODO: Send some kind of error message along if it wasn successful
+
+        return "redirect:/teams/"+request.teamId();
+    }
+
+    @PostMapping("create")
     public String addTeam(TeamCreationRequest request, Authentication authentication) {
         Account account = (Account) authentication.getPrincipal();
         log.info("POST /teams/create: TeamCreationRequest=%s, Account=%s".formatted(request, account));
@@ -79,7 +105,7 @@ public class TeamController {
         return "redirect:/teams";
     }
 
-    @PostMapping("/delete")
+    @PostMapping("delete")
     public String deleteTeam(Authentication authentication, TeamDeletionRequest request) {
         Account account = (Account) authentication.getPrincipal();
 
@@ -96,7 +122,7 @@ public class TeamController {
         return "redirect:/teams";
     }
 
-    @PostMapping("/accept")
+    @PostMapping("accept")
     public String acceptMembership(MembershipUpdateRequest request, Authentication authentication) {
         Account account = (Account) authentication.getPrincipal();
         log.info("POST /teams/accept request=" + request);
@@ -106,7 +132,7 @@ public class TeamController {
         return "redirect:/teams";
     }
 
-    @PostMapping("/reject")
+    @PostMapping("reject")
     public String rejectMembership(MembershipUpdateRequest request, Authentication authentication) {
         Account account = (Account) authentication.getPrincipal();
         log.info("POST /teams/reject request=" + request);

@@ -6,9 +6,7 @@ import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Project;
 import gruppe8.nebula.models.Team;
 import gruppe8.nebula.repositories.TeamRepository;
-import gruppe8.nebula.requests.MembershipUpdateRequest;
-import gruppe8.nebula.requests.TeamDeletionRequest;
-import gruppe8.nebula.requests.TeamCreationRequest;
+import gruppe8.nebula.requests.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,6 +67,17 @@ public class TeamService {
         return membershipService.getMembershipsForAccount(account, false);
     }
 
+    public List<MembershipEntity> getMembersForTeam(Account account, Long teamId) {
+        Boolean allowed = membershipService.accountHasMembershipInTeam(account, teamId);
+        if (!allowed) { return null; }
+        return membershipService.getMembershipsForTeam(teamId, true);
+    }
+    public List<MembershipEntity> getInvitationsForTeam(Account account, Long teamId) {
+        Boolean allowed = membershipService.accountHasMembershipInTeam(account, teamId);
+        if (!allowed) { return null; }
+        return membershipService.getMembershipsForTeam(teamId, false);
+    }
+
     public Boolean acceptMembership(Account account, MembershipUpdateRequest request) {
         Boolean allowed = membershipService.accountOwnsMembership(account, request);
 
@@ -84,6 +93,14 @@ public class TeamService {
 
         return membershipService.rejectMembership(request);
     }
+    public Boolean removeMembershipFromTeam(Account account, MembershipDeletionRequest request) {
+        Boolean allowed = membershipService.accountHasMembershipInTeam(account, request.teamId());
+        Boolean possible = membershipService.membershipIsPartOfTeam(request.membershipId(), request.teamId());
+
+        if (!allowed || !possible) { return false; }
+
+        return membershipService.deleteMembership(request.membershipId());
+    }
 
     public Team getTeam(Account account, Long teamId) {
         Boolean allowed = membershipService.accountHasMembershipInTeam(account, teamId);
@@ -97,5 +114,15 @@ public class TeamService {
         team.getProjects().addAll(projects);
 
         return team;
+    }
+
+    public Boolean createInvitation(Account account, InvitationCreationRequest request) {
+        Boolean allowed = membershipService.accountHasMembershipInTeam(account, request.teamId());
+        if (!allowed) { return false; }
+
+        Account invitee = accountService.getAccountByEmail(request.email());
+        if (invitee == null) { return false; }
+
+        return membershipService.sendInvitation(request.teamId(), invitee.getId());
     }
 }
