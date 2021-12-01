@@ -139,37 +139,27 @@ p {
 
 .team-name{
     text-decoration: none;
+    text-decoration-thickness: 2pt;
     color: blue;
 }
 .team-name:hover{
-    text-decoration: underline;  
+    text-decoration: underline;
 }
 
 
-/* Tooltip container */
-.tooltip {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0 .5rem;
-}
 
 /* Tooltip text */
-.tooltip .tooltip-text {
+.tooltip > .tooltip-text {
     font-size: 0.8rem;
     visibility: hidden;
-    width: 150%;
-    background-color: rgba(0,0,0, 70%);
+    background-color: rgba(0, 0, 0, 70%);
 
     color: #fff;
-    text-align: center;
     padding: 0.4rem;
     border-radius: 0.4rem;
 
     /* Position the tooltip text - see examples below! */
     position: absolute;
-    z-index: 1;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
