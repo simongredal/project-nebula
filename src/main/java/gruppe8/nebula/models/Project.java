@@ -7,6 +7,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Project {
@@ -65,23 +66,28 @@ public class Project {
     }
 
     public int getTotalProjectSpanDays() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
-        String inputString1 = "23 01 1997";
-        String inputString2 = "27 04 1997";
+        int daysBetween = -1;
 
         try {
-            long daysBetween = Duration.between(getStartDate(), getEndDate()).toDays();
-            System.out.println ("Days: " + daysBetween);
+            LocalDateTime date1 = getStartDate();
+            LocalDateTime date2 = getEndDate();
+
+            daysBetween = (int) ChronoUnit.DAYS.between(date1, date2); //returns days between in calendar time
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return daysBetween;
     }
     public List<Date> getTotalProjectSpanDates() {
-        List<Date> projectSpan = new ArrayList<>();
-        projectSpan.add(getStartDate());
+        List<Date> bitch = new ArrayList<>();
 
+        for (int i=0; i<getTotalProjectSpanDays();i++) {
+            Date currentDate = java.sql.Timestamp.valueOf(getStartDate().plusDays(i));
+            bitch.add(currentDate);
+        }
 
+        return bitch;
     }
 
     public Long getId() {

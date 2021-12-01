@@ -36,50 +36,5 @@ function createChart(e) {
     });
 }
 
-//give function array of dates, returns minimum date
-function minDate(arr) {
-    return new Date(Math.min.apply(null,arr));
-}
-
-//give function array of dates, returns max diff int
-function maxDifference(arr) {
-    //converts dates to time
-    var DateTimes = [];
-    for (var i = 0; i < arr.length; i++) {
-        var date = new Date(arr[i]).getTime();
-        DateTimes.push(date);
-    }
-
-    //looks for longest time, converts to days after
-    let maxDiff = -1;
-    let min = arr[0];
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] > min && maxDiff < arr[i] - min) {
-            maxDiffInMilliseconds = arr[i] - min;
-        }
-        if (arr[i] < min) {
-            min = arr[i];
-        }
-    }
-
-    //convert difference of time to days
-    var maxDiffInDays = maxDiffInMilliseconds / (1000 * 3600 * 24);
-
-    return maxDiffInDays;
-}
-
-//make date array for diagram
-function makeGanttDateArray(arr) {
-    var startDate = minDate(arr);
-    var dateArray = [];
-    dateArray.push(startDate)
-
-    for (let i = 0; i < maxDifference(arr); i++) {
-        var date = startDate+i;
-        dateTimes.push(date);
-    }
-    return dateTimes;
-}
-
 window.addEventListener("load", createChart);
 window.addEventListener("resize", createChart);

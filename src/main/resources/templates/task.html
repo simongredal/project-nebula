@@ -70,23 +70,13 @@
 
     </form>-->
     <div class="chart-wrapper">
-            <!--
-            <ul class="chart-values">
-                <li th:each="task : ${project.getSubtasks()}" th:text="${project.getName()}"></li>
-            </ul>-->
 
             <ul class="chart-values">
-                <li>sun</li>
-                <li>mon</li>
-                <li>tue</li>
-                <li>wed</li>
-                <li>thu</li>
-                <li>fri</li>
-                <li>sat</li>
+                <li th:each="Date : ${project.getTotalProjectSpanDates()}" th:text="${Date.getDate()}"></li>
             </ul>
 
             <ul class="chart-bars">
-                <li data-duration="tue½-wed" data-color="#b03532">Task</li>
+                <li th:each="Task : ${project.getAllTasks()}" data-color="#b03532" th:text="${Task.getName()}"></li>
                 <li data-duration="wed-sat" data-color="#33a8a5">Task</li>
                 <li data-duration="sun-tue" data-color="#30997a">Task</li>
                 <li data-duration="tue½-thu" data-color="#6a478f">Task</li>

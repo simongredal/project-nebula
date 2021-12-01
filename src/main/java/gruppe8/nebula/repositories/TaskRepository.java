@@ -9,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +38,8 @@ public class TaskRepository {
                         resultSet.getLong("project_id"),
                         resultSet.getLong("parent_id"),
                         resultSet.getString("name"),
-                        resultSet.getDate("startDate"),
-                        resultSet.getDate("endDate")
+                        resultSet.getTimestamp("startDate").toLocalDateTime(),
+                        resultSet.getTimestamp("endDate").toLocalDateTime()
                 ));
             }
         } catch (SQLException e) {
@@ -60,8 +57,8 @@ public class TaskRepository {
             preparedStatement.setLong(1,projectId);
             preparedStatement.setObject(2,parentId); //setting as object instead of Long, so it can also be null
             preparedStatement.setString(3,task.getName());
-            preparedStatement.setDate(4,task.getStartDate());
-            preparedStatement.setDate(5,task.getEndDate());
+            preparedStatement.setTimestamp(4, Timestamp.valueOf( task.getStartDate() ));
+            preparedStatement.setTimestamp(5,Timestamp.valueOf( task.getEndDate() ));
 
             preparedStatement.execute();
 
