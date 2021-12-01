@@ -1,7 +1,12 @@
 @import "globals.css";
 
+.main { box-shadow: inset 0 4px 12px hsl(0deg, 0%, 50%); }
+.footer { box-shadow: inset 0 4px 12px hsl(0deg, 0%, 25%); }
+
 /* Navbar and footer are pretty alike so let them use the same css*/
 .navbar, .footer {
+  font-size: 1.2rem;
+  font-weight: bold;
   width: 100%;
   height: var(--navbar-height);
   padding: 0 2rem;
@@ -17,90 +22,42 @@
 
   align-items: center;
 }
+.navbar *, .footer * { color: inherit; }
+.navbar > *, .footer > * { padding: 0 1rem; }
+.navbar > :first-child, .footer > :first-child { padding-left: 0; }
+.navbar > :last-child, .footer > :last-child { padding-right: 0; }
 
-.main { box-shadow: inset 0 4px 12px hsl(0deg, 0%, 50%); }
-.footer { box-shadow: inset 0 4px 12px hsl(0deg, 0%, 25%); }
-
-
-.navbar-text {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.navbar * {
-  color: inherit;
-}
+.navbar a, .footer a { text-decoration: none; }
 
 .navbar-brand {
   display: flex;
   align-items: center;
   flex-direction: row;
 }
+.navbar-logo { width: 3rem; height: 3rem; }
+.navbar-spacer, .footer-spacer { flex-grow: 1; }
 
-.navbar-logo {
-  width: 3rem;
-  height: 3rem;
-}
-
-
-.navbar-spacer {
-  flex-grow: 1;
-}
-
-/* Changed from padding to margin.
-   Padding made it look weird on phones */
-.navbar > * {
-  margin: 0 1rem;
-}
-
-.navbar > :first-child {
-  padding-left: 0;
-}
-
-.navbar > :last-child {
-  padding-right: 0;
-}
-
-.navbar a {
-  text-decoration: none;
-}
-
-.navbar a:hover:not.nebula {
-}
-/*
-Creates a small bar beneath a link when hovered
- */
-
-.navbar-text a::before {
+/* Creates a small bar beneath a link when hovered */
+.navbar-text a::after, .footer-text a::after {
   content: " ";
   display: block;
-  height: 8px;
-}
-
-.navbar-text a::after{
-  content: " ";
-  display: block;
-  height: 4px;
-  margin-top: 4px;
+  margin-top: -2pt;
+  height: 2pt;
   width: 0;
 
   background-color: var(--primary-text-color);
-  transition: all ease-in-out 250ms;
+  transition: all ease-in-out 200ms;
 }
-
-.navbar-text a:hover::after{
-  width: 100%;
-}
-
-
+.navbar-text a:hover::after, .footer-text a:hover::after { width: 100%; }
 
 .nebula {
   font-family: 'Anton', sans-serif;
   font-weight: 900;
   font-size: 1.4em;
   font-style: oblique;
-  text-shadow: 0 0 2px blue;
+  text-shadow: 0 0 1pt blue;
   text-decoration: underline;
+  text-decoration-thickness: 2pt;
 }
 
 
@@ -120,59 +77,18 @@ Creates a small bar beneath a link when hovered
 }
 
 @media (max-width: 950px) {
-  .navbar{
+  .navbar {
     height: fit-content;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-
   }
   .navbar-text{
-    margin: 1rem 0;
+    margin: 0.5rem 0;
   }
 }
 
-
 /* Footer */
-
-
-.footer-text{
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-.footer-text > a{
-  color: var(--primary-text-color);
-  text-decoration: none;
-
-}
-
-.footer * {
-  padding: 0 1rem;
-}
-
-.footer-text a::before {
-  content: "";
-  display: block;
-  height: 8px;
-}
-
-.footer-text a::after{
-  content: " ";
-  display: block;
-  height: 4px;
-  margin-top: 2px;
-  width: 0;
-
-  background-color: var(--primary-text-color);
-  transition: all ease-in-out 250ms;
-}
-
-.footer-text a:hover::after{
-  width: 100%;
-}
-
-
-
 @media (max-width: 640px) {
   .footer{
     display: flex;
