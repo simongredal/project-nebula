@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="row"><strong>Create More Projects</strong></div>
                     <div class="row">
-                        <form action="" method="post" class="col form-wrapper">
+                        <form th:action="@{/projects/new-page}" method="post" class="col form-wrapper">
                             <div class="row form-control">
                                 <label for="name">Project Name</label>
                                 <input type="text" id="name" name="name" autocomplete="off" placeholder="My Awesome Project">

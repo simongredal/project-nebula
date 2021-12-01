@@ -7,6 +7,7 @@ import gruppe8.nebula.requests.MembershipUpdateRequest;
 import gruppe8.nebula.requests.TeamCreationRequest;
 import gruppe8.nebula.requests.TeamDeletionRequest;
 import gruppe8.nebula.services.AccountService;
+import gruppe8.nebula.services.MembershipService;
 import gruppe8.nebula.services.ProjectService;
 import gruppe8.nebula.services.TeamService;
 import org.slf4j.Logger;

@@ -2,6 +2,7 @@ package gruppe8.nebula.controllers;
 
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Project;
+import gruppe8.nebula.requests.CreateProjectRequest;
 import gruppe8.nebula.requests.TaskCreationRequest;
 import gruppe8.nebula.requests.TaskDeletionRequest;
 import gruppe8.nebula.services.ProjectService;
@@ -89,5 +90,20 @@ public class ProjectController {
 
         log.info("Unsuccessful Task deletion");
         return "redirect:/projects/"+request.projectId();
+    }
+
+    @PostMapping("/new-project")
+    public String newProject(CreateProjectRequest request, Authentication authentication){
+        Account account = (Account) authentication.getPrincipal();
+        log.info("POST /projects/new-project: CreateProjectRequest=%s, Account=%s".formatted(request, account));
+
+        Boolean success = projectService.createProject(account,request);
+
+        if (success){
+            log.info("Successful Project Create");
+            return "redirect:/project_page";
+        }
+        log.info("Unsuccessful Project create");
+        return "redirect:/teams";
     }
 }
