@@ -42,4 +42,11 @@ public class Task {
     public List<Task> getSubtasks() {
         return subtasks;
     }
+
+    public List<Task> getAllTasks() {
+        List<Task> tasks = new ArrayList<>();
+        tasks.add( this ); // DOH!
+        for (Task task : subtasks) { tasks.addAll(task.getAllTasks()); }
+        return tasks;
+    }
 }

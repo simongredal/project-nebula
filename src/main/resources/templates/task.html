@@ -17,6 +17,15 @@
 
     <div class="row">
         <div class="card">
+            <div class="row"><strong>Tasks in This Project (getAllTasks)</strong></div>
+            <div class="row" th:each="task : ${project.getAllTasks()}">
+                <strong th:text="${task.getId()} + ': ' + ${task.getName()}" ></strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card">
             <div class="row"><strong>Create a New Task</strong></div>
             <div class="row">
                 <form class="col form-wrapper" th:action="@{/projects/create}" method="POST">

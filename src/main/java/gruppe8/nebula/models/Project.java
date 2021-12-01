@@ -4,7 +4,6 @@ import gruppe8.nebula.entities.ProjectEntity;
 import gruppe8.nebula.entities.TaskEntity;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Project {
 
@@ -30,6 +29,12 @@ public class Project {
         tasks.stream()
                 .filter(taskEntity -> taskEntity.parent() == 0L )
                 .forEach( t -> this.subtasks.add(new Task(t, tasks)));
+    }
+
+    public List<Task> getAllTasks() {
+        List<Task> tasks = new ArrayList<>();
+        for (Task task : subtasks) { tasks.addAll(task.getAllTasks()); }
+        return tasks;
     }
 
     public Long getId() {

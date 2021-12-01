@@ -4,7 +4,6 @@ import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Project;
 import gruppe8.nebula.requests.TaskCreationRequest;
 import gruppe8.nebula.requests.TaskDeletionRequest;
-import gruppe8.nebula.requests.TeamCreationRequest;
 import gruppe8.nebula.services.ProjectService;
 import gruppe8.nebula.services.TaskService;
 import org.slf4j.Logger;
@@ -47,11 +46,16 @@ public class ProjectController {
     }
 
     @GetMapping("/{projectId}")
-    public String task(@PathVariable Long projectId, Model model) {
-        model.addAttribute("project", projectService.getProjectById(projectId));
+    public String task(@PathVariable Long projectId, Authentication authentication, Model model) {
+        log.info("GET /projects/"+projectId);
 
-        log.info("GET /teams/"+projectId);
+        Account account = (Account) authentication.getPrincipal();
+        Project project = projectService.getProjectById(projectId);
 
+        model.addAttribute("account", account);
+        model.addAttribute("project", project);
+
+        log.info("getAllTasks=" + project.getAllTasks() );
         return "task";
     }
 
