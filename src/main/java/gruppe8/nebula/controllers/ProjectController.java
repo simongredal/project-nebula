@@ -42,8 +42,7 @@ public class ProjectController {
     }
 
     @GetMapping("/{projectId}")
-    public String task(@PathVariable Long projectId, Authentication authentication, Model model) {
-        Account account = (Account) authentication.getPrincipal();
+    public String task(@PathVariable Long projectId, Model model) {
         model.addAttribute("project", projectService.getProjectById(projectId));
 
         log.info("GET /teams/"+projectId);
