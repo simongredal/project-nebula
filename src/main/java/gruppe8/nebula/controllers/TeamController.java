@@ -78,6 +78,23 @@ public class TeamController {
         return "redirect:/teams";
     }
 
+    @PostMapping("/delete")
+    public String deleteTeam(Authentication authentication, TeamDeletionRequest request) {
+        Account account = (Account) authentication.getPrincipal();
+
+        log.info("POST /teams/create: TeamDeletionRequest=%s, Account=%s".formatted(request, account));
+
+        Boolean success = teamService.deleteTeam(account, request);
+
+        if (success) {
+            log.info("Successful team deletion");
+            return "redirect:/teams";
+        }
+
+        log.info("Unsuccessful team deletion");
+        return "redirect:/teams";
+    }
+
     @PostMapping("/accept")
     public String acceptMembership(MembershipUpdateRequest request, Authentication authentication) {
         Account account = (Account) authentication.getPrincipal();
@@ -97,24 +114,4 @@ public class TeamController {
         // TODO: Send some kind of error message along if it wasn successful
         return "redirect:/teams";
     }
-
-    @PostMapping("/delete")
-    public String deleteTeam(Authentication authentication, TeamDeletionRequest request) {
-        Account account = (Account) authentication.getPrincipal();
-
-        log.info("POST /teams/create: TaskCreationRequest=%s, Account=%s".formatted(request, account));
-
-        Boolean success = teamService.deleteTeam(request);
-
-        if (success) {
-            log.info("Successful team deletion");
-            return "redirect:/teams";
-        }
-        return "redirect:/teams";
-    }
-
-
-
-
-
 }

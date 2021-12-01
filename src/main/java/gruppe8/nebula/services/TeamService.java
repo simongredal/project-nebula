@@ -41,9 +41,12 @@ public class TeamService {
 
         return true;
     }
-    public Boolean deleteTeam(TeamDeletionRequest request) {
-        return teamRepository.deleteTeam(request.id());
+    public Boolean deleteTeam(Account account, TeamDeletionRequest request) {
+        Boolean allowed = membershipService.accountHasMembershipInTeam(account, request.id());
 
+        if (!allowed) { return false; }
+
+        return teamRepository.deleteTeam(request.id());
     }
     public Boolean updateTeam(TeamDeletionRequest request, Team teamNew) {
         assert false : "updateTeam does not work anymore";

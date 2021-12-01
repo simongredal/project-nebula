@@ -37,10 +37,11 @@
 <div class="row" th:fragment="membership-card(membership)">
     <!--/*@thymesVar id="membership" type="gruppe8.nebula.entities.MembershipEntity"*/-->
     <div class="card">
-        <div class="row">
+        <div class="row no-wrap space-between">
+            <a class="team-name" th:href="'/teams/'+${membership.teamId()}"><strong th:text="${membership.teamName()}"></strong></a>
             <form th:action="@{/teams/delete}" method="POST">
-                <input type="hidden" th:value="${membership.teamId()}">
-                <a class="team-name" th:href="'/teams/'+${membership.teamId()}"><strong th:text="${membership.teamName()}"></strong></a> <button class="btn btn-danger bi-trash"></button>
+                <input type="hidden" name="id" th:value="${membership.teamId()}">
+                <button type="submit" class="btn btn-danger"><i class="bi-trash"></i></button>
             </form>
         </div>
         <div class="row no-wrap space-evenly">
