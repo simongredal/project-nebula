@@ -17,31 +17,46 @@ public class MembershipService {
         this.membershipRepository = membershipRepository;
     }
 
+
     public Boolean addMembership(TeamEntity from, Account to) {
-        return membershipRepository.createMembership(from, to, true);
+        return membershipRepository.createMembership(from.id(), to.getId(), true);
     }
-
     public Boolean sendInvitation(TeamEntity from, Account to) {
-        return membershipRepository.createMembership(from, to, false);
+        return membershipRepository.createMembership(from.id(), to.getId(), false);
+    }
+    public Boolean sendInvitation(Long teamId, Long accountId) {
+        return membershipRepository.createMembership(teamId, accountId, false);
     }
 
-    public List<MembershipEntity> getMembershipsForAccount(Account account, Boolean accepted) {
-        return membershipRepository.getMemberships(account.getId(), accepted);
+
+    public List<MembershipEntity> getMembershipsForAccount(Account account, Boolean membershipAccepted) {
+        return membershipRepository.getMembershipsForAccount(account.getId(), membershipAccepted);
     }
+    public List<MembershipEntity> getMembershipsForTeam(Long teamId, Boolean membershipAccepted) {
+        return membershipRepository.getMembershipsForTeam(teamId, membershipAccepted);
+    }
+
 
     public Boolean accountOwnsMembership(Account account, MembershipUpdateRequest request) {
         return membershipRepository.accountOwnsMembership(account.getId(), request.membershipId());
     }
+    public Boolean accountHasMembershipInTeam(Account account, Long teamId) {
+        return membershipRepository.accountHasMembershipInTeam(account.getId(), teamId);
+    }
+
 
     public Boolean acceptMembership(MembershipUpdateRequest request) {
         return membershipRepository.acceptMembership(request.membershipId());
     }
-
     public Boolean rejectMembership(MembershipUpdateRequest request) {
-        return membershipRepository.rejectMembership(request.membershipId());
+        return membershipRepository.deleteMembership(request.membershipId());
     }
 
-    public Boolean accountHasMembershipInTeam(Account account, Long teamId) {
-        return membershipRepository.accountHasMembershipInTeam(account.getId(), teamId);
+    public Boolean membershipIsPartOfTeam(Long membershipId, Long teamId) {
+        return membershipRepository.membershipIsPartOfTeam(membershipId, teamId);
+    }
+
+    public Boolean deleteMembership(Long membershipId) {
+        return membershipRepository.deleteMembership(membershipId);
     }
 }

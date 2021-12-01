@@ -116,6 +116,26 @@ p {
 .col:first-child { padding-left: 0; }
 .col:last-child { padding-right: 0; }
 
+.list-group {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0;
+    border-radius: 0.4rem;
+    box-shadow: var(--shadow-elevation-low);
+}
+.list-group > .list-item {
+    padding: 0 0.3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 0 1 auto;
+}
+.list-group > .list-item:nth-child(odd) { background-color: hsl(0deg, 0%, 90%); }
+.list-group > .list-item:nth-child(even) { }
+.list-group > .list-item:first-child { border-top-left-radius: 0.4rem; border-top-right-radius: 0.4rem; }
+.list-group > .list-item:last-child { border-bottom-left-radius: 0.4rem; border-bottom-right-radius: 0.4rem; }
+
 .w-1  { width:   8.3333%; }
 .w-2  { width:  16.6666%; }
 .w-3  { width:  25.0000%; }

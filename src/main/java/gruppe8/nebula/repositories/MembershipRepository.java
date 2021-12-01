@@ -1,8 +1,6 @@
 package gruppe8.nebula.repositories;
 
 import gruppe8.nebula.entities.MembershipEntity;
-import gruppe8.nebula.entities.TeamEntity;
-import gruppe8.nebula.models.Account;
 import gruppe8.nebula.services.DatabaseManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,12 +24,12 @@ public class MembershipRepository{
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
-    public boolean createMembership(TeamEntity team, Account account, Boolean accepted){
+    public boolean createMembership(Long teamId, Long accountId, Boolean accepted){
         try (Connection connection = databaseManager.getConnection()) {
             String query = "INSERT INTO memberships (team_id, account_id, accepted) VALUES (?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, team.id());
-            preparedStatement.setLong(2, account.getId());
+            preparedStatement.setLong(1, teamId);
+            preparedStatement.setLong(2, accountId);
             preparedStatement.setBoolean(3, accepted);
 
             preparedStatement.execute();
@@ -43,7 +41,8 @@ public class MembershipRepository{
         return false;
     }
 
-    public List<MembershipEntity> getMemberships(Long accountId, Boolean membershipAccepted) {
+
+    public List<MembershipEntity> getMembershipsForAccount(Long accountId, Boolean membershipAccepted) {
         List<MembershipEntity> memberships = new ArrayList<>();
         try (Connection connection = databaseManager.getConnection()) {
             String query = "SELECT * FROM membership_view WHERE account_id = ? AND membership_accepted = ?";
@@ -74,6 +73,36 @@ public class MembershipRepository{
 
         return Collections.unmodifiableList(memberships);
     }
+    public List<MembershipEntity> getMembershipsForTeam(Long teamId, Boolean membershipAccepted) {
+        List<MembershipEntity> memberships = new ArrayList<>();
+        try (Connection connection = databaseManager.getConnection()) {
+            String query = "SELECT * FROM membership_view WHERE team_id = ? AND membership_accepted = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, teamId);
+            preparedStatement.setBoolean(2, membershipAccepted);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next() ) {
+                memberships.add( new MembershipEntity(
+                        resultSet.getLong("account_id"),
+                        resultSet.getString("account_name"),
+                        resultSet.getString("account_email"),
+                        resultSet.getLong("team_id"),
+                        resultSet.getString("team_name"),
+                        resultSet.getLong("membership_id"),
+                        resultSet.getBoolean("membership_accepted"),
+                        resultSet.getInt("membership_count"),
+                        resultSet.getInt("invitation_count"),
+                        resultSet.getInt("project_count")
+                ));
+            }
+
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+        return Collections.unmodifiableList(memberships);
+    }
+
 
     public Boolean accountOwnsMembership(Long accountId, Long membershipId) {
         try (Connection connection = databaseManager.getConnection()) {
@@ -93,6 +122,25 @@ public class MembershipRepository{
 
         return false;
     }
+    public Boolean accountHasMembershipInTeam(Long accountId, Long teamId) {
+        try (Connection connection = databaseManager.getConnection()) {
+            String query = "SELECT EXISTS(SELECT id FROM memberships WHERE (accepted = TRUE AND  team_id = ? AND account_id = ?));";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, teamId);
+            preparedStatement.setLong(2, accountId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1) == 1;
+            }
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+
+        return false;
+    }
+
 
     public Boolean acceptMembership(Long membershipId) {
         try (Connection connection = databaseManager.getConnection()) {
@@ -109,7 +157,11 @@ public class MembershipRepository{
         return false;
     }
 
-    public Boolean rejectMembership(Long membershipId) {
+    public Boolean deleteMembership(Long membershipId) {
+        /* TODO: If you delete everyone from the team, the team will still exists
+        Because a team has no foreign keys itself we can't use on delete cascade
+        We need something like: DELETE FROM teams WHERE id NOT IN (SELECT team_id FROM memberships);
+         */
         try (Connection connection = databaseManager.getConnection()) {
             String query = "DELETE FROM memberships WHERE id = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -124,12 +176,12 @@ public class MembershipRepository{
         return false;
     }
 
-    public Boolean accountHasMembershipInTeam(Long accountId, Long teamId) {
+    public Boolean membershipIsPartOfTeam(Long membershipId, Long teamId) {
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "SELECT EXISTS(SELECT id FROM memberships WHERE (accepted = TRUE AND  team_id = ? AND account_id = ?));";
+            String query = "SELECT EXISTS(SELECT * FROM memberships WHERE (team_id = ? AND id = ?));";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, teamId);
-            preparedStatement.setLong(2, accountId);
+            preparedStatement.setLong(2, membershipId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

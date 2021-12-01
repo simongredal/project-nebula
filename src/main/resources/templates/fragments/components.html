@@ -73,6 +73,15 @@
     </div>
 </div>
 
+<th:block th:fragment="membership-card(membership)"><!--/*@thymesVar id="membership" type="gruppe8.nebula.entities.MembershipEntity"*/-->
+    <div th:text="${membership.accountName} + ' (' + ${membership.accountEmail()} + ')'"></div>
+    <div><form th:action="@{uninvite}" method="post">
+        <input type="hidden" name="membershipId" th:value="${membership.membershipId()}">
+        <input type="hidden" name="teamId" th:value="${membership.teamId()}">
+        <button type="submit" class="btn btn-danger"><i class="bi-trash"></i></button>
+    </form></div>
+</th:block>
+
 <div class="row" th:fragment="project-card(project)">
     <!--/*@thymesVar id="project" type="gruppe8.nebula.models.Project"*/-->
     <div class="card">
