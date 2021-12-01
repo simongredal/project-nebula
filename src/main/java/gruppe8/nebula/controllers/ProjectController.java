@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/*
+This class handles both Projects and Tasks.
+ */
+
 @Controller
 @RequestMapping("/projects")
 public class ProjectController {
@@ -32,6 +36,7 @@ public class ProjectController {
 
     @GetMapping
     public String index(Authentication authentication, Model model) {
+        // Instantiates an account object which get authenticated.
         Account account = (Account) authentication.getPrincipal();
 
         model.addAttribute("account", account);

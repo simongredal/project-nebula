@@ -5,6 +5,7 @@ import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Team;
 import gruppe8.nebula.requests.MembershipUpdateRequest;
 import gruppe8.nebula.requests.TeamCreationRequest;
+import gruppe8.nebula.requests.TeamDeletionRequest;
 import gruppe8.nebula.services.AccountService;
 import gruppe8.nebula.services.ProjectService;
 import gruppe8.nebula.services.TeamService;
@@ -42,7 +43,7 @@ public class TeamController {
         model.addAttribute("account", account);
         model.addAttribute("teams", teams);
         model.addAttribute("invites", invites);
-        model.addAttribute("allAccounts",accountService.getAllAccounts());
+        model.addAttribute("allAccounts", accountService.getAllAccounts());
 
         log.info("GET /teams: Model=%s".formatted(model));
         return "teams";
@@ -50,7 +51,7 @@ public class TeamController {
 
     @GetMapping("/{teamId}")
     public String teams(@PathVariable Long teamId, Authentication authentication, Model model) {
-        log.info("GET /teams/"+teamId);
+        log.info("GET /teams/" + teamId);
 
         Account account = (Account) authentication.getPrincipal();
         Team team = teamService.getTeam(account, teamId);
@@ -58,7 +59,7 @@ public class TeamController {
         model.addAttribute("account", account);
         model.addAttribute("team", team);
 
-        log.info("Model="+model);
+        log.info("Model=" + model);
         return "team";
     }
 
@@ -80,7 +81,7 @@ public class TeamController {
     @PostMapping("/accept")
     public String acceptMembership(MembershipUpdateRequest request, Authentication authentication) {
         Account account = (Account) authentication.getPrincipal();
-        log.info("POST /teams/accept request="+request);
+        log.info("POST /teams/accept request=" + request);
 
         Boolean success = teamService.acceptMembership(account, request);
         // TODO: Send some kind of error message along if it wasn successful
@@ -90,10 +91,30 @@ public class TeamController {
     @PostMapping("/reject")
     public String rejectMembership(MembershipUpdateRequest request, Authentication authentication) {
         Account account = (Account) authentication.getPrincipal();
-        log.info("POST /teams/reject request="+request);
+        log.info("POST /teams/reject request=" + request);
 
         Boolean success = teamService.rejectMembership(account, request);
         // TODO: Send some kind of error message along if it wasn successful
         return "redirect:/teams";
     }
+
+    @PostMapping("/delete")
+    public String deleteTeam(Authentication authentication, TeamDeletionRequest request) {
+        Account account = (Account) authentication.getPrincipal();
+
+        log.info("POST /teams/create: TaskCreationRequest=%s, Account=%s".formatted(request, account));
+
+        Boolean success = teamService.deleteTeam(request);
+
+        if (success) {
+            log.info("Successful team deletion");
+            return "redirect:/teams";
+        }
+        return "redirect:/teams";
+    }
+
+
+
+
+
 }

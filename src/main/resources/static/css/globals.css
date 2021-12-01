@@ -2,9 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto&display=swap');
 
 :root{
-  --primary-text-color: aliceblue;
-  --navbar-color: teal;
-  --navbar-height: 4rem;
+    --primary-text-color: aliceblue;
+    --navbar-color: teal;
+    --navbar-height: 4rem;
+    --main-padding: 2rem;
+
 
   /*  https://www.joshwcomeau.com/shadow-palette/ */
   --shadow-color: 0deg 0% 55%;

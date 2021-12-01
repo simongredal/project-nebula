@@ -26,7 +26,7 @@ public class ProjectRepository {
 
     public ProjectEntity getProjectById(Long id) {
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "SELECT * FROM Nebula.projects WHERE projects.id = ?";
+            String query = "SELECT * FROM projects WHERE projects.id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
 
@@ -91,7 +91,7 @@ public class ProjectRepository {
         List<ProjectEntity> projectEntities = new ArrayList<>();
 
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "SELECT * FROM Nebula.projects WHERE projects.team_id = ?";
+            String query = "SELECT * FROM projects WHERE projects.team_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, teamId);
 

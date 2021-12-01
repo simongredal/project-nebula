@@ -1,18 +1,10 @@
 package gruppe8.nebula.services;
 
-import gruppe8.nebula.controllers.TaskController;
-import gruppe8.nebula.entities.TeamEntity;
-import gruppe8.nebula.models.Account;
-import gruppe8.nebula.models.Project;
 import gruppe8.nebula.models.Task;
-import gruppe8.nebula.models.Team;
-import gruppe8.nebula.repositories.ProjectRepository;
 import gruppe8.nebula.repositories.TaskRepository;
 import gruppe8.nebula.entities.TaskEntity;
-import gruppe8.nebula.repositories.TeamRepository;
 import gruppe8.nebula.requests.TaskCreationRequest;
 import gruppe8.nebula.requests.TaskDeletionRequest;
-import gruppe8.nebula.requests.TeamCreationRequest;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

@@ -1,4 +1,5 @@
 @import "globals.css";
+@import "styles.css";
 
 .main { box-shadow: inset 0 4px 12px hsl(0deg, 0%, 50%); }
 .footer { box-shadow: inset 0 4px 12px hsl(0deg, 0%, 25%); }
@@ -23,7 +24,7 @@
   align-items: center;
 }
 .navbar *, .footer * { color: inherit; }
-.navbar > *, .footer > * { padding: 0 1rem; }
+.navbar > *, .footer > * { margin: 0 1rem; }
 .navbar > :first-child, .footer > :first-child { padding-left: 0; }
 .navbar > :last-child, .footer > :last-child { padding-right: 0; }
 
@@ -73,6 +74,9 @@
 /* Making the Nebula link in the header responsive */
 /* Phones */
 @media (max-width: 405px) {
+  .main{
+    padding: calc(var(--main-padding) / 2);
+  }
   .navbar{
     display: flex;
     flex-direction: column;

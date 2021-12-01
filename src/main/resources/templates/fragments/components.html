@@ -38,9 +38,12 @@
     <!--/*@thymesVar id="membership" type="gruppe8.nebula.entities.MembershipEntity"*/-->
     <div class="card">
         <div class="row">
-            <a class="team-name" th:href="'/teams/'+${membership.teamId()}"><strong th:text="${membership.teamName()}"></strong></a>
+            <form th:action="@{/teams/delete}" method="POST">
+                <input type="hidden" th:value="${membership.teamId()}">
+                <a class="team-name" th:href="'/teams/'+${membership.teamId()}"><strong th:text="${membership.teamName()}"></strong></a> <button class="btn btn-danger bi-trash"></button>
+            </form>
         </div>
-        <div class="row space-evenly">
+        <div class="row no-wrap space-evenly">
             <div class="tooltip">
                 <span th:text="${membership.membershipCount()}" th:remove="tag"></span><i class="bi-people"></i>
                 <span th:text="'You currently have ' + ${membership.membershipCount()} + ' member in your team'" class="tooltip-text"></span>

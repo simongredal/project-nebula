@@ -15,6 +15,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
+/*
+Spring Security goes through a "Filterchain".
+A lot of processing is happening before a request reach our controller
+https://www.marcobehler.com/guides/spring-security
+ */
+
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
@@ -31,9 +38,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable()
             .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/js/*","task", "/css/*", "/images/*", "/fonts/*").permitAll()
-                .antMatchers(HttpMethod.GET,"/", "/login*", "/signup*", "/contact").permitAll()
+                // antMatchers allows us to decide which pages are accessible without having logged in. We've split it up into our post and get mappings
+                .antMatchers(HttpMethod.GET,"/js/*","task", "/css/*", "/images/*", "/fonts/*").permitAll() // static content
+                .antMatchers(HttpMethod.GET,"/", "/login*", "/signup*", "/contact").permitAll() // HTML templates
                 .antMatchers(HttpMethod.POST,"/login", "/signup").permitAll()
+                // Everything else requires a log in
                 .anyRequest().authenticated()
             .and().formLogin()
                 .loginPage("/login")
@@ -45,11 +54,18 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
+    /*
+    Authenticates a user which tries to log in
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
-
+    /*
+    The bean below defines the "contract" for which the above method authenticates.
+    The password gets encrypted with the Argon2PasswordEncoder.
+    The accountRepository implements userDetailSerivce, which returns a single user object
+     */
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();

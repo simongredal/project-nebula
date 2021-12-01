@@ -19,6 +19,9 @@ public class LoginController {
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
+    /*
+     Spring Security handles the login, this controller just redirects to the correct HTML template.
+     */
     @GetMapping
     public String login(@RequestParam Optional<String> error,
                         @RequestParam Optional<String> success,

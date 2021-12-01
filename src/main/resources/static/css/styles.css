@@ -47,7 +47,7 @@ p {
     background-color: #f2f2f2;
     width: 100%;
     min-height: calc(100vh - 2 * var(--navbar-height));
-    padding: 2rem;
+    padding: var(--main-padding);
 
     display: flex;
     flex-direction: column;
@@ -95,12 +95,17 @@ p {
     padding: 0.5rem 0;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex: 0 1 auto;
     align-items: baseline;
 }
 .row:first-child { padding-top: 0; }
 .row:last-child { padding-bottom: 0; }
+
+.no-wrap{
+    flex-wrap: nowrap;
+    margin: 0 1rem;
+}
 
 .col {
     padding: 0 0.5rem;

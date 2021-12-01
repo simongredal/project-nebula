@@ -8,6 +8,7 @@
 </head>
 <body>
     <header th:replace="fragments/components :: navbar"></header>
+    <!-- includes all the content which is inside the <main> tag-->
     <main class="main" th:include="this :: content"></main>
     <footer th:replace="fragments/components :: footer"></footer>
 </body>
