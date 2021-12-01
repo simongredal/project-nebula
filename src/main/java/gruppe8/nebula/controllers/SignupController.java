@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
+@RequestMapping("/signup")
 public class SignupController {
     private final AccountService signupService;
     private final Logger log;
@@ -22,14 +24,14 @@ public class SignupController {
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
-    @GetMapping("/signup")
+    @GetMapping
     public String signup(Model model) {
         log.info("GET /signup: Model=" + model);
 
         return "signup";
     }
 
-    @PostMapping("/signup")
+    @PostMapping
     public RedirectView addUser(AccountCreationRequest request, RedirectAttributes redirectAttributes) {
         log.info("POST /signup: SignupRequest=" + request.toString());
 
