@@ -58,7 +58,7 @@ public class TaskRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setLong(1,projectId);
-            preparedStatement.setObject(2,parentId);
+            preparedStatement.setObject(2,parentId); //setting as object instead of Long, so it can also be null
             preparedStatement.setString(3,task.getName());
             preparedStatement.setDate(4,task.getStartDate());
             preparedStatement.setDate(5,task.getEndDate());
