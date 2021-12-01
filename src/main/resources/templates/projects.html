@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:include="fragments/layout :: layout">
 <head>
-    <th:block th:insert="fragments/components :: head"></th:block>
-    <title>Projects | Nebula</title>
+    <meta charset="UTF-8">
+    <title th:fragment="page">Your Page Name Here</title>
 </head>
 <body>
-<header th:replace="fragments/components :: navbar"></header>
-<main class="main">
-
+<main th:fragment="content">
+    <div class="col center">
+        <div class="row"><strong>All the projects are supposed to be here</strong></div>
+    </div>
 </main>
 </body>
 </html>

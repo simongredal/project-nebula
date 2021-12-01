@@ -27,17 +27,10 @@
 .navbar > :first-child, .footer > :first-child { padding-left: 0; }
 .navbar > :last-child, .footer > :last-child { padding-right: 0; }
 
-.navbar a, .footer a { text-decoration: none; }
-
-.navbar-brand {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+.navbar a, .footer a {
+  text-decoration: none;
 }
-.navbar-logo { width: 3rem; height: 3rem; }
-.navbar-spacer, .footer-spacer { flex-grow: 1; }
-
-/* Creates a small bar beneath a link when hovered */
+/*!* Creates a small bar beneath a link when hovered *!*/
 .navbar-text a::after, .footer-text a::after {
   content: " ";
   display: block;
@@ -49,6 +42,24 @@
   transition: all ease-in-out 200ms;
 }
 .navbar-text a:hover::after, .footer-text a:hover::after { width: 100%; }
+
+/* Alternative way to make a line appear under the links */
+/*.navbar a, .footer a {*/
+/*  text-decoration: underline 0.2rem;*/
+/*  text-decoration-color: rgba(255, 255, 255, 0);*/
+/*  transition: text-decoration-color 300ms;*/
+/*}*/
+/*.navbar a:hover, .footer a:hover {*/
+/*  text-decoration-color: rgba(255, 255, 255, 1);*/
+/*}*/
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.navbar-logo { width: 3rem; height: 3rem; }
+.navbar-spacer, .footer-spacer { flex-grow: 1; }
 
 .nebula {
   font-family: 'Anton', sans-serif;

@@ -12,15 +12,11 @@
             <h2>All Your Teams</h2>
             </div>
             <div th:each="team : ${teams}" th:remove="tag">
-                <div th:replace="fragments/components :: membership-card(${team})">
-
-                </div>
+                <div th:replace="fragments/components :: membership-card(${team})"></div>
             </div>
         </div>
         <div class="col">
-            <div class="row center">
-            <h2>All Your Invitations</h2>
-            </div>
+            <div class="row center"><h2>All Your Invitations</h2></div>
             <div th:each="invite : ${invites}" th:remove="tag">
                 <div th:replace="fragments/components :: membership-card(${invite})"></div>
             </div>
