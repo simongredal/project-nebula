@@ -10,5 +10,4 @@ public class ContactController {
     public String contact(){
         return "contact";
     }
-
 }
