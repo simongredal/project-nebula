@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.stream.IntStream;
 
-public record TaskEntity(Long id, Long projectId, Long parent, String name, LocalDateTime startDate, LocalDateTime endDate) implements CharSequence {
+public record TaskEntity(Long id, Long projectId, Long parent, String name, String startDate, String endDate) implements CharSequence {
     @Override
     public int length() {
         return this.toString().length();

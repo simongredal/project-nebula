@@ -38,8 +38,8 @@ public class TaskRepository {
                         resultSet.getLong("project_id"),
                         resultSet.getLong("parent_id"),
                         resultSet.getString("name"),
-                        resultSet.getTimestamp("startDate").toLocalDateTime(),
-                        resultSet.getTimestamp("endDate").toLocalDateTime()
+                        resultSet.getTimestamp("startDate").toLocalDateTime().toString(),
+                        resultSet.getTimestamp("endDate").toLocalDateTime().toString()
                 ));
             }
         } catch (SQLException e) {
