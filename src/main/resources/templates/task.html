@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title th:fragment="page">Project editor</title>
+
 </head>
 <body>
 <main th:fragment="content">
@@ -68,6 +69,34 @@
             <input type="submit" value="Submit task!">
 
     </form>-->
+    <div class="chart-wrapper">
+            <!--
+            <ul class="chart-values">
+                <li th:each="task : ${project.getSubtasks()}" th:text="${project.getName()}"></li>
+            </ul>-->
+
+            <ul class="chart-values">
+                <li>sun</li>
+                <li>mon</li>
+                <li>tue</li>
+                <li>wed</li>
+                <li>thu</li>
+                <li>fri</li>
+                <li>sat</li>
+            </ul>
+
+            <ul class="chart-bars">
+                <li data-duration="tue½-wed" data-color="#b03532">Task</li>
+                <li data-duration="wed-sat" data-color="#33a8a5">Task</li>
+                <li data-duration="sun-tue" data-color="#30997a">Task</li>
+                <li data-duration="tue½-thu" data-color="#6a478f">Task</li>
+                <li data-duration="mon-tue½" data-color="#da6f2b">Task</li>
+                <li data-duration="wed-wed" data-color="#3d8bb1">Task</li>
+                <li data-duration="thu-fri½" data-color="#e03f3f">Task</li>
+                <li data-duration="mon½-wed½" data-color="#59a627">Task</li>
+                <li data-duration="fri-sat" data-color="#4464a1">Task</li>
+            </ul>
+    </div>
 </main>
 </body>
 </html>
