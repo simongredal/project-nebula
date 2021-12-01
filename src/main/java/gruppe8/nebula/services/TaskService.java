@@ -6,6 +6,8 @@ import gruppe8.nebula.entities.TaskEntity;
 import gruppe8.nebula.requests.TaskCreationRequest;
 import gruppe8.nebula.requests.TaskDeletionRequest;
 import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -21,6 +23,7 @@ public class TaskService {
     }
 
     public Boolean createTask(TaskCreationRequest request) {
+        //Timestamp startDate = Timestamp.valueOf(localDateTime);
         Task task = new Task(new TaskEntity(request.id(),request.projectId(), request.parentId(), request.name(),request.startDate(),request.endDate()));
         return taskRepository.createTask(task, request.parentId(), request.projectId());
 

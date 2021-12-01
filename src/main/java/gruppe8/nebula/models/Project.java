@@ -3,6 +3,11 @@ package gruppe8.nebula.models;
 import gruppe8.nebula.entities.ProjectEntity;
 import gruppe8.nebula.entities.TaskEntity;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Project {
@@ -35,6 +40,54 @@ public class Project {
         List<Task> tasks = new ArrayList<>();
         for (Task task : subtasks) { tasks.addAll(task.getAllTasks()); }
         return tasks;
+    }
+
+    public List<LocalDateTime> getAllDates() {
+        List<LocalDateTime> dates = new ArrayList<>();
+        for (Task task : getAllTasks()) {
+            dates.add(task.getStartDate());
+            dates.add(task.getEndDate());
+        }
+        return dates;
+    }
+
+    public LocalDateTime getStartDate() {
+        LocalDateTime minDate = getAllDates().stream()
+                .min(LocalDateTime::compareTo)
+                .get();
+        return minDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        LocalDateTime maxDate = getAllDates().stream()
+                .max(LocalDateTime::compareTo)
+                .get();
+        return maxDate;
+    }
+
+    public int getTotalProjectSpanDays() {
+        int daysBetween = -1;
+
+        try {
+            LocalDateTime date1 = getStartDate();
+            LocalDateTime date2 = getEndDate();
+
+            daysBetween = (int) ChronoUnit.DAYS.between(date1, date2); //returns days between in calendar time
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return daysBetween;
+    }
+    public List<Date> getTotalProjectSpanDates() {
+        List<Date> bitch = new ArrayList<>();
+
+        for (int i=0; i<getTotalProjectSpanDays();i++) {
+            Date currentDate = java.sql.Timestamp.valueOf(getStartDate().plusDays(i));
+            bitch.add(currentDate);
+        }
+
+        return bitch;
     }
 
     public Long getId() {

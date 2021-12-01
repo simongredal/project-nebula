@@ -2,14 +2,15 @@ package gruppe8.nebula.models;
 
 import gruppe8.nebula.entities.TaskEntity;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.sql.Date;
 
 public class Task {
     private Long id;
     private String name;
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private final List<Task> subtasks = new ArrayList<>();
 
     public Task(TaskEntity taskEntity) {
@@ -36,8 +37,8 @@ public class Task {
     public String getName() {
         return name;
     }
-    public Date getStartDate() {return startDate;}
-    public Date getEndDate() {return endDate;}
+    public LocalDateTime getStartDate() {return startDate;}
+    public LocalDateTime getEndDate() {return endDate;}
 
     public List<Task> getSubtasks() {
         return subtasks;
