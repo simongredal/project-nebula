@@ -104,8 +104,6 @@ p {
 .row:first-child { padding-top: 0; }
 .row:last-child { padding-bottom: 0; }
 
-.no-wrap{ flex-wrap: nowrap; }
-
 .col {
     padding: 0 0.5rem;
     display: flex;
@@ -157,9 +155,9 @@ p {
 .space-around { justify-content: space-around; }
 .space-between { justify-content: space-between; }
 
-.wrap {
-    flex-wrap: wrap;
-}
+
+.wrap { flex-wrap: wrap; }
+.overflow { overflow-x: scroll; }
 
 .team-name{
     text-decoration: none;
