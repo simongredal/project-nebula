@@ -23,25 +23,16 @@
   align-items: center;
 }
 .navbar *, .footer * { color: inherit; }
-.navbar > *, .footer > * { margin: 0 1rem; }
+.navbar > *, .footer > * { padding: 0 1rem; }
 .navbar > :first-child, .footer > :first-child { padding-left: 0; }
 .navbar > :last-child, .footer > :last-child { padding-right: 0; }
 
-.navbar a, .footer a {
-  text-decoration: none;
-}
-
-.navbar a:hover:not(.nebula) {
-}
-/*
-Creates a small bar beneath a link when hovered
- */
-
 /*!* Creates a small bar beneath a link when hovered *!*/
+.navbar a, .footer a { text-decoration: none; }
 .navbar-text a::after, .footer-text a::after {
   content: " ";
   display: block;
-  margin-top: 2px;
+  margin-top: -2pt;
   height: 2pt;
   width: 0;
 
