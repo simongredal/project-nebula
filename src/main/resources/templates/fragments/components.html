@@ -36,11 +36,11 @@
     <div th:unless="${account} == null" class="navbar-text"><a href="/logout">Logout</a></div>
 </header>
 
-<div class="row" th:fragment="membership-card(membership)">
+<div class="row" th:fragment="team-card(membership)">
     <!--/*@thymesVar id="membership" type="gruppe8.nebula.entities.MembershipEntity"*/-->
     <div class="card">
         <div class="row no-wrap space-between">
-            <a class="team-name" th:href="'/teams/'+${membership.teamId()}"><strong th:text="${membership.teamName()}"></strong></a>
+            <a class="team-name" th:href="'/teams/'+${membership.teamId()}"><strong class="heading" th:text="${membership.teamName()}"></strong></a>
             <form th:action="@{/teams/delete}" method="POST">
                 <input type="hidden" name="id" th:value="${membership.teamId()}">
                 <button type="submit" class="btn btn-danger"><i class="bi-trash"></i></button>
