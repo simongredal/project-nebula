@@ -94,7 +94,7 @@ Creates a small bar beneath a link when hovered
   }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 970px) {
   .navbar {
     height: fit-content;
     display: flex;
@@ -117,7 +117,7 @@ Creates a small bar beneath a link when hovered
   }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 970px) {
   .footer{
     display: flex;
     flex-direction: column;
