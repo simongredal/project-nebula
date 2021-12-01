@@ -1,63 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:include="fragments/layout :: layout">
 <head>
     <meta charset="UTF-8">
-    <th:block th:insert="fragments/components :: head">head</th:block>
-    <script type="text/javascript" th:src="@{../js/scripts.js}"></script>
-
-    <title>Project editor</title>
+    <title th:fragment="page">Project editor</title>
 </head>
 <body>
-<div action="/task" method="GET">
-
-</div>
-
-<div th:each="task : ${project.getSubtasks()}">
-    <div th:replace="fragments/components :: task"></div>
-</div>
-
-<div class="col">
-    <h2>Create a New Task</h2>
+<main th:fragment="content">
     <div class="row">
         <div class="card">
-            <form class="col form-wrapper" th:action="@{/projects/create}" method="POST">
-                <div class="row form-control">
-                    <label for="name">Task Name</label>
-                    <input type="text" id="name" name="name" required>
+            <div class="row"><strong>Tasks in This Project</strong></div>
+            <div class="row" th:each="task : ${project.getSubtasks()}">
+                <div th:replace="fragments/components :: task"></div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="card">
+            <div class="row"><strong>Create a New Task</strong></div>
+            <div class="row">
+                <form class="col form-wrapper" th:action="@{/projects/create}" method="POST">
+                    <div class="row form-control">
+                        <label for="name">Task Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
 
-                    <label for="startDate">startDate</label>
-                    <input type="date" id="startDate" name="startDate" required>
-
-                    <label for="endDate">endDate</label>
-                    <input type="date" id="endDate" name="endDate" required>
-
-                    <label for="parentId">parent</label>
-                    <input type="text" id="parentId" name="parentId">
+                    <div class="row form-control">
+                        <label for="startDate">startDate</label>
+                        <input type="date" id="startDate" name="startDate" required>
+                    </div>
+                    <div class="row form-control">
+                        <label for="endDate">endDate</label>
+                        <input type="date" id="endDate" name="endDate" required>
+                    </div>
+                    <div class="row form-control">
+                        <label for="parentId">parent</label>
+                        <input type="text" id="parentId" name="parentId">
+                    </div>
 
                     <input type="hidden" name="projectId" th:value="${project.getId()}">
 
-                </div>
-
-                <div class="row form-control">
-                    <button class="w-12" type="submit" id="submit">Create Task</button>
-                </div>
-            </form>
+                    <div class="row form-control">
+                        <button class="w-12 btn btn-wow" type="submit" id="submit">Create Task</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-<!--
-<form action="/task" method="POST">
-    <div id="add-field">
-        Create new input field. Should be made a list
-    <button type="button" id="add-field-btn  -button" onclick="addField()">Add another task!</button>
-        <input type="text" list="accounts" placeholder="Set a task">
-        TODO:: Set whose responsible for each task. Maybe with a Datalist
+    <!--
+    <form action="/task" method="POST">
+        <div id="add-field">
+            Create new input field. Should be made a list
+        <button type="button" id="add-field-btn  -button" onclick="addField()">Add another task!</button>
+            <input type="text" list="accounts" placeholder="Set a task">
+            TODO:: Set whose responsible for each task. Maybe with a Datalist
 
-    </div>
-        <input type="submit" value="Submit task!">
+        </div>
+            <input type="submit" value="Submit task!">
 
-</form>-->
-
+    </form>-->
+</main>
 </body>
 </html>
