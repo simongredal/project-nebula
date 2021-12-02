@@ -3,10 +3,7 @@ package gruppe8.nebula.models;
 import gruppe8.nebula.entities.ProjectEntity;
 import gruppe8.nebula.entities.TaskEntity;
 
-import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
