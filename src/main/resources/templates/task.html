@@ -104,10 +104,14 @@
                     <li th:each="String : ${project.getTotalProjectSpanDates()}" th:text="${String}"></li>
 
                 </ul>
-
-                <ul class="chart-bars">
-                    <li th:each="Task : ${project.getAllTasks()}" th:data-duration="${Task.getDates()}" data-color="#b03532" th:text="${Task.getName()}"></li>
-                </ul>
+                <div>
+                    <ul class="chart-bars">
+                        <li class="tooltip" th:each="Task : ${project.getAllTasks()}" th:data-duration="${Task.getDates()}" data-color="#b03532" >
+                            <span class="tooltip-text" th:text="${Task.getName()}"></span>
+                            <span th:text="${Task.getName()}"></span>
+                        </li>
+                    </ul>
+                </div>
         </div>
     </div>
 </main>
