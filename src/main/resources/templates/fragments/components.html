@@ -73,7 +73,7 @@
     </div>
 </div>
 
-<th:block th:fragment="membership-card(membership)"><!--/*@thymesVar id="membership" type="gruppe8.nebula.entities.MembershipEntity"*/-->
+<th:block th:fragment="membership-card"><!--/*@thymesVar id="membership" type="gruppe8.nebula.entities.MembershipEntity"*/-->
     <div th:text="${membership.accountName} + ' (' + ${membership.accountEmail()} + ')'"></div>
     <div><form th:action="@{uninvite}" method="post">
         <input type="hidden" name="membershipId" th:value="${membership.membershipId()}">

@@ -118,6 +118,7 @@ p {
 .col:last-child { padding-right: 0; }
 
 .list-group {
+    padding: unset;
     font-size: 1rem;
     display: flex;
     flex-direction: column;
