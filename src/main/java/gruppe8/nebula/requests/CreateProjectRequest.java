@@ -1,5 +1,5 @@
 package gruppe8.nebula.requests;
 
-public record CreateProjectRequest(Long id,String name) {
+public record CreateProjectRequest(Long teamId, String projectName) {
 
 }

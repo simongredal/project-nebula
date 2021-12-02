@@ -47,7 +47,7 @@ public class ProjectRepository {
 
     public boolean createProject(Project project, Account account) {
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "INSERT INTO projects (name, id) VALUES (?, ?)";
+            String query = "INSERT INTO projects (name, team_id) VALUES (?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, project.getName());

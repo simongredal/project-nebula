@@ -34,7 +34,7 @@ public class ProjectService {
     }
 
     public Boolean createProject(Account account, CreateProjectRequest request) {
-        Project project = new Project(request.id(), request.name());
+        Project project = new Project(request.teamId(), request.projectName());
         return projectRepository.createProject(project, account);
     }
 
