@@ -82,7 +82,7 @@ public class Project {
     public List<Date> getTotalProjectSpanDates() {
         List<Date> bitch = new ArrayList<>();
 
-        for (int i=0; i<getTotalProjectSpanDays();i++) {
+        for (int i=0; i<=getTotalProjectSpanDays();i++) {
             Date currentDate = java.sql.Timestamp.valueOf(getStartDate().plusDays(i));
             bitch.add(currentDate);
         }

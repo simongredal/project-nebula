@@ -4,7 +4,7 @@ function createChart(e) {
     const daysArray = [...days];
 
     tasks.forEach(el => {
-        const duration = el.dataset.duration.split("-");
+        const duration = el.dataset.duration.split("/");
         const startDay = duration[0];
         const endDay = duration[1];
         let left = 0,
