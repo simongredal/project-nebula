@@ -64,7 +64,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     /*
     The bean below defines the "contract" for which the above method authenticates.
     The password gets encrypted with the Argon2PasswordEncoder.
-    The accountRepository implements userDetailSerivce, which returns a single user object
+    The accountRepository implements userDetailService, which returns a single user object
      */
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
