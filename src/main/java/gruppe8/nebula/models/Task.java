@@ -68,4 +68,12 @@ public class Task {
         for (Task task : subtasks) { tasks.addAll(task.getAllTasks()); }
         return tasks;
     }
+    public String getDates() {
+        String startDate = getStartDate().toString().replace("T"," ")+":00.0";
+        String endDate = getEndDate().toString().replace("T"," ")+":00.0";
+        String dates= "sun/mon";//startDate+ "/"+endDate;
+        dates= startDate+ "/"+endDate;
+        System.out.println(dates);
+        return dates;
+    }
 }
