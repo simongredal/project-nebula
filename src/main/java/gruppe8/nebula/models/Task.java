@@ -73,7 +73,6 @@ public class Task {
         String endDate = getEndDate().toString().replace("T"," ")+":00.0";
         String dates= "sun/mon";//startDate+ "/"+endDate;
         dates= startDate+ "/"+endDate;
-        System.out.println(dates);
         return dates;
     }
 }

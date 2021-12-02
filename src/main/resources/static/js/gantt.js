@@ -1,3 +1,6 @@
+//example:
+//https://webdesign.tutsplus.com/tutorials/build-a-simple-gantt-chart-with-css-and-javascript--cms-33813
+
 function createChart(e) {
     const days = document.querySelectorAll(".chart-values li");
     const tasks = document.querySelectorAll(".chart-bars li");
