@@ -1,3 +1,5 @@
+@import "globals.css";
+
 * {
     box-sizing: border-box;
 }
@@ -10,7 +12,8 @@ body {
     margin: 0;
     padding: 0;
     font-size: 12pt;
-    font-family: sans-serif;
+    font-family: Montserrat, sans-serif;
+    font-weight: 800;
 }
 
 p {

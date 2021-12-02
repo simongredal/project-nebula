@@ -7,10 +7,12 @@
 /* Navbar and footer are pretty alike so let them use the same css*/
 .navbar, .footer {
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: 800;
   width: 100%;
   height: var(--navbar-height);
   padding: 0 2rem;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
 
   color: var(--primary-text-color);
   background-color: var(--navbar-color);
