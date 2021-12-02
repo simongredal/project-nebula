@@ -54,29 +54,25 @@ public class Project {
     public LocalDateTime getStartDate() {
         LocalDateTime minDate = getAllDates().stream()
                 .min(LocalDateTime::compareTo)
-                .get();
+                .orElse(null);
         return minDate;
     }
 
     public LocalDateTime getEndDate() {
         LocalDateTime maxDate = getAllDates().stream()
                 .max(LocalDateTime::compareTo)
-                .get();
+                .orElse(null);
         return maxDate;
     }
 
     public int getTotalProjectSpanDays() {
-        int daysBetween = -1;
-
-        try {
-            LocalDateTime date1 = getStartDate();
-            LocalDateTime date2 = getEndDate();
-
-            daysBetween = (int) ChronoUnit.DAYS.between(date1, date2); //returns days between in calendar time
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        LocalDateTime date1 = getStartDate();
+        LocalDateTime date2 = getEndDate();
+        if (date1==null || date2==null) {
+            int daysBetween = -1;
+            return daysBetween;
         }
+        int daysBetween = (int) ChronoUnit.DAYS.between(date1, date2); //returns days between in calendar time
         return daysBetween;
     }
 
