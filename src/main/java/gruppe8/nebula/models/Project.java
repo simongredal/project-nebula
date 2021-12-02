@@ -79,15 +79,18 @@ public class Project {
         }
         return daysBetween;
     }
-    public List<Date> getTotalProjectSpanDates() {
-        List<Date> bitch = new ArrayList<>();
+
+    public List<String> getTotalProjectSpanDates() {
+        List<String> dates = new ArrayList<>();
 
         for (int i=0; i<=getTotalProjectSpanDays();i++) {
             Date currentDate = java.sql.Timestamp.valueOf(getStartDate().plusDays(i));
-            bitch.add(currentDate);
+            String[] dateString= currentDate.toString().split(" ",0);
+            String dateFormatted = dateString[0];
+            dates.add(dateFormatted);
         }
-
-        return bitch;
+        System.out.println(dates);
+        return dates;
     }
 
     public Long getId() {

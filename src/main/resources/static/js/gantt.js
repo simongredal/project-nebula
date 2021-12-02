@@ -5,8 +5,10 @@ function createChart(e) {
 
     tasks.forEach(el => {
         const duration = el.dataset.duration.split("/");
-        const startDay = duration[0];
-        const endDay = duration[1];
+        const startDate = duration[0].split(" ");
+        const endDate = duration[1].split(" ");
+        const startDay = startDate[0];
+        const endDay = endDate[0];
         let left = 0,
             width = 0;
 
