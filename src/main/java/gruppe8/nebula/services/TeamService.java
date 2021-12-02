@@ -120,7 +120,7 @@ public class TeamService {
         Boolean allowed = membershipService.accountHasMembershipInTeam(account, request.teamId());
         if (!allowed) { return false; }
 
-        Account invitee = accountService.getAccountByEmail(request.email());
+        Account invitee = accountService.getAccountByEmail(request.invitation());
         if (invitee == null) { return false; }
 
         return membershipService.sendInvitation(request.teamId(), invitee.getId());

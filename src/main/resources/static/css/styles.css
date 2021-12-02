@@ -130,6 +130,7 @@ p {
     display: flex;
     flex-direction: row;
     align-items: center;
+    white-space: nowrap;
     flex: 0 1 auto;
 }
 .list-group > .list-item:nth-child(odd) { background-color: hsl(0deg, 0%, 90%); }
@@ -159,8 +160,9 @@ p {
 .space-between { justify-content: space-between; }
 
 
-.wrap { flex-wrap: wrap; }
+.no-wrap { flex-wrap: nowrap; }
 .overflow { overflow-x: scroll; }
+
 
 .team-name{
     text-decoration: none;

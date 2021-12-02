@@ -43,7 +43,7 @@ public class TeamController {
         model.addAttribute("account", account);
         model.addAttribute("teams", teams);
         model.addAttribute("invites", invites);
-        model.addAttribute("allAccounts", accountService.getAllAccounts());
+        model.addAttribute("allAccounts", allAccounts);
 
         log.info("GET /teams: Model=%s".formatted(model));
         return "teams";
@@ -57,11 +57,13 @@ public class TeamController {
         Team team = teamService.getTeam(account, teamId);
         List<MembershipEntity> members = teamService.getMembersForTeam(account, teamId);
         List<MembershipEntity> invites = teamService.getInvitationsForTeam(account, teamId);
+        List<Account> allAccounts = accountService.getAllAccounts();
 
         model.addAttribute("account", account);
         model.addAttribute("team", team);
         model.addAttribute("members", members);
         model.addAttribute("invites", invites);
+        model.addAttribute("allAccounts", allAccounts);
 
         log.info("Model=" + model);
         return "team";
