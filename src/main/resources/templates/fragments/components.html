@@ -96,27 +96,28 @@
     <div class="footer-text"><a th:href="@{/#}">Terms Of Use</a></div>
 </footer>
 
-<div th:fragment="task">
- <table>
+<th:block th:fragment="task">
+        <tr>
+            <td th:text="${task.getName()}"></td>
+            <td th:text="${task.getStartDate()}"></td>
+            <td th:text="${task.getEndDate()}"></td>
+        </tr>
+
+
+    <td>
      <form th:action="@{/projects/delete}" method="POST">
          <input type="hidden" name="taskId" th:value="${task.getId()}">
          <input type="hidden" name="projectId" th:value="${project.getId()}">
-         <tr>
-             <td th:text="${task.getId()}"></td>
-             <td th:text="${task.getName()}"></td>
-             <td th:text="${task.getStartDate()}"></td>
-             <td th:text="${task.getEndDate()}"></td>
-
-             <td>
-                 <button type="submit" class="btn btn-danger">x</button>
-             </td>
-         </tr>
+         <div>
+             <button type="submit" class="btn btn-danger bi-trash"></button>
+         </div>
      </form>
- </table>
+    </td>
+
     <div th:each="task : ${task.getSubtasks()}">
         <div th:replace="fragments/components :: task"></div>
     </div>
-</div>
+</th:block>
 
 </body>
 </html>
