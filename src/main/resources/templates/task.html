@@ -44,14 +44,33 @@
                         <input type="datetime-local" id="endDate" name="endDate" required>
                     </div>
                     <div class="row form-control">
-                        <label for="parentId">parent</label>
-                        <input type="text" id="parentId" name="parentId">
+                        <label for="parentId">does task have parent?</label>
+                        <!--<input type="text" id="parentId" name="parentId">-->
+                        <div class="w-12">
+                            <div class="col" id="team-members">
+                                <div class="form-control">
+                                    <select class="w-12" id="parentId" name="parentId" list="tasks" autocomplete="off">
+                                        <option value="">none</option>
+                                        <option th:each="Task : ${project.getAllTasks()}"
+                                                th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
+                                    </select>
+                                        <!--<input type="hidden" id="parentId" name="parentId">-->
+                                </div>
+                            </div>
+                        </div>
+                        <!--
+                        <datalist id="tasks">
+                            <option th:data-value="${}" th:each="Task : ${project.getAllTasks()}"
+                                     th:text="${Task.getId()}"></option>
+                        </datalist>-->
+
                     </div>
+
 
                     <input type="hidden" name="projectId" th:value="${project.getId()}">
 
                     <div class="row form-control">
-                        <button class="w-12 btn btn-wow" type="submit" id="submit">Create Task</button>
+                        <button class="w-12 btn btn-wow" type="submit" id="submit" onclick="setParentId()">Create Task</button>
                     </div>
                 </form>
             </div>
