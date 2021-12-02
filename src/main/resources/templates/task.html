@@ -10,11 +10,20 @@
     <div class="row">
         <div class="card">
             <div class="row"><strong>Tasks in This Project</strong></div>
-            <div class="row" th:each="task : ${project.getSubtasks()}">
-                <div th:replace="fragments/components :: task"></div>
+            <div class="row">
+                        <table id="tasks" class="list-group">
+                            <tr class="list-item">
+                                <th>Name</th>
+                                <th>Start date</th>
+                                <th>End date</th>
+                            </tr>
+                        <tr class="list-item" th:each="task : ${project.getSubtasks()}">
+                            <td th:replace="fragments/components :: task"></td>
+                        </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
     <div class="row">
         <div class="card">

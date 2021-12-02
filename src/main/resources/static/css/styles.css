@@ -172,7 +172,6 @@ p {
 }
 
 
-
 /* Tooltip text */
 .tooltip > .tooltip-text {
     font-size: 0.8rem;
@@ -190,4 +189,27 @@ p {
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltip-text {
     visibility: visible;
+}
+
+#tasks {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#tasks td, #tasks th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#tasks tr:nth-child(even){background-color: #f2f2f2;}
+
+#tasks tr:hover {background-color: #ddd;}
+
+#tasks th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background: linear-gradient(45deg, red,blue,red);
+    color: white;
 }
