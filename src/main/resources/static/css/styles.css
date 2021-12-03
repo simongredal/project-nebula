@@ -123,13 +123,15 @@ p {
     margin: 0;
     font-size: 1rem;
     display: flex;
+    border: 1pt solid hsl(0deg, 0%, 90%);
+    border-radius: 0.4rem;
+    background-color: hsl(0deg, 0%, 90%);
     flex-direction: column;
     flex: 1 0 0;
-    border-radius: 0.4rem;
     box-shadow: var(--shadow-elevation-low);
 }
 
-.list-item {
+.list-group > li {
     padding: 0 0.3rem;
     display: flex;
     flex-direction: row;
@@ -137,12 +139,10 @@ p {
     white-space: nowrap;
     flex: 0 1 auto;
 }
-.list-item:nth-child(odd) { background-color: hsl(0deg, 0%, 90%); }
-.list-item:nth-child(even) { }
-
-.list-item:first-child { border-top-left-radius: 0.4rem; border-top-right-radius: 0.4rem; }
-.list-item:last-child { border-bottom-left-radius: 0.4rem; border-bottom-right-radius: 0.4rem; }
-
+.list-group > li:nth-child(odd) { background-color: hsl(0deg, 0%, 90%); }
+.list-group > li:nth-child(even) { background-color: hsl(0deg, 0%, 100%); }
+.list-group > li:first-child { border-top-left-radius: 0.4rem; border-top-right-radius: 0.4rem; }
+.list-group > li:last-child { border-bottom-left-radius: 0.4rem; border-bottom-right-radius: 0.4rem; }
 
 
 .table {

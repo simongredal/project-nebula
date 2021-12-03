@@ -41,7 +41,7 @@
                     <div class="row"><strong class="heading">Current Members</strong></div>
                     <div class="row">
                         <ul class="list-group">
-                            <li class="list-item no-wrap space-between"
+                            <li class="no-wrap space-between"
                                 th:each="member : ${members}"
                                 th:include="fragments/components :: membership-card"
                                 th:with="membership=${member}">
@@ -56,7 +56,7 @@
                     <div class="row"><strong class="heading">Active Invitations</strong></div>
                     <div class="row">
                         <ul class="list-group">
-                            <li class="list-item no-wrap space-between"
+                            <li class="no-wrap space-between"
                                 th:each="invite : ${invites}"
                                 th:include="fragments/components :: membership-card"
                                 th:with="membership=${invite}">
