@@ -70,7 +70,7 @@ public class TeamRepository {
             int changedRows = preparedStatement.executeUpdate();
             if (changedRows == 1) {
                 connection.commit();
-                System.out.println("team deleted: " + teamId);
+                log.info("team deleted: " + teamId);
                 return true;
             }
             connection.rollback();
@@ -89,7 +89,7 @@ public class TeamRepository {
 
             int update = preparedStatement.executeUpdate();
             if (update == 1) {
-                System.out.println("team name updated: " + teamNew.getName());
+                log.info("team name updated: " + teamNew.getName());
                 return true;
             }
         } catch (SQLException e) {

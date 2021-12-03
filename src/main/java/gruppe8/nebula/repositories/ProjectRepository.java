@@ -17,11 +17,11 @@ import org.slf4j.LoggerFactory;
 @Repository
 public class ProjectRepository {
     private final DatabaseManager databaseManager;
-    private final Logger logger;
+    private final Logger log;
 
     public ProjectRepository(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
-        this.logger = LoggerFactory.getLogger(this.getClass());
+        this.log = LoggerFactory.getLogger(this.getClass());
     }
 
     public ProjectEntity getProjectById(Long id) {
@@ -55,12 +55,12 @@ public class ProjectRepository {
 
             int updatedRows = preparedStatement.executeUpdate();
             if (updatedRows != 1) {
-                logger.error("Failed to create project");
+                log.error("Failed to create project");
                 return false;
             }
             return true;
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
         }
         return false;
     }
@@ -74,7 +74,7 @@ public class ProjectRepository {
             preparedStatement.setLong(1, Long.parseLong(project.getName()));
             preparedStatement.setLong(2, project.getId());
 
-            System.out.println("deletion of project initialized");
+            log.info("deletion of project initialized");
             int changedRows = preparedStatement.executeUpdate();
             if (changedRows == 1) {
                 connection.commit();
@@ -82,7 +82,7 @@ public class ProjectRepository {
             }
             connection.rollback();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
         }
         return false;
     }
