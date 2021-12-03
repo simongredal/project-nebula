@@ -9,27 +9,20 @@
 <main th:fragment="content">
     <div class="row">
         <div class="card">
-            <div class="row"><strong>Tasks in This Project</strong></div>
-            <div class="row">
-                        <table id="tasks" class="list-group">
-                            <tr class="list-item">
-                                <th>Name</th>
-                                <th>Start date</th>
-                                <th>End date</th>
+            <div class="row"><strong class="heading">Tasks in This Project</strong></div>
+            <div class="row no-wrap">
+                <div class="col">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Date</td>
+                                <td>Edit</td>
                             </tr>
-                        <tr class="list-item" th:each="task : ${project.getSubtasks()}">
-                            <td th:replace="fragments/components :: task"></td>
-                        </tr>
-                        </table>
-                    </div>
+                        </thead>
+                        <tbody th:insert="fragments/components :: task-tr" th:with="tasks=${project.getSubtasks()}, indent=0"></tbody>
+                    </table>
                 </div>
-            </div>
-
-    <div class="row">
-        <div class="card">
-            <div class="row"><strong>Tasks in This Project (getAllTasks)</strong></div>
-            <div class="row" th:each="task : ${project.getAllTasks()}">
-                <strong th:text="${task.getId()} + ': ' + ${task.getName()}" ></strong>
             </div>
         </div>
     </div>
@@ -99,19 +92,18 @@
     </form>-->
 
     <div class="row overflow">
-        <div class="chart-wrapper">
+        <div class="col">
+            <div class="chart-wrapper">
                 <ul class="chart-values">
                     <li th:each="String : ${project.getTotalProjectSpanDates()}" th:text="${String}"></li>
-
                 </ul>
-                <div>
-                    <ul class="chart-bars">
-                        <li class="tooltip" th:each="Task : ${project.getAllTasks()}" th:data-duration="${Task.getDates()}" data-color="#b03532" >
-                            <span class="tooltip-text" th:text="${Task.getName()}"></span>
-                            <span th:text="${Task.getName()}"></span>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="chart-bars">
+                    <li class="tooltip" th:each="Task : ${project.getAllTasks()}" th:data-duration="${Task.getDates()}" data-color="#b03532" >
+                        <span class="tooltip-text" th:text="${Task.getName()}"></span>
+                        <span th:text="${Task.getName()}"></span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </main>
