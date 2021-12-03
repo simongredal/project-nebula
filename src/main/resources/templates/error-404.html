@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error | Page not found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <style>
+        body {
+            background-image: linear-gradient(90deg, blue, white, blue);
+        }
+        * {
+            font-weight: bold;
+        }
+        h1,
+        h3{
+            color: black;
+        }
+        .error > a {
+            color: black;
+        }
+
+        p{
+            font-size: 16em;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<main style="text-align: center">
+    <h1>Oops!</h1>
+    <h3>You tried to access a wrong page</h3>
+
+    <p>🤔</p>
+
+
+    <div class="error">
+        <span>Did you want to access another page?</span>
+        <br>
+        <span>Click the link below!</span>
+        <a href="javascript:history.back()">Go back</a>
+        <a th:href="@{/}">Go to home page</a>
+        <a th:href="@{/teams}">Go to the team page</a>
+
+    </div>
+
+
+</main>
+
+</body>
+</html>
