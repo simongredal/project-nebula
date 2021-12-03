@@ -81,20 +81,18 @@
     </form></div>
 </th:block>
 
-<div class="row" th:fragment="project-card"><!--/*@thymesVar id="project" type="gruppe8.nebula.models.Project"*/-->
-    <div class="card">
-        <div class="row">
-            <strong class="heading"><a th:href="'/projects/'+${project.getId()}" th:text="${project.getName()}"></a></strong>
-        </div>
-        <div class="row no-wrap">
-            <div class="tooltip">
-                <span th:text="${project.getAllTasks().size()}" th:remove="tag"></span><i class="bi-check-square"></i>
-                <span th:if="${project.getAllTasks().size()} == 1" th:text="${project.getAllTasks().size()} + ' task in project'" class="tooltip-text"></span>
-                <span th:unless="${project.getAllTasks().size()} == 1" th:text="${project.getAllTasks().size()} + ' tasks in project'" class="tooltip-text"></span>
-            </div>
+<th:block th:fragment="project-card"> <!--/*@thymesVar id="project" type="gruppe8.nebula.models.Project"*/-->
+    <div class="row">
+        <strong class="heading"><a th:href="'/projects/'+${project.getId()}" th:text="${project.getName()}"></a></strong>
+    </div>
+    <div class="row no-wrap">
+        <div class="tooltip">
+            <span th:text="${project.getAllTasks().size()}" th:remove="tag"></span><i class="bi-check-square"></i>
+            <span th:if="${project.getAllTasks().size()} == 1" th:text="${project.getAllTasks().size()} + ' task in project'" class="tooltip-text"></span>
+            <span th:unless="${project.getAllTasks().size()} == 1" th:text="${project.getAllTasks().size()} + ' tasks in project'" class="tooltip-text"></span>
         </div>
     </div>
-</div>
+</th:block>
 
 <footer class="footer" th:fragment="footer">
     <div class="footer-spacer"></div>
