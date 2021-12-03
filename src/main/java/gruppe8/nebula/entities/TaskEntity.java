@@ -2,7 +2,7 @@ package gruppe8.nebula.entities;
 
 import java.util.stream.IntStream;
 
-public record TaskEntity(Long id, Long projectId, Long parent, String name, String startDate, String endDate) implements CharSequence {
+public record TaskEntity(Long id, Long projectId, Long parent, String name, String startDate, String endDate, Long duration, Long resourceId) implements CharSequence {
     @Override
     public int length() {
         return this.toString().length();

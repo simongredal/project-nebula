@@ -37,7 +37,9 @@ public class TaskRepository {
                         resultSet.getLong("parent_id"),
                         resultSet.getString("name"),
                         resultSet.getTimestamp("startDate").toLocalDateTime().toString(),
-                        resultSet.getTimestamp("endDate").toLocalDateTime().toString()
+                        resultSet.getTimestamp("endDate").toLocalDateTime().toString(),
+                        resultSet.getLong("duration"),
+                        resultSet.getLong("resource_id")
                 ));
             }
         } catch (SQLException e) {
@@ -49,15 +51,17 @@ public class TaskRepository {
 
     public boolean createTask(Task task,Long parentId,Long projectId){
         try(Connection connection = databaseManager.getConnection()){
-            String query = "insert into tasks (project_id,parent_id,name,startDate,endDate) VALUES (?,?,?,?,?)";
+            String query = "insert into tasks (project_id,parent_id,name,startDate,endDate,duration,resource_id) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
+            System.out.println("task resource"+task.getResource());
             preparedStatement.setLong(1,projectId);
             preparedStatement.setObject(2,parentId); //setting as object instead of Long, so it can also be null
             preparedStatement.setString(3,task.getName());
             preparedStatement.setTimestamp(4, Timestamp.valueOf( task.getStartDate() ));
             preparedStatement.setTimestamp(5,Timestamp.valueOf( task.getEndDate() ));
-
+            preparedStatement.setObject(6,task.getDuration());
+            preparedStatement.setObject(7,task.getResource());
             preparedStatement.execute();
 
             return preparedStatement.getUpdateCount() == 1;

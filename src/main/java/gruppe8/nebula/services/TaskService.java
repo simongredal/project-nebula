@@ -22,8 +22,16 @@ public class TaskService {
     }
 
     public Boolean createTask(TaskCreationRequest request) {
-        //Timestamp startDate = Timestamp.valueOf(localDateTime);
-        Task task = new Task(new TaskEntity(request.id(),request.projectId(), request.parentId(), request.name(),request.startDate(),request.endDate()));
+        Task task = new Task(new TaskEntity(request.id(),
+                                            request.projectId(),
+                                            request.parentId(),
+                                            request.name(),
+                                            request.startDate(),
+                                            request.endDate(),
+                                            request.duration(),
+                                            request.resourceId()));
+
+        System.out.println("entity resource"+request.resourceId());
         return taskRepository.createTask(task, request.parentId(), request.projectId());
 
     }

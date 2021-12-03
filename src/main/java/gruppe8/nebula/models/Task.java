@@ -11,6 +11,8 @@ public class Task {
     private String name;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private Long duration;
+    private Long resourceId;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private final List<Task> subtasks = new ArrayList<>();
 
@@ -19,6 +21,8 @@ public class Task {
         this.name = taskEntity.name();
         this.startDate = setDate(taskEntity.startDate());
         this.endDate = setDate(taskEntity.endDate());
+        this.duration = taskEntity.duration();
+        this.resourceId = taskEntity.resourceId();
     }
 
     public Task(TaskEntity task, List<TaskEntity> tasks){
@@ -26,6 +30,8 @@ public class Task {
         this.name = task.name();
         this.startDate = setDate(task.startDate());
         this.endDate = setDate(task.endDate());
+        this.duration = task.duration();
+        this.resourceId = task.resourceId();
         tasks.stream()
                 .filter(taskEntity -> task.id().equals(taskEntity.parent()))
                 .forEach( t -> this.subtasks.add(new Task(t, tasks)) );
@@ -47,13 +53,13 @@ public class Task {
     public Long getId() {
         return id;
     }
-
+    public Long getDuration() {return duration;}
+    public Long getResource() {return resourceId;}
     public String getName() {
         return name;
     }
     public LocalDateTime getStartDate() {return startDate;}
     public LocalDateTime getEndDate() {return endDate;}
-
     public List<Task> getSubtasks() {
         return subtasks;
     }
