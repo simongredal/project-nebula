@@ -11,7 +11,7 @@
             <div class="row center"><h2 class="heading">Projects</h2></div>
 
             <div th:each="project : ${team.getProjects()}" th:remove="tag">
-                <div th:replace="fragments/components :: project-card(${project})"></div>
+                <div th:replace="fragments/components :: project-card" th:with="project=${project}"></div>
             </div>
 
             <div class="row">

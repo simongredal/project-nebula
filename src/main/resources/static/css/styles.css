@@ -53,7 +53,7 @@ p {
     width: 100%;
     min-height: calc(100vh - 2 * var(--navbar-height));
     padding: var(--main-padding);
-
+    gap: 1rem;
     display: flex;
     flex-direction: column;
 }
@@ -64,11 +64,14 @@ p {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     background-color: white;
     border-radius: 0.6rem;
-    margin: 0.25rem;
+    margin: 0.5rem;
     padding: 1rem;
+    gap: 1rem;
     box-shadow: var(--shadow-elevation-medium);
 }
 
@@ -97,28 +100,27 @@ p {
 .btn-wow:active { background: linear-gradient(45deg, hsl(0, 90%, 62%) 0%, hsl(205, 70%, 47%) 50%, hsl(0, 90%, 62%) 100%); }
 
 .row {
-    padding: 0.5rem 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     flex: 0 1 auto;
     align-items: baseline;
+    gap: 1rem;
 }
-.row:first-child { padding-top: 0; }
-.row:last-child { padding-bottom: 0; }
 
 .col {
-    padding: 0 0.5rem;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     flex: 1 0 0;
+    gap: 1rem;
 }
-.col:first-child { padding-left: 0; }
-.col:last-child { padding-right: 0; }
+
+.no-gap { gap: 0; }
 
 .list-group {
     padding: unset;
+    margin: 0;
     font-size: 1rem;
     display: flex;
     flex-direction: column;

@@ -39,14 +39,14 @@
 <div class="row" th:fragment="team-card(membership)">
     <!--/*@thymesVar id="membership" type="gruppe8.nebula.entities.MembershipEntity"*/-->
     <div class="card">
-        <div class="row no-wrap space-between">
+        <div class="row no-wrap">
             <a class="team-name" th:href="'/teams/'+${membership.teamId()}"><strong class="heading" th:text="${membership.teamName()}"></strong></a>
             <form th:action="@{/teams/delete}" method="POST">
                 <input type="hidden" name="id" th:value="${membership.teamId()}">
                 <button type="submit" class="btn btn-danger"><i class="bi-trash"></i></button>
             </form>
         </div>
-        <div class="row no-wrap space-evenly">
+        <div class="row no-wrap">
             <div class="tooltip">
                 <span th:text="${membership.membershipCount()}" th:remove="tag"></span><i class="bi-people"></i>
                 <span th:text="'You currently have ' + ${membership.membershipCount()} + ' member in your team'" class="tooltip-text"></span>
@@ -82,10 +82,18 @@
     </form></div>
 </th:block>
 
-<div class="row" th:fragment="project-card(project)">
-    <!--/*@thymesVar id="project" type="gruppe8.nebula.models.Project"*/-->
+<div class="row" th:fragment="project-card"><!--/*@thymesVar id="project" type="gruppe8.nebula.models.Project"*/-->
     <div class="card">
-        <a th:href="'/projects/'+${project.getId()}" class="team-name"><strong th:text="${project.getName()}"></strong></a>
+        <div class="row">
+            <a th:href="'/projects/'+${project.getId()}" class="team-name"><strong th:text="${project.getName()}"></strong></a>
+        </div>
+        <div class="row no-wrap">
+            <div class="tooltip">
+                <span th:text="${project.getAllTasks().size()}" th:remove="tag"></span><i class="bi-check-square"></i>
+                <span th:if="${project.getAllTasks().size()} == 1" th:text="${project.getAllTasks().size()} + ' task in project'" class="tooltip-text"></span>
+                <span th:unless="${project.getAllTasks().size()} == 1" th:text="${project.getAllTasks().size()} + ' tasks in project'" class="tooltip-text"></span>
+            </div>
+        </div>
     </div>
 </div>
 
