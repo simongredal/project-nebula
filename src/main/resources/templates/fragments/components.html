@@ -106,15 +106,15 @@
 
 <th:block th:fragment="task-tr"><!--/*@thymesVar id="tasks" type="java.util.List<gruppe8.nebula.models.Task>"*/-->
     <th:block th:each="task : ${tasks}">
-        <tr class="table-row">
+        <tr>
             <td>
-                <span th:if="${indent} > 0" th:style="'display: inline-block; padding-left: '+${1.5*indent}+'rem;'">↳</span>
+                <span th:if="${indent} > 0" th:style="'display: inline-block; padding-left: '+${1.1*indent-1}+'rem;'">↳</span>
                 <span th:text="${task.getName()}" th:remove="tag"></span>
             </td>
-            <td th:text="${#temporals.format(task.getStartDate(), 'YYYY-mm-dd')}+' – '+${#temporals.format(task.getEndDate(), 'YYYY-mm-dd')}"></td>
+            <td th:text="${#temporals.format(task.getStartDate(), 'YYYY-MM-dd')}+' – '+${#temporals.format(task.getEndDate(), 'YYYY-MM-dd')}"></td>
 
             <td>
-                <div class="row">
+                <div class="row no-gap">
                     <form class="form-wrapper" th:action="@{/projects/update}" method="POST">
                         <input type="hidden" name="taskId" th:value="${task.getId()}">
                         <input type="hidden" name="projectId" th:value="${project.getId()}">

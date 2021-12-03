@@ -57,7 +57,7 @@ public class ProjectController {
         model.addAttribute("project", project);
 
         log.info("getAllTasks=" + project.getAllTasks() );
-        return "task";
+        return "project";
     }
 
     @PostMapping("/create")
