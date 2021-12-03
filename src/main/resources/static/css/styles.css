@@ -246,3 +246,7 @@ p {
     background: linear-gradient(45deg, red,blue,red);
     color: white;
 }
+
+input[type=datetime-local]{
+    resize: none;
+}
