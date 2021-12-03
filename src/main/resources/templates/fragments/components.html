@@ -39,9 +39,9 @@
 <div class="row" th:fragment="team-card(membership)">
     <!--/*@thymesVar id="membership" type="gruppe8.nebula.entities.MembershipEntity"*/-->
     <div class="card">
-        <div class="row no-wrap">
-            <a class="team-name" th:href="'/teams/'+${membership.teamId()}"><strong class="heading" th:text="${membership.teamName()}"></strong></a>
-            <form th:action="@{/teams/delete}" method="POST">
+        <div class="row no-wrap space-between">
+            <strong class="heading"><a th:href="'/teams/'+${membership.teamId()}" th:text="${membership.teamName()}"></a></strong>
+            <form th:action="@{delete}" method="POST">
                 <input type="hidden" name="id" th:value="${membership.teamId()}">
                 <button type="submit" class="btn btn-danger"><i class="bi-trash"></i></button>
             </form>
@@ -85,7 +85,7 @@
 <div class="row" th:fragment="project-card"><!--/*@thymesVar id="project" type="gruppe8.nebula.models.Project"*/-->
     <div class="card">
         <div class="row">
-            <a th:href="'/projects/'+${project.getId()}" class="team-name"><strong th:text="${project.getName()}"></strong></a>
+            <strong class="heading"><a th:href="'/projects/'+${project.getId()}" th:text="${project.getName()}"></a></strong>
         </div>
         <div class="row no-wrap">
             <div class="tooltip">
