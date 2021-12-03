@@ -254,8 +254,8 @@ input[type=datetime-local]{
 .required{
     color: red;
     font-weight: 900;
-
 }
+
 .error > a {
     display: grid;
     color: var(--primary-text-color);
@@ -265,4 +265,12 @@ input[type=datetime-local]{
 }
 .error > a:hover{
     text-decoration: underline;
+}
+
+/* styling tabs */
+.tab-folder > .tab-content:target ~ .tab-content:last-child, .tab-folder > .tab-content {
+    display: none;
+}
+.tab-folder > :last-child, .tab-folder > .tab-content:target {
+    display: block;
 }

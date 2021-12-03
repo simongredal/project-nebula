@@ -19,8 +19,8 @@ public class Task {
     public Task(TaskEntity taskEntity){
         this.id = taskEntity.id();
         this.name = taskEntity.name();
-        this.startDate = setDate(taskEntity.startDate());
-        this.endDate = setDate(taskEntity.endDate());
+        this.startDate = taskEntity.startDate();
+        this.endDate = taskEntity.endDate();
         this.duration = taskEntity.duration();
         this.resourceId = taskEntity.resourceId();
     }
@@ -28,26 +28,13 @@ public class Task {
     public Task(TaskEntity task, List<TaskEntity> tasks){
         this.id = task.id();
         this.name = task.name();
-        this.startDate = setDate(task.startDate());
-        this.endDate = setDate(task.endDate());
+        this.startDate = task.startDate();
+        this.endDate = task.endDate();
         this.duration = task.duration();
         this.resourceId = task.resourceId();
         tasks.stream()
                 .filter(taskEntity -> task.id().equals(taskEntity.parent()))
                 .forEach( t -> this.subtasks.add(new Task(t, tasks)) );
-    }
-    public LocalDateTime setDate(String date) {
-
-        LocalDateTime dateTime= null;
-
-        try {
-            dateTime = LocalDateTime.parse(date.replace("T"," "), formatter);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        return dateTime;
-
     }
 
     public Long getId() {
@@ -55,9 +42,7 @@ public class Task {
     }
     public Long getDuration() {return duration;}
     public Long getResource() {return resourceId;}
-    public String getName() {
-        return name;
-    }
+    public String getName() {return name;}
     public LocalDateTime getStartDate() {return startDate;}
     public LocalDateTime getEndDate() {return endDate;}
     public List<Task> getSubtasks() {

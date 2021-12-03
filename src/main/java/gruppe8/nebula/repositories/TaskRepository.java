@@ -36,8 +36,8 @@ public class TaskRepository {
                         resultSet.getLong("project_id"),
                         resultSet.getLong("parent_id"),
                         resultSet.getString("name"),
-                        resultSet.getTimestamp("startDate").toLocalDateTime().toString(),
-                        resultSet.getTimestamp("endDate").toLocalDateTime().toString(),
+                        resultSet.getTimestamp("startDate").toLocalDateTime(),
+                        resultSet.getTimestamp("endDate").toLocalDateTime(),
                         resultSet.getLong("duration"),
                         resultSet.getLong("resource_id")
                 ));
@@ -70,17 +70,17 @@ public class TaskRepository {
         }
         return false;
     }
-    public boolean editTask(TaskEntity task){
+    public boolean editTask(Task task){
         try(Connection connection = databaseManager.getConnection()){
             String query = "UPDATE tasks (name,startDate,endDate,duration,resource_id) VALUES (?,?,?,?,?) "+"WHERE id=(?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setString(1,task.name());
-            preparedStatement.setTimestamp(2, Timestamp.valueOf( task.startDate() ));
-            preparedStatement.setTimestamp(3,Timestamp.valueOf( task.endDate() ));
-            preparedStatement.setObject(4,task.duration());
-            preparedStatement.setObject(5,task.resourceId());
-            preparedStatement.setObject(6,task.id());
+            preparedStatement.setString(1,task.getName());
+            preparedStatement.setTimestamp(2, Timestamp.valueOf( task.getStartDate() ));
+            preparedStatement.setTimestamp(3,Timestamp.valueOf( task.getEndDate() ));
+            preparedStatement.setObject(4,task.getDuration());
+            preparedStatement.setObject(5,task.getResource());
+            preparedStatement.setObject(6,task.getId());
             preparedStatement.execute();
 
             return preparedStatement.getUpdateCount() == 1;
@@ -110,4 +110,5 @@ public class TaskRepository {
         }
         return false;
     }
+
 }

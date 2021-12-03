@@ -36,14 +36,14 @@ public class TaskService {
     }
 
     public Boolean updateTask(TaskUpdateRequest request) {
-        TaskEntity task = new TaskEntity(request.id(),
+        Task task = new Task (new TaskEntity(request.id(),
                 request.projectId(),
                 request.parentId(),
                 request.name(),
                 request.startDate(),
                 request.endDate(),
                 request.duration(),
-                request.resourceId());
+                request.resourceId()));
         return taskRepository.editTask(task);
     }
 
