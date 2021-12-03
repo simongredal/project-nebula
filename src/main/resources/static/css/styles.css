@@ -286,3 +286,8 @@ input[type=datetime-local]{
     border: 1px solid #ccc;
     border-top: none;
 }
+.required{
+    color: red;
+    font-weight: 900;
+
+}
