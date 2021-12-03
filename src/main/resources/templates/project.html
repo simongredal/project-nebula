@@ -20,54 +20,44 @@
             </div>
         </div>
 
-    <div class="row">
-        <div class="card">
-            <div class="row"><strong>Create a New Task</strong></div>
+        <div class="col">
             <div class="row">
-                <form class="col form-wrapper" th:action="@{/projects/create}" method="POST">
-                    <div class="row form-control">
-                        <label for="name">Task Name</label>
-                        <input type="text" id="name" name="name" placeholder="Give your task a good name" required>
-                    </div>
-
-                    <div class="row form-control">
-                        <label for="startDate">startDate</label>
-                        <input type="datetime-local" id="startDate" name="startDate" required>
-                    </div>
-                    <div class="row form-control">
-                        <label for="endDate">endDate</label>
-                        <input type="datetime-local" id="endDate" name="endDate" required>
-                    </div>
-                    <div class="row form-control">
-                        <label for="parentId">does task have parent?</label>
-                        <!--<input type="text" id="parentId" name="parentId">-->
-                        <div class="w-12">
-                            <div class="col" id="team-members">
-                                <div class="form-control">
-                                    <select class="w-12" id="parentId" name="parentId" list="tasks" autocomplete="off">
-                                        <option value="">none</option>
-                                        <option th:each="Task : ${project.getAllTasks()}"
-                                                th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
-                                    </select>
-                                        <!--<input type="hidden" id="parentId" name="parentId">-->
-                                </div>
+                <div class="card">
+                    <div class="row"><strong>Create a New Task</strong></div>
+                    <div class="row">
+                        <form class="col form-wrapper" th:action="@{create}" method="POST">
+                            <div class="row form-control">
+                                <label for="name">Task Name</label>
+                                <input type="text" id="name" name="name" placeholder="Give your task a good name" required>
                             </div>
-                        </div>
-                        <!--
-                        <datalist id="tasks">
-                            <option th:data-value="${}" th:each="Task : ${project.getAllTasks()}"
-                                     th:text="${Task.getId()}"></option>
-                        </datalist>-->
 
+                            <div class="row form-control">
+                                <label for="startDate">Start</label>
+                                <input type="datetime-local" id="startDate" name="startDate" required>
+                            </div>
+
+                            <div class="row form-control">
+                                <label for="endDate">End</label>
+                                <input type="datetime-local" id="endDate" name="endDate" required>
+                            </div>
+
+                            <div class="row form-control">
+                                <label for="parentId">Parent Task</label>
+                                <select id="parentId" name="parentId" list="tasks" autocomplete="off">
+                                    <option value="">None</option>
+                                    <option th:each="Task : ${project.getAllTasks()}"
+                                            th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
+                                </select>
+                            </div>
+
+                            <input type="hidden" name="projectId" th:value="${project.getId()}">
+
+                            <div class="row form-control">
+                                <button class="w-12 btn btn-wow" type="submit" id="submit" onclick="setParentId()">Create Task</button>
+                            </div>
+                        </form>
                     </div>
-
-
-                    <input type="hidden" name="projectId" th:value="${project.getId()}">
-
-                    <div class="row form-control">
-                        <button class="w-12 btn btn-wow" type="submit" id="submit" onclick="setParentId()">Create Task</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -84,8 +74,9 @@
 
     </form>-->
 
-    <div class="row overflow">
-        <div class="col">
+    <div class="row">
+        <div class="card">
+            <div class="row overflow">
             <div class="chart-wrapper">
                 <ul class="chart-values">
                     <li th:each="String : ${project.getTotalProjectSpanDates()}" th:text="${String}"></li>
@@ -96,6 +87,7 @@
                         <span th:text="${Task.getName()}"></span>
                     </li>
                 </ul>
+            </div>
             </div>
         </div>
     </div>
