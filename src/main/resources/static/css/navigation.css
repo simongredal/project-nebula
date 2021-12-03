@@ -1,5 +1,4 @@
 @import "globals.css";
-@import "styles.css";
 
 .main { box-shadow: inset 0 4px 12px hsl(0deg, 0%, 50%); }
 .footer { box-shadow: inset 0 4px 12px hsl(0deg, 0%, 25%); }
