@@ -2,13 +2,9 @@ package gruppe8.nebula.models;
 
 import gruppe8.nebula.entities.TaskEntity;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.sql.Date;
 
 public class Task {
     private Long id;

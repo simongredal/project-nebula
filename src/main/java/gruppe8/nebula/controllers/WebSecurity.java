@@ -12,11 +12,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
 /*
-Spring Security goes through a "Filterchain".
+Spring Security goes through a "FilterChain".
 A lot of processing is happening before a request reach our controller
 https://www.marcobehler.com/guides/spring-security
  */

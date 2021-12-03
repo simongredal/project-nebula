@@ -43,7 +43,7 @@
 
                             <div class="row form-control">
                                 <label for="parentId">Parent Task</label>
-                                <select id="parentId" name="parentId" list="tasks" autocomplete="off">
+                                <select id="parentId" name="parentId" autocomplete="off">
                                     <option value="">None</option>
                                     <option th:each="Task : ${project.getAllTasks()}"
                                             th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
@@ -53,7 +53,7 @@
                             <input type="hidden" name="projectId" th:value="${project.getId()}">
 
                             <div class="row form-control">
-                                <button class="w-12 btn btn-wow" type="submit" id="submit" onclick="setParentId()">Create Task</button>
+                                <button class="w-12 btn btn-wow" type="submit" id="submit">Create Task</button>
                             </div>
                         </form>
                     </div>

@@ -49,28 +49,24 @@ public class Project {
     }
 
     public LocalDateTime getStartDate() {
-        LocalDateTime minDate = getAllDates().stream()
+        return getAllDates().stream()
                 .min(LocalDateTime::compareTo)
                 .orElse(null);
-        return minDate;
     }
 
     public LocalDateTime getEndDate() {
-        LocalDateTime maxDate = getAllDates().stream()
+        return getAllDates().stream()
                 .max(LocalDateTime::compareTo)
                 .orElse(null);
-        return maxDate;
     }
 
     public int getTotalProjectSpanDays() {
         LocalDateTime date1 = getStartDate();
         LocalDateTime date2 = getEndDate();
         if (date1==null || date2==null) {
-            int daysBetween = -1;
-            return daysBetween;
+            return -1;
         }
-        int daysBetween = (int) ChronoUnit.DAYS.between(date1, date2); //returns days between in calendar time
-        return daysBetween;
+        return (int) ChronoUnit.DAYS.between(date1, date2);
     }
 
     public List<String> getTotalProjectSpanDates() {
@@ -108,7 +104,7 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{"+ name +"} : ["+subtasks.toString()+"]";
+        return "Project{"+ name +"} : ["+subtasks+"]";
     }
 }
 

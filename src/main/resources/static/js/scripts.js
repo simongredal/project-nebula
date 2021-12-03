@@ -16,7 +16,6 @@ function passwordVisibility() {
 
 function addTeamInvitation() {
     const invitations_div = document.querySelector("#team-members");
-    const invitation_button = document.querySelector("#team-members-button");
     const input_wrapper = document.createElement("div");
     input_wrapper.className = "form-control";
 
@@ -32,19 +31,6 @@ function addTeamInvitation() {
     invitations_div.insertBefore(input_wrapper, null);
 }
 
-function addField(){
-    const add_field_div = document.querySelector("#add-field");
-    const add_field_btn = document.querySelector("#add-field-btn");
-    const field_input = document.createElement("input");
-
-    field_input.name = "task"
-    field_input.type = "text";
-    field_input.placeholder = "Set a task";
-
-
-    add_field_div.insertBefore(field_input,null);
-}
-
 function thankYou(){
     const name = document.getElementById("name").value
     const email = document.getElementById("email").value
@@ -53,14 +39,4 @@ function thankYou(){
     if (name && email && message !== ""){
         alert("Thank you for your message!\nWe aim to answer as soon as possible!")
     }
-}
-
-
-function addRowToTable(elemId) {
-    var totalRowCount = elem.rows.length; // 5
-    var row = table.insertRow(totalRowCount);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    cell1.innerHTML = " ";
-    cell2.innerHTML = " ";
 }

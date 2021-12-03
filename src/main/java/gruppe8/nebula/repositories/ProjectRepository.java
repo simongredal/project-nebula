@@ -6,7 +6,6 @@ import gruppe8.nebula.services.DatabaseManager;
 import gruppe8.nebula.entities.ProjectEntity;
 import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

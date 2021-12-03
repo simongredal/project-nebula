@@ -1,8 +1,6 @@
 package gruppe8.nebula.repositories;
 
 import gruppe8.nebula.models.Task;
-import gruppe8.nebula.models.Project;
-import gruppe8.nebula.models.Team;
 import gruppe8.nebula.services.DatabaseManager;
 import gruppe8.nebula.entities.TaskEntity;
 import org.slf4j.Logger;

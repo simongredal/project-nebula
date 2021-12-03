@@ -1,7 +1,5 @@
 package gruppe8.nebula.entities;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.stream.IntStream;
 
 public record TaskEntity(Long id, Long projectId, Long parent, String name, String startDate, String endDate) implements CharSequence {

@@ -5,7 +5,6 @@ import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Team;
 import gruppe8.nebula.requests.*;
 import gruppe8.nebula.services.AccountService;
-import gruppe8.nebula.services.MembershipService;
 import gruppe8.nebula.services.ProjectService;
 import gruppe8.nebula.services.TeamService;
 import org.slf4j.Logger;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 @Controller
@@ -76,7 +74,7 @@ public class TeamController {
 
         Account account = (Account) authentication.getPrincipal();
         Boolean success = teamService.createInvitation(account, request);
-        // TODO: Send some kind of error message along if it wasn successful
+        // TODO: Send some kind of error message along if it wasn't successful
 
         return "redirect:/teams/"+request.teamId();
     }
@@ -87,7 +85,7 @@ public class TeamController {
 
         Account account = (Account) authentication.getPrincipal();
         Boolean success = teamService.removeMembershipFromTeam(account, request);
-        // TODO: Send some kind of error message along if it wasn successful
+        // TODO: Send some kind of error message along if it wasn't successful
 
         return "redirect:/teams/"+request.teamId();
     }
@@ -130,7 +128,7 @@ public class TeamController {
         log.info("POST /teams/accept request=" + request);
 
         Boolean success = teamService.acceptMembership(account, request);
-        // TODO: Send some kind of error message along if it wasn successful
+        // TODO: Send some kind of error message along if it wasn't successful
         return "redirect:/teams";
     }
 
@@ -140,7 +138,7 @@ public class TeamController {
         log.info("POST /teams/reject request=" + request);
 
         Boolean success = teamService.rejectMembership(account, request);
-        // TODO: Send some kind of error message along if it wasn successful
+        // TODO: Send some kind of error message along if it wasn't successful
         return "redirect:/teams";
     }
 }

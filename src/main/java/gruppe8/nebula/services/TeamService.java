@@ -105,7 +105,7 @@ public class TeamService {
     public Team getTeam(Account account, Long teamId) {
         Boolean allowed = membershipService.accountHasMembershipInTeam(account, teamId);
 
-        if (!allowed) { return null; };
+        if (!allowed) { return null; }
 
         TeamEntity teamEntity = teamRepository.getTeamById(teamId);
         List<Project> projects = projectService.getProjectsByTeamId(teamId);
