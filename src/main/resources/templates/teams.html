@@ -9,14 +9,18 @@
     <div class="row">
         <div class="col">
             <div class="row center"><h2 class="heading">All Your Teams</h2></div>
-            <div th:each="team : ${teams}" th:remove="tag">
-                <div th:replace="fragments/components :: team-card(${team})"></div>
+            <div class="row"
+                 th:each="team : ${teams}"
+                 th:include="fragments/components :: team-card"
+                 th:with="membership=${team}">
             </div>
         </div>
         <div class="col">
             <div class="row center"><h2>All Your Invitations</h2></div>
-            <div th:each="invite : ${invites}" th:remove="tag">
-                <div th:replace="fragments/components :: team-card(${invite})"></div>
+            <div class="row"
+                 th:each="invite : ${invites}"
+                 th:include="fragments/components :: team-card"
+                 th:with="membership=${invite}">
             </div>
         </div>
         <div class="col">
@@ -25,7 +29,7 @@
             </div>
             <div class="row">
             <div class="card">
-                <form class="col form-wrapper" th:action="@{/teams/create}" method="POST">
+                <form class="col form-wrapper" th:action="@{create}" method="POST">
                     <div class="row form-control">
                         <label for="name">Team Name</label>
                         <input type="text" id="name" name="name" required>
