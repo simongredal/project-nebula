@@ -1,17 +1,17 @@
 @import "globals.css";
+@import url('https://fonts.googleapis.com/css2?family=Anton');
 
 .main { box-shadow: inset 0 4px 12px hsl(0deg, 0%, 50%); }
 .footer { box-shadow: inset 0 4px 12px hsl(0deg, 0%, 25%); }
 
 /* Navbar and footer are pretty alike so let them use the same css*/
 .navbar, .footer {
+  font-family: sans-serif;
   font-size: 1.2rem;
-  font-weight: 800;
   width: 100%;
   height: var(--navbar-height);
   padding: 0 2rem;
-  text-transform: uppercase;
-  font-family: 'Montserrat', sans-serif;
+
 
   color: var(--primary-text-color);
   background-color: var(--navbar-color);
