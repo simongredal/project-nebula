@@ -3,32 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title th:fragment="page">Project editor</title>
+
 </head>
 <body>
 <main th:fragment="content">
     <div class="center"><h2 th:text="${project.getName()}"></h2></div>
-    <!-- Tab links -->
-    <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Create')">London</button>
-        <button class="tablinks" onclick="openCity(event, 'Edit')">Paris</button>
-        <button class="tablinks" onclick="openCity(event, 'Delete')">Tokyo</button>
-    </div>
-
-    <!-- Tab content -->
-    <div id="Create" class="tabcontent">
-        <h3>London</h3>
-        <p>London is the capital city of England.</p>
-    </div>
-
-    <div id="Edit" class="tabcontent">
-        <h3>Paris</h3>
-        <p>Paris is the capital of France.</p>
-    </div>
-
-    <div id="Delete" class="tabcontent">
-        <h3>Tokyo</h3>
-        <p>Tokyo is the capital of Japan.</p>
-    </div>
     <div class="row">
         <div class="col">
             <div class="card">
@@ -51,17 +30,17 @@
                             <!-- The create task form -->
                             <!-- name -->
                             <div class="row form-control">
-                                <label for="name">Task Name <span class="required">*</span></label>
+                                <label for="name">Task Name*</label>
                                 <input type="text" id="name" name="name" placeholder="Give your task a good name" required>
                             </div>
                             <!-- start date -->
                             <div class="row form-control">
-                                <label for="startDate">startDate <span class="required">*</span> </label>
+                                <label for="startDate">startDate*</label>
                                 <input type="datetime-local" id="startDate" name="startDate" required>
                             </div>
                             <!-- end date -->
                             <div class="row form-control">
-                                <label for="endDate">endDate <span class="required">*</span></label>
+                                <label for="endDate">endDate*</label>
                                 <input type="datetime-local" id="endDate" name="endDate" required>
                             </div>
                             <!-- duration (hours) -->

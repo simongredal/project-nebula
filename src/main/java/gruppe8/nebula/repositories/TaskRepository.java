@@ -49,19 +49,38 @@ public class TaskRepository {
         return tasks;
     }
 
-    public boolean createTask(Task task,Long parentId,Long projectId){
+    public boolean createTask(TaskEntity task){
         try(Connection connection = databaseManager.getConnection()){
             String query = "insert into tasks (project_id,parent_id,name,startDate,endDate,duration,resource_id) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            System.out.println("task resource"+task.getResource());
-            preparedStatement.setLong(1,projectId);
-            preparedStatement.setObject(2,parentId); //setting as object instead of Long, so it can also be null
-            preparedStatement.setString(3,task.getName());
-            preparedStatement.setTimestamp(4, Timestamp.valueOf( task.getStartDate() ));
-            preparedStatement.setTimestamp(5,Timestamp.valueOf( task.getEndDate() ));
-            preparedStatement.setObject(6,task.getDuration());
-            preparedStatement.setObject(7,task.getResource());
+            preparedStatement.setLong(1,task.projectId());
+            preparedStatement.setObject(2,task.parent()); //setting as object instead of Long, so it can also be null
+            preparedStatement.setString(3,task.name());
+            preparedStatement.setTimestamp(4, Timestamp.valueOf( task.startDate() ));
+            preparedStatement.setTimestamp(5,Timestamp.valueOf( task.endDate() ));
+            preparedStatement.setObject(6,task.duration());
+            preparedStatement.setObject(7,task.resourceId());
+            preparedStatement.execute();
+
+            return preparedStatement.getUpdateCount() == 1;
+
+        } catch (SQLException e){
+            logger.error(e.getMessage());
+        }
+        return false;
+    }
+    public boolean editTask(TaskEntity task){
+        try(Connection connection = databaseManager.getConnection()){
+            String query = "UPDATE tasks (name,startDate,endDate,duration,resource_id) VALUES (?,?,?,?,?) "+"WHERE id=(?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1,task.name());
+            preparedStatement.setTimestamp(2, Timestamp.valueOf( task.startDate() ));
+            preparedStatement.setTimestamp(3,Timestamp.valueOf( task.endDate() ));
+            preparedStatement.setObject(4,task.duration());
+            preparedStatement.setObject(5,task.resourceId());
+            preparedStatement.setObject(6,task.id());
             preparedStatement.execute();
 
             return preparedStatement.getUpdateCount() == 1;

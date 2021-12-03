@@ -5,6 +5,7 @@ import gruppe8.nebula.repositories.TaskRepository;
 import gruppe8.nebula.entities.TaskEntity;
 import gruppe8.nebula.requests.TaskCreationRequest;
 import gruppe8.nebula.requests.TaskDeletionRequest;
+import gruppe8.nebula.requests.TaskUpdateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,24 +23,31 @@ public class TaskService {
     }
 
     public Boolean createTask(TaskCreationRequest request) {
-        Task task = new Task(new TaskEntity(request.id(),
+        TaskEntity task = new TaskEntity(request.id(),
                                             request.projectId(),
                                             request.parentId(),
                                             request.name(),
                                             request.startDate(),
                                             request.endDate(),
                                             request.duration(),
-                                            request.resourceId()));
+                                            request.resourceId());
 
-        System.out.println("entity resource"+request.resourceId());
-        return taskRepository.createTask(task, request.parentId(), request.projectId());
+        return taskRepository.createTask(task);
+    }
 
+    public Boolean updateTask(TaskUpdateRequest request) {
+        TaskEntity task = new TaskEntity(request.id(),
+                request.projectId(),
+                request.parentId(),
+                request.name(),
+                request.startDate(),
+                request.endDate(),
+                request.duration(),
+                request.resourceId());
+        return taskRepository.editTask(task);
     }
 
     public Boolean deleteTask(TaskDeletionRequest request) {
         return taskRepository.deleteTask(request.taskId());
-
     }
-
-
 }
