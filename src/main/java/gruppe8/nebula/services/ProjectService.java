@@ -1,8 +1,10 @@
 package gruppe8.nebula.services;
 
+import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.entities.ProjectEntity;
 import gruppe8.nebula.entities.TaskEntity;
 import gruppe8.nebula.models.Account;
+import gruppe8.nebula.models.Membership;
 import gruppe8.nebula.models.Project;
 import gruppe8.nebula.repositories.ProjectRepository;
 import gruppe8.nebula.requests.CreateProjectRequest;
@@ -16,10 +18,12 @@ import java.util.List;
 public class ProjectService {
     private final TaskService taskService;
     private final ProjectRepository projectRepository;
+    private final MembershipService membershipService;
 
-    public ProjectService(ProjectRepository projectRepository, TaskService taskService) {
+    public ProjectService(ProjectRepository projectRepository, TaskService taskService, MembershipService membershipService) {
         this.projectRepository = projectRepository;
         this.taskService = taskService;
+        this.membershipService = membershipService;
     }
 
     public Project getProjectById(Long id) {

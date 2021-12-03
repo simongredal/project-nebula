@@ -6,8 +6,24 @@
 </head>
 <body>
 <main th:fragment="content">
-    <div class="col center">
-        <div class="row"><strong>All the projects are supposed to be here</strong></div>
+    <div class="row center"><h2 class="heading">All Your Projects</h2></div>
+    <div class="row">
+        <div class="col" th:each="team: ${allTeams}">
+            <div class="row center">
+                <strong class="heading"><a th:href="'/teams/'+${team.getId()}" th:text="${team.getName()}"></a></strong>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card"
+                         th:each="project : ${team.getProjects()}"
+                         th:insert="fragments/components :: project-card"
+                         th:with="project = ${project}">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
 </main>
 </body>

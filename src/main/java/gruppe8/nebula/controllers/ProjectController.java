@@ -1,12 +1,15 @@
 package gruppe8.nebula.controllers;
 
+import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Project;
+import gruppe8.nebula.models.Team;
 import gruppe8.nebula.requests.CreateProjectRequest;
 import gruppe8.nebula.requests.TaskCreationRequest;
 import gruppe8.nebula.requests.TaskDeletionRequest;
 import gruppe8.nebula.services.ProjectService;
 import gruppe8.nebula.services.TaskService;
+import gruppe8.nebula.services.TeamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /*
 This class handles both Projects and Tasks.
@@ -27,10 +32,12 @@ public class ProjectController {
     private final Logger log;
     private final ProjectService projectService;
     private final TaskService taskService;
+    private final TeamService teamService;
 
-    private ProjectController(ProjectService projectService, TaskService taskService) {
+    private ProjectController(ProjectService projectService, TaskService taskService, TeamService teamService) {
         this.projectService = projectService;
         this.taskService = taskService;
+        this.teamService = teamService;
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
@@ -38,8 +45,12 @@ public class ProjectController {
     public String index(Authentication authentication, Model model) {
         // Instantiates an account object which get authenticated.
         Account account = (Account) authentication.getPrincipal();
+        List<Team> allTeams = teamService.getTeamsForAccount(account).stream()
+                .map(membershipEntity -> teamService.getTeam(account, membershipEntity.teamId()))
+                .toList();
 
         model.addAttribute("account", account);
+        model.addAttribute("allTeams", allTeams);
 
         log.info("GET /projects: Model="+model);
 
