@@ -6,26 +6,19 @@
     --body: #f5f7f8;
 }
 
-* {
+.chart-wrapper * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-ul {
+.chart-wrapper ul {
     list-style: none;
 }
 
-a {
+.chart-wrapper a {
     text-decoration: none;
     color: inherit;
-}
-
-body {
-    background: var(--body);
-    font-size: 16px;
-    font-family: sans-serif;
-    padding-top: 40px;
 }
 
 .chart-wrapper {
