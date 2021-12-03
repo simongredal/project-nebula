@@ -106,17 +106,4 @@ public class ProjectController {
         log.info("Unsuccessful Project create");
         return "redirect:/teams";
     }
-
-    @GetMapping("/new-project{projectId}")
-    public String createNewProject(@PathVariable Long projectId, Authentication authentication, Model model){
-
-        Account account = (Account) authentication.getPrincipal();
-        Project project = projectService.getProjectById(projectId);
-
-        model.addAttribute("account", account);
-        model.addAttribute("project", project);
-
-
-        return "project_page";
-    }
 }
