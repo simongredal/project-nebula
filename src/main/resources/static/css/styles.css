@@ -32,11 +32,9 @@ p {
     align-items: baseline;
 }
 
-.form-control label {
-    margin-right: 1rem;
-}
-
-.form-control input, .form-control textarea {
+.form-control input, .form-control textarea, .form-control select {
+    padding: 0 0.4rem;
+    border-radius: 0;
     flex-grow: 1;
     margin: 0;
     border: none;
@@ -44,9 +42,13 @@ p {
     border-bottom-color: #999999;
     border-bottom-style: solid;
     border-bottom-width: 2pt;
-    resize: none;
+    resize: vertical;
 }
 .form-control input:focus, .form-control textarea:focus { border-bottom-color: hsl(215, 100%, 50%); }
+
+.form-control select {
+    font: inherit;
+}
 
 .main {
     background-color: #f2f2f2;
