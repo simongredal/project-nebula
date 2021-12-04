@@ -134,7 +134,6 @@ p {
     display: flex;
     border: 1pt solid hsl(0deg, 0%, 90%);
     border-radius: 0.4rem;
-    background-color: hsl(0deg, 0%, 90%);
     flex-direction: column;
     flex: 1 0 0;
     box-shadow: var(--shadow-elevation-low);
@@ -150,8 +149,8 @@ p {
 }
 .list-group > li:nth-child(odd) { background-color: hsl(0deg, 0%, 90%); }
 .list-group > li:nth-child(even) { background-color: hsl(0deg, 0%, 100%); }
-.list-group > li:first-child { border-top-left-radius: 0.4rem; border-top-right-radius: 0.4rem; }
-.list-group > li:last-child { border-bottom-left-radius: 0.4rem; border-bottom-right-radius: 0.4rem; }
+.list-group > li:first-child { border-top-left-radius: calc(0.4rem - 1pt); border-top-right-radius: calc(0.4rem - 1pt); }
+.list-group > li:last-child { border-bottom-left-radius: calc(0.4rem - 1pt); border-bottom-right-radius: calc(0.4rem - 1pt); }
 
 
 .table-group {
@@ -172,10 +171,10 @@ p {
 
 .table-group > tbody > tr:nth-child(odd) { background-color: hsl(0deg, 0%, 90%); }
 .table-group > tbody > tr:nth-child(even) { background-color: hsl(0deg, 0%, 100%); }
-.table-group > thead:last-child > tr:first-child > td:first-child { border-top-left-radius: 0.4rem; }
-.table-group > thead:last-child > tr:first-child > td:last-child { border-top-right-radius: 0.4rem; }
-.table-group > tbody:last-child > tr:last-child > td:first-child { border-bottom-left-radius: 0.4rem; }
-.table-group > tbody:last-child > tr:last-child > td:last-child { border-bottom-right-radius: 0.4rem; }
+.table-group > thead:last-child > tr:first-child > td:first-child { border-top-left-radius: calc(0.4rem - 1pt); }
+.table-group > thead:last-child > tr:first-child > td:last-child { border-top-right-radius: calc(0.4rem - 1pt); }
+.table-group > tbody:last-child > tr:last-child > td:first-child { border-bottom-left-radius: calc(0.4rem - 1pt); }
+.table-group > tbody:last-child > tr:last-child > td:last-child { border-bottom-right-radius: calc(0.4rem - 1pt); }
 
 .w-1  { width:   8.3333%; }
 .w-2  { width:  16.6666%; }
@@ -267,10 +266,46 @@ input[type=datetime-local]{
     text-decoration: underline;
 }
 
-/* styling tabs */
+.tab-group {
+    margin: -1rem;
+    padding: 0.5rem;
+    border-radius: 0.6rem;
+}
+/* Tab styling */
+.tab-menu {
+    display: flex;
+}
+.tab-menu > * {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: center;
+    padding: 0.5rem 0;
+    border-left: 1pt solid hsl(0deg, 0%, 90%);
+    border-right: 1pt solid hsl(0deg, 0%, 90%);
+    border-bottom: 2pt solid hsl(0deg, 0%, 90%);
+    font-weight: bold;
+    white-space: nowrap;
+    color: blue;
+    text-decoration: none;
+    text-decoration-color: blue;
+    text-decoration-thickness: 1pt;
+}
+.tab-menu > :hover { text-decoration: underline; }
+.tab-menu > :first-child { border-left: none; }
+.tab-menu > :last-child { border-right: none; }
+.tab-folder {
+    padding: 0.5rem;
+}
+.tab-content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+/* tab behaviour */
 .tab-folder > .tab-content:target ~ .tab-content:last-child, .tab-folder > .tab-content {
     display: none;
 }
 .tab-folder > :last-child, .tab-folder > .tab-content:target {
-    display: block;
+    display: flex;
 }
