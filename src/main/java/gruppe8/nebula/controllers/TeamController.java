@@ -74,9 +74,15 @@ public class TeamController {
 
         Account account = (Account) authentication.getPrincipal();
         Boolean success = teamService.createInvitation(account, request);
-        // TODO: Send some kind of error message along if it wasn't successful
+        if (success) {
+            log.info("");
+            return "redirect:/teams"+request.teamId();
+        }
+        log.info("unsuccessful invite");
+        return "redirect:/teams";
 
-        return "redirect:/teams/"+request.teamId();
+
+
     }
     // Remove a Membership from a Team whether it was accepted or not
     @PostMapping("uninvite")
@@ -85,9 +91,12 @@ public class TeamController {
 
         Account account = (Account) authentication.getPrincipal();
         Boolean success = teamService.removeMembershipFromTeam(account, request);
-        // TODO: Send some kind of error message along if it wasn't successful
-
-        return "redirect:/teams/"+request.teamId();
+        if (success){
+            log.info("");
+            return "redirect:/teams"+request.teamId();
+        }
+        log.info("unsuccessful uninvite");
+        return "/redirect:/teams";
     }
 
     @PostMapping("create")
@@ -128,9 +137,15 @@ public class TeamController {
         log.info("POST /teams/accept request=" + request);
 
         Boolean success = teamService.acceptMembership(account, request);
-        // TODO: Send some kind of error message along if it wasn't successful
+        if (success) {
+            log.info("Successful accept");
+            return "redirect:/teams";
+        }
+
+        log.info("Unsuccessful accept");
         return "redirect:/teams";
     }
+
 
     @PostMapping("reject")
     public String rejectMembership(MembershipUpdateRequest request, Authentication authentication) {
@@ -138,7 +153,11 @@ public class TeamController {
         log.info("POST /teams/reject request=" + request);
 
         Boolean success = teamService.rejectMembership(account, request);
-        // TODO: Send some kind of error message along if it wasn't successful
+        if (success) {
+            log.info("Successful reject");
+            return "redirect:/teams";
+        }
+        log.info("Unsuccessful reject");
         return "redirect:/teams";
     }
 }
