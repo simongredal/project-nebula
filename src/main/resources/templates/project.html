@@ -7,7 +7,7 @@
 </head>
 <body>
 <main th:fragment="content">
-    <div class="center"><h2 th:text="${project.getName()}"></h2></div>
+    <div class="row center"><h2 th:text="${project.getName()}"></h2></div>
     <div class="row">
         <div class="col">
             <div class="card">
@@ -22,19 +22,17 @@
         </div>
 
         <div class="col">
-            <div class="row">
-                <div class="card">
-                    <ul id="menu">
-                        <li><a href="#tab1">Create task</a></li>
-                        <li><a href="#tab2">Edit task</a></li>
-                        <li><a href="#tab3">Delete task</a></li>
-                    </ul>
+            <div class="card">
+                <div class="tab-group">
+                    <div class="tab-menu">
+                        <a href="#tab1">Create task</a>
+                        <a href="#tab2">Edit task</a>
+                        <a href="#tab3">Delete task</a>
+                    </div>
                     <div class="tab-folder">
-                        <div id="tab2" class="tab-content">TBD</div>
-                        <div id="tab3" class="tab-content">TBD</div>
-                        <div id="tab1" class="tab-content">
-                            <main th:replace="fragments/components :: createTaskTab"></main>
-                        </div>
+                        <div id="tab2" class="tab-content">TBD 2</div>
+                        <div id="tab3" class="tab-content">TBD 3</div>
+                        <div id="tab1" class="tab-content" th:insert="fragments/components :: createTaskTab"></div>
                     </div>
                 </div>
             </div>

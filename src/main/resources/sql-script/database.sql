@@ -36,14 +36,14 @@ create table if not exists resources (
     constraint resources_teams_fkindex foreign key (team_id) references teams (id) on delete cascade
 );
 create table if not exists tasks (
-    id         int auto_increment primary key,
-    project_id int          not null,
-    parent_id  int          null,
-    name       varchar(255) null,
-    startDate  datetime not null,
-    endDate    datetime not null,
-    resource_id   int          null,
-    duration   int          null,
+    id          int auto_increment primary key,
+    project_id  int          not null,
+    parent_id   int          null,
+    name        varchar(255) null,
+    startDate   datetime not null,
+    endDate     datetime not null,
+    resource_id int          null,
+    duration    int          null,
     constraint tasks_projects_fkindex foreign key (project_id) references projects (id)
        on delete cascade,
     constraint tasks_tasks_fkindex foreign key (parent_id) references tasks (id)
