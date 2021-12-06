@@ -173,6 +173,12 @@
                         th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
             </select>
         </div>
+        <!-- Estimated cost -->
+        <div class="row form-control">
+            <label> Estimated cost</label>
+            <input type="number" min="0.01" step="0.01" max="99999" placeholder="0" name="Estimated cost"/>
+            <span>DKK</span>
+        </div>
             <!-- resource? -->
         <div class="row form-control">
             <label for="resourceList">what type of resource?</label>
