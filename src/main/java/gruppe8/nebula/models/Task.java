@@ -64,7 +64,8 @@ public class Task {
         return dates;
     }
 
-    public Long getRemainingHours(){
+    // TODO: Add minutes and days
+    public String getRemainingTimeForTask(){
 
         LocalDateTime startDate = getStartDate();
         LocalDateTime endDate = getEndDate();
@@ -72,7 +73,8 @@ public class Task {
         Duration duration = Duration.between(startDate, endDate);
 
 
-        return duration.toHours();
+        return duration.toHours() + " hours";
+
     }
 
 

@@ -113,7 +113,7 @@
             </td>
             <td th:text="${#temporals.format(task.getStartDate(), ' dd-MM-YYYY')}+' – '+${#temporals.format(task.getEndDate(), 'dd-MM-YYYY')}"></td>
 
-            <td th:text="${task.getRemainingHours()} + 'h'" ></td>
+            <td th:text="${task.getRemainingTimeForTask()}" ></td>
 
             <td>
                 <div class="row no-gap">
