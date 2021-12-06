@@ -307,7 +307,7 @@ input[type=datetime-local]{
     display: none;
 }
 .tab-folder > :last-child, .tab-folder > .tab-content:target {
-    display: block;
+    display: flex;
 }
 
 /* colorcoding options selection should probably not be here :v but im tired of working tbh*/

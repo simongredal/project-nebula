@@ -159,46 +159,32 @@
         <!-- duration (hours) -->
         <div class="row form-control">
             <label for="endDate">Duration</label>
-            <div class="row no-gap">
             <input type="number" placeholder="0" min="0" step="1" id="duration" name="duration">
             <span>hours</span>
-            </div>
-            <!-- parent? -->
-            <div class="row form-control">
-                <label for="parentId">does task have parent?</label>
-                <div class="w-12">
-                    <div class="col" id="taskList">
-                        <div class="form-control">
-                            <select class="w-12" id="parentId" name="parentId" list="tasks" autocomplete="off">
-                                <option value="">none</option>
-                                <option th:each="Task : ${project.getAllTasks()}"
-                                        th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <!-- parent? -->
+        <div class="row form-control">
+            <label for="parentId">does task have parent?</label>
+            <select id="parentId" name="parentId" list="tasks" autocomplete="off">
+                <option value="">none</option>
+                <option th:each="Task : ${project.getAllTasks()}"
+                        th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
+            </select>
+        </div>
             <!-- resource? -->
-            <div class="row form-control">
-                <label for="resourceId">what type of resource?</label>
-                <div class="w-12">
-                    <div class="col" id="resourceList">
-                        <div class="form-control">
-                            <select class="w-12" id="resourceId" name="resourceId" list="resources" autocomplete="off">
-                                <option value="">none</option>
-                                <option th:each="entry : ${project.getResources()}" th:text="${entry.value.getName()}" th:value="${entry.key}">
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="row form-control">
+            <label for="resourceList">what type of resource?</label>
+            <select id="resourceList" name="resourceId" autocomplete="off">
+                <option value="">none</option>
+                <option th:each="entry : ${project.getResources()}" th:text="${entry.value.getName()}" th:value="${entry.key}">
+                </option>
+            </select>
+        </div>
 
-            <input type="hidden" name="projectId" th:value="${project.getId()}">
+        <input type="hidden" name="projectId" th:value="${project.getId()}">
 
-            <div class="row form-control">
-                <button class="w-12 btn btn-wow" type="submit" id="submit">Create Task</button>
-            </div>
+        <div class="row form-control">
+            <button class="w-12 btn btn-wow" type="submit" id="submit">Create Task</button>
         </div>
     </form>
 </th:block>
@@ -225,7 +211,7 @@
     </th:block>
 </th:block>
 
-<div th:fragment="createResourceTab">
+<th:block th:fragment="createResourceTab">
     <div class="row"><strong>Create a resource</strong></div>
     <div class="row">
         <form class="col form-wrapper" th:action="@{new-resource}" method="POST">
@@ -237,24 +223,18 @@
             </div>
             <!-- Color? -->
             <div class="row form-control">
-                <label for="parentId">if you want, select color coding</label>
-                <div class="w-12">
-                    <div class="col">
-                        <div class="form-control">
-                            <!-- in the future would like to make non-hardcoded-->
-                            <select class="none" name="color" list="colors">
-                                <option class="none" value="#808080" >none</option>
-                                <option class="BlueCol" value="#13b4ff" background="#800000">Blue</option>
-                                <option class="MaroonCol" value="#800000" >Maroon</option>
-                                <option class="OliveCol" value="#808000" >Olive</option>
-                                <option class="LimeCol" value="#00FF00" >Limecol</option>
-                                <option class="AquaCol" value="00FFFF" >Aqua</option>
-                                <option class="PurpleCol" value="#ab3fdd" >Purple</option>
-                                <option class="WineCol" value="#ae163e" >Winecol</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                <!-- in the future would like to make non-hardcoded-->
+                <label for="color">if you want, select color coding</label>
+                <select class="none" id="color" name="color">
+                    <option class="none" value="#808080" >none</option>
+                    <option class="BlueCol" value="#13b4ff" background="#800000">Blue</option>
+                    <option class="MaroonCol" value="#800000" >Maroon</option>
+                    <option class="OliveCol" value="#808000" >Olive</option>
+                    <option class="LimeCol" value="#00FF00" >Limecol</option>
+                    <option class="AquaCol" value="00FFFF" >Aqua</option>
+                    <option class="PurpleCol" value="#ab3fdd" >Purple</option>
+                    <option class="WineCol" value="#ae163e" >Winecol</option>
+                </select>
             </div>
 
             <input type="hidden" name="project_id" th:value="${project.getId()}">
@@ -264,7 +244,7 @@
             </div>
         </form>
     </div>
-</div>
+</th:block>
 
 </body>
 </html>
