@@ -14,7 +14,7 @@
                 <div class="row"><strong class="heading">Tasks in This Project</strong></div>
                 <div class="row">
                     <table class="table-group">
-                        <thead><tr><td>Name</td><td>Date</td><td>Edit</td></tr></thead>
+                        <thead><tr><td>Name</td><td>Date</td><td>Remaining hours left</td><td>Edit</td></tr></thead>
                         <tbody th:insert="fragments/components :: task-tr" th:with="tasks=${project.getSubtasks()}, indent=0"></tbody>
                     </table>
                 </div>

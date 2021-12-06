@@ -1,5 +1,6 @@
 package gruppe8.nebula.repositories;
 
+import gruppe8.nebula.models.Membership;
 import gruppe8.nebula.models.Task;
 import gruppe8.nebula.services.DatabaseManager;
 import gruppe8.nebula.entities.TaskEntity;
@@ -7,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Member;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

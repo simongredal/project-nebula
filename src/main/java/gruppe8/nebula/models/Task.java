@@ -2,6 +2,7 @@ package gruppe8.nebula.models;
 
 import gruppe8.nebula.entities.TaskEntity;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -62,4 +63,19 @@ public class Task {
         dates= startDate+ "/"+endDate;
         return dates;
     }
+
+    public Long getRemainingHours(){
+
+        LocalDateTime startDate = getStartDate();
+        LocalDateTime endDate = getEndDate();
+
+        Duration duration = Duration.between(startDate, endDate);
+
+
+        return duration.toHours();
+    }
+
+
+
+
 }

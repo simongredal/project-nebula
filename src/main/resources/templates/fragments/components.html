@@ -113,6 +113,8 @@
             </td>
             <td th:text="${#temporals.format(task.getStartDate(), ' dd-MM-YYYY')}+' – '+${#temporals.format(task.getEndDate(), 'dd-MM-YYYY')}"></td>
 
+            <td th:text="${task.getRemainingHours()} + 'h'" ></td>
+
             <td>
                 <div class="row no-gap">
                     <form class="form-wrapper" th:action="@{/projects/update}" method="POST">

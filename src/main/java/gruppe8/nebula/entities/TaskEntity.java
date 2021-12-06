@@ -1,9 +1,19 @@
 package gruppe8.nebula.entities;
 
+import gruppe8.nebula.models.Account;
+import gruppe8.nebula.models.Membership;
+
+import java.lang.reflect.Member;
 import java.time.LocalDateTime;
 import java.util.stream.IntStream;
 
-public record TaskEntity(Long id, Long projectId, Long parent, String name, LocalDateTime startDate, LocalDateTime endDate, Long duration, Long resourceId) implements CharSequence {
+public record TaskEntity(Long id, Long projectId,
+                         Long parent,
+                         String name,
+                         LocalDateTime startDate,
+                         LocalDateTime endDate,
+                         Long duration,
+                         Long resourceId) implements CharSequence {
     @Override
     public int length() {
         return this.toString().length();
