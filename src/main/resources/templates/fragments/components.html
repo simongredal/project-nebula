@@ -30,7 +30,7 @@
     <div class="navbar-spacer"></div>
     <div th:if="${account} == null" class="navbar-text"><a th:href="@{/signup}">Signup!</a></div>
     <div th:if="${account} == null" class="navbar-text"><a th:href="@{/login}">Login</a></div>
-    <div th:unless="${account} == null" class="navbar-text"><p th:text="'Welcome '+ ${account.getName()}"></p></div>
+    <div th:unless="${account} == null" class="navbar-text"><p th:text="'Welcome '+ ${account.name()}"></p></div>
     <div th:unless="${account} == null" class="navbar-text"><a th:href="@{/projects}">Projects</a></div>
     <div th:unless="${account} == null" class="navbar-text"><a th:href="@{/teams}">Teams</a></div>
     <div th:unless="${account} == null" class="navbar-text"><a th:href="@{/logout}">Logout</a></div>

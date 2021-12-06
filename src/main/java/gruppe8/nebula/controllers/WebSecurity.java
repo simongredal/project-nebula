@@ -1,6 +1,7 @@
 package gruppe8.nebula.controllers;
 
 import gruppe8.nebula.repositories.AccountRepository;
+import gruppe8.nebula.services.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,12 @@ https://www.marcobehler.com/guides/spring-security
 @Configuration
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
-    private final AccountRepository accountRepository;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final AccountService accountService;
+    private final Logger log;
 
-    @Autowired
-    public WebSecurity(AccountRepository accountRepository){
-        this.accountRepository = accountRepository;
+    public WebSecurity(AccountService accountService){
+        this.accountService = accountService;
+        this.log = LoggerFactory.getLogger(this.getClass());
     }
 
     @Override
@@ -69,12 +70,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setPasswordEncoder(new Argon2PasswordEncoder());
-        authenticationProvider.setUserDetailsService(accountRepository);
+        authenticationProvider.setUserDetailsService(accountService);
         return authenticationProvider;
     }
 
     @Bean
-    public Argon2PasswordEncoder passwordEncoder() {
+    public static Argon2PasswordEncoder passwordEncoder() {
         return new Argon2PasswordEncoder(16, 32 , 1, 32768, 5);
     }
 }

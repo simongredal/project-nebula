@@ -1,5 +1,7 @@
 package gruppe8.nebula.models;
 
+import gruppe8.nebula.entities.AccountEntity;
+import gruppe8.nebula.services.TeamService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,45 +15,38 @@ public class Account implements UserDetails {
     private String email;
     private String password;
 
+    public Account() {}
 
-    public Account(Long id, String name, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.email = email;
+    public static Account of(AccountEntity entity) {
+        Account account = new Account();
+        account.id = entity.id();
+        account.email = entity.email();
+        account.password = entity.password();
+        account.name = entity.name();
+        return account;
     }
 
-    public Account(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
+    public Long id() { return id; }
 
-    public String getName() {
-        return name;
-    }
+    public String email() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public Long getId() {
-        return id;
-    }
+    public String password() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String name() { return name; }
+    public void setName(String name) { this.name = name; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
-    public String getPassword() {
-        return password;
-    }
+    @Override
+    public String getUsername() { return email; }
 
     @Override
-    public String getUsername() {
-        return email;
-    }
+    public String getPassword() { return password; }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -71,18 +66,6 @@ public class Account implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }
 
