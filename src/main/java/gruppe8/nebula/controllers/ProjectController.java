@@ -4,10 +4,9 @@ import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Project;
 import gruppe8.nebula.models.Team;
-import gruppe8.nebula.requests.CreateProjectRequest;
-import gruppe8.nebula.requests.TaskCreationRequest;
-import gruppe8.nebula.requests.TaskDeletionRequest;
+import gruppe8.nebula.requests.*;
 import gruppe8.nebula.services.ProjectService;
+import gruppe8.nebula.services.ResourceService;
 import gruppe8.nebula.services.TaskService;
 import gruppe8.nebula.services.TeamService;
 import org.slf4j.Logger;
@@ -33,11 +32,13 @@ public class ProjectController {
     private final ProjectService projectService;
     private final TaskService taskService;
     private final TeamService teamService;
+    private final ResourceService resourceService;
 
-    private ProjectController(ProjectService projectService, TaskService taskService, TeamService teamService) {
+    private ProjectController(ProjectService projectService, TaskService taskService, TeamService teamService, ResourceService resourceService) {
         this.projectService = projectService;
         this.taskService = taskService;
         this.teamService = teamService;
+        this.resourceService = resourceService;
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
@@ -101,6 +102,36 @@ public class ProjectController {
 
         log.info("Unsuccessful Task deletion");
         return "redirect:/projects/"+request.projectId();
+    }
+    @PostMapping("/new-resource")
+    public String createResource(ResourceCreationRequest request, Authentication authentication) {
+        Account account = (Account) authentication.getPrincipal();
+
+        log.info("POST /teams/create: TaskCreationRequest=%s, Account=%s".formatted(request,account));
+
+        Boolean success = resourceService.createResource(request);
+        if (success) {
+            log.info("Successful Resource create");
+            return "redirect:/projects/"+request.project_id();
+        }
+
+        log.info("Unsuccessful Resource create");
+        return "redirect:/projects/"+request.project_id();
+    }
+    @PostMapping("/delete-resource")
+    public String deleteResource(ResourceDeletionRequest request, Authentication authentication) {
+        Account account = (Account) authentication.getPrincipal();
+
+        log.info("POST /teams/create: TaskCreationRequest=%s, Account=%s".formatted(request,account));
+
+        Boolean success = resourceService.deleteResource(request);
+        if (success) {
+            log.info("Successful Resource delete");
+            return "redirect:/projects/"+request.project_id();
+        }
+
+        log.info("Unsuccessful Resource delete");
+        return "redirect:/projects/"+request.project_id();
     }
 
     @PostMapping("/new-project")

@@ -5,12 +5,13 @@ import gruppe8.nebula.entities.TaskEntity;
 import gruppe8.nebula.services.DatabaseManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@Repository
 public class ResourceRepository {
     private final DatabaseManager databaseManager;
     private final Logger logger;
@@ -19,16 +20,37 @@ public class ResourceRepository {
         this.databaseManager = databaseManager;
         this.logger = LoggerFactory.getLogger(this.getClass());
     }
+    public List<ResourceEntity> getResourcesForProject(Long projectId) {
+        List<ResourceEntity> resources = new ArrayList<>();
+        try (Connection connection = databaseManager.getConnection()) {
+            String query = "SELECT * FROM resources WHERE project_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, projectId);
 
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                resources.add(new ResourceEntity(
+                        resultSet.getLong("id"),
+                        resultSet.getLong("project_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("color")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resources;
+    }
     public boolean createResource(ResourceEntity resource){
         try(Connection connection = databaseManager.getConnection()){
-            String query = "insert into resources (id,team_id,name,color) VALUES (?,?,?,?)";
+            String query = "insert into resources (project_id,name,color) VALUES (?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setLong(1,resource.id());
-            preparedStatement.setLong(2,resource.team_id());
-            preparedStatement.setString(3,resource.name());
-            preparedStatement.setString(4,resource.color());
+            preparedStatement.setLong(1,resource.project_id());
+            preparedStatement.setString(2,resource.name());
+            preparedStatement.setString(3,resource.color());
 
             preparedStatement.execute();
 
@@ -60,7 +82,7 @@ public class ResourceRepository {
 
     public boolean deleteResource(Long resourceId) {
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "DELETE FROM resource WHERE (id = ?);";
+            String query = "DELETE FROM resources WHERE (id = ?);";
             connection.setAutoCommit(false);
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);

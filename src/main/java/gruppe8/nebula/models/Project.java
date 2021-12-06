@@ -1,18 +1,21 @@
 package gruppe8.nebula.models;
 
 import gruppe8.nebula.entities.ProjectEntity;
+import gruppe8.nebula.entities.ResourceEntity;
 import gruppe8.nebula.entities.TaskEntity;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Project {
 
     private Long id;
     private String name;
     private final List<Task> subtasks = new ArrayList<>();
-
+    private HashMap<Long,Resource> resources = new HashMap<>();
+    //private final List<Resource> resources = new ArrayList<>();
     public Project() {
     }
 
@@ -31,6 +34,21 @@ public class Project {
         tasks.stream()
                 .filter(taskEntity -> taskEntity.parent() == 0L )
                 .forEach( t -> this.subtasks.add(new Task(t, tasks)));
+    }
+
+    public void setResources(List<ResourceEntity> resourceList) {
+        for (ResourceEntity r : resourceList) {
+            Resource resource = new Resource(r);
+            this.resources.put(resource.getId(),resource);
+        }
+    }
+
+    /*
+    public List<Resource> getResources() {
+        return resources;
+    }*/
+    public HashMap<Long,Resource> getResources() {
+        return resources;
     }
 
     public List<Task> getAllTasks() {

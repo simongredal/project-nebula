@@ -30,10 +30,10 @@ create table if not exists projects (
 
 create table if not exists resources (
     id         int auto_increment primary key,
-    team_id    int                   not null,
+    project_id    int                   not null,
     name       varchar(255)          not null,
     color      varchar(255)          null,
-    constraint resources_teams_fkindex foreign key (team_id) references teams (id) on delete cascade
+    constraint resources_projects_fkindex foreign key (project_id) references projects (id) on delete cascade
 );
 create table if not exists tasks (
     id          int auto_increment primary key,
@@ -48,7 +48,7 @@ create table if not exists tasks (
        on delete cascade,
     constraint tasks_tasks_fkindex foreign key (parent_id) references tasks (id)
        on delete cascade,
-    constraint tasks_resources_fkindex foreign key (resource_id) references resources (id)
+    constraint tasks_resources_fkindex foreign key (resource_id) references resources (id) ON DELETE SET NULL
 );
 
 create or replace view membership_counts as

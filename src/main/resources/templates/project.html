@@ -7,7 +7,7 @@
 </head>
 <body>
 <main th:fragment="content">
-    <div class="row center"><h2 th:text="${project.getName()}"></h2></div>
+    <div class="center"><h2 th:text="${project.getName()}"></h2></div>
     <div class="row">
         <div class="col">
             <div class="card">
@@ -38,19 +38,32 @@
             </div>
         </div>
     </div>
-    <!--
-    <form action="/task" method="POST">
-        <div id="add-field">
-            Create new input field. Should be made a list
-        <button type="button" id="add-field-btn  -button" onclick="addField()">Add another task!</button>
-            <input type="text" list="accounts" placeholder="Set a task">
-            TODO:: Set whose responsible for each task. Maybe with a Datalist
 
+    <!-- resource overview and editor -->
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="row"><strong class="heading">Resources in This Project</strong></div>
+                <div class="row">
+                    <table class="table-group">
+                        <thead><tr><td>Name</td></tr></thead>
+                        <tbody th:insert="fragments/components :: resource-tr" th:with="tasks=${project.getSubtasks()}, indent=0"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
             <input type="submit" value="Submit task!">
 
-    </form>-->
+        <div class="col">
+            <div class="row">
+                <div class="card">
+                    <main th:replace="fragments/components :: createResourceTab"></main>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- gantt diagram -->
     <div class="row">
         <div class="card">
             <div class="row overflow">
@@ -59,7 +72,12 @@
                     <li th:each="String : ${project.getTotalProjectSpanDates()}" th:text="${String}"></li>
                 </ul>
                 <ul class="chart-bars">
-                    <li class="tooltip" th:each="Task : ${project.getAllTasks()}" th:data-duration="${Task.getDates()}" data-color="#b03532" >
+
+                    <li th:if="${project.getResources().get(Task.getResource())}==null" class="tooltip" th:each="Task : ${project.getAllTasks()}" th:data-duration="${Task.getDates()}" data-color="#808080" >
+                        <span class="tooltip-text" th:text="${Task.getName()}"></span>
+                        <span th:text="${Task.getName()}"></span>
+                    </li>
+                    <li th:unless="${project.getResources().get(Task.getResource())}==null" class="tooltip" th:each="Task : ${project.getAllTasks()}" th:data-duration="${Task.getDates()}" th:data-color="${project.getResources().get(Task.getResource()).getColor()}" >
                         <span class="tooltip-text" th:text="${Task.getName()}"></span>
                         <span th:text="${Task.getName()}"></span>
                     </li>

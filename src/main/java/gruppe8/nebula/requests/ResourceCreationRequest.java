@@ -1,4 +1,4 @@
 package gruppe8.nebula.requests;
 
-public record ResourceCreationRequest(Long id, Long team_id, String name, String color) {
+public record ResourceCreationRequest(Long id, Long project_id, String name, String color) {
 }
