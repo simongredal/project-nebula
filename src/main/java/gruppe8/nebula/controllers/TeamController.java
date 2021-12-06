@@ -75,7 +75,7 @@ public class TeamController {
         Account account = (Account) authentication.getPrincipal();
         Boolean success = teamService.createInvitation(account, request);
         if (success) {
-            log.info("");
+            log.info("Successful invite");
             return "redirect:/teams"+request.teamId();
         }
         log.info("unsuccessful invite");
@@ -92,7 +92,7 @@ public class TeamController {
         Account account = (Account) authentication.getPrincipal();
         Boolean success = teamService.removeMembershipFromTeam(account, request);
         if (success){
-            log.info("");
+            log.info("Successful uninvite");
             return "redirect:/teams"+request.teamId();
         }
         log.info("unsuccessful uninvite");
