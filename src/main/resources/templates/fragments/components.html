@@ -36,6 +36,20 @@
     <div th:unless="${account} == null" class="navbar-text"><a th:href="@{/logout}">Logout</a></div>
 </header>
 
+<th:block th:fragment="message" th:with="message=${message}" th:if="${message != null}">
+    <!--/*@thymesVar id="message" type="gruppe8.nebula.models.Message"*/-->
+    <div class="message row no-wrap space-between"
+         th:classappend="|${message.type() == T(gruppe8.nebula.models.Message.Type).INFO ? 'message-info' : ''} ${message.type() == T(gruppe8.nebula.models.Message.Type).WARNING ? 'message-warning' : ''} ${message.type() == T(gruppe8.nebula.models.Message.Type).ERROR ? 'message-error' : ''}|">
+        <div>
+            <span th:if="${message.type() == T(gruppe8.nebula.models.Message.Type).INFO}" class="bi-info-circle"></span>
+            <span th:if="${message.type() == T(gruppe8.nebula.models.Message.Type).WARNING}" class="bi-exclamation-triangle"></span>
+            <span th:if="${message.type() == T(gruppe8.nebula.models.Message.Type).ERROR}" class="bi-x-circle"></span>
+            <span th:text="${message.text()}"></span>
+        </div>
+        <span class="message-close" onclick="this.parentNode.remove()">✕</span>
+    </div>
+</th:block>
+
 <th:block th:fragment="team-card"><!--/*@thymesVar id="membership" type="gruppe8.nebula.entities.MembershipEntity"*/-->
     <div class="card">
         <div class="row no-wrap space-between">

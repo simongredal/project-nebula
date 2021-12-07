@@ -30,6 +30,21 @@ p {
     text-decoration: underline;
 }
 
+.message {
+    padding: 0.5rem 2rem;
+    background-color: dodgerblue;
+    color: white;
+}
+
+.message-info { background-color: dodgerblue; }
+.message-warning {background-color: orange; }
+.message-error { background-color: crimson; }
+
+.message > .message-close {
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .form-wrapper {
     display: flex;
 }

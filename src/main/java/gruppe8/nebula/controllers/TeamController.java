@@ -2,6 +2,7 @@ package gruppe8.nebula.controllers;
 
 import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.models.Account;
+import gruppe8.nebula.models.Message;
 import gruppe8.nebula.models.Team;
 import gruppe8.nebula.requests.*;
 import gruppe8.nebula.services.AccountService;
@@ -13,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -23,10 +26,9 @@ public class TeamController {
     private final Logger log;
     private final AccountService accountService;
 
-    public TeamController(TeamService teamService, AccountService accountService, ProjectService projectService) {
+    public TeamController(TeamService teamService, AccountService accountService) {
         this.teamService = teamService;
         this.accountService = accountService;
-        this.projectService = projectService;
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
@@ -98,35 +100,33 @@ public class TeamController {
     }
 
     @PostMapping("create")
-    public String addTeam(TeamCreationRequest request, Authentication authentication) {
+    public RedirectView addTeam(TeamCreationRequest request, Authentication authentication, RedirectAttributes redirectAttributes) {
         Account account = (Account) authentication.getPrincipal();
         log.info("POST /teams/create: TeamCreationRequest=%s, Account=%s".formatted(request, account));
 
         Boolean success = teamService.createTeam(account, request);
-        if (success) {
-            log.info("Successful Team create");
-            return "redirect:/teams";
-        }
 
-        log.info("Unsuccessful Team create");
-        return "redirect:/teams";
+        Message message;
+        if (success) { message = new Message(Message.Type.INFO, "Team has been created."); }
+        else { message = new Message(Message.Type.WARNING, "Team could not be created."); }
+        redirectAttributes.addFlashAttribute("message", message);
+
+        return new RedirectView("/teams");
     }
 
     @PostMapping("delete")
-    public String deleteTeam(Authentication authentication, TeamDeletionRequest request) {
+    public RedirectView deleteTeam(Authentication authentication, TeamDeletionRequest request, RedirectAttributes redirectAttributes) {
         Account account = (Account) authentication.getPrincipal();
 
-        log.info("POST /teams/create: TeamDeletionRequest=%s, Account=%s".formatted(request, account));
-
+        log.info("POST /teams/delete: TeamDeletionRequest=%s, Account=%s".formatted(request, account));
         Boolean success = teamService.deleteTeam(account, request);
 
-        if (success) {
-            log.info("Successful team deletion");
-            return "redirect:/teams";
-        }
+        Message message;
+        if (success) { message = new Message(Message.Type.INFO, "Team has been deleted."); }
+        else { message = new Message(Message.Type.WARNING, "Team could not be deleted."); }
+        redirectAttributes.addFlashAttribute("message", message);
 
-        log.info("Unsuccessful team deletion");
-        return "redirect:/teams";
+        return new RedirectView("/teams");
     }
 
     @PostMapping("accept")
