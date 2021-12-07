@@ -22,7 +22,6 @@ public class TeamController {
     private final TeamService teamService;
     private final Logger log;
     private final AccountService accountService;
-    private final ProjectService projectService;
 
     public TeamController(TeamService teamService, AccountService accountService, ProjectService projectService) {
         this.teamService = teamService;
@@ -81,9 +80,8 @@ public class TeamController {
         log.info("unsuccessful invite");
         return "redirect:/teams";
 
-
-
     }
+
     // Remove a Membership from a Team whether it was accepted or not
     @PostMapping("uninvite")
     public String invite(MembershipDeletionRequest request, Authentication authentication, Model model) {

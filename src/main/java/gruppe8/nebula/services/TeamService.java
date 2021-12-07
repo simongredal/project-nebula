@@ -26,7 +26,10 @@ public class TeamService {
     }
 
     public Boolean createTeam(Account currentAccount, TeamCreationRequest request) {
-        TeamEntity team = teamRepository.createTeamWithName(request.name());
+        TeamEntity entity = new TeamEntity();
+        entity.setName( request.name() );
+
+        TeamEntity team = teamRepository.createTeam( entity );
         if (team == null) { return false; }
 
         membershipService.addMembership(team, currentAccount);
@@ -46,15 +49,7 @@ public class TeamService {
 
         return teamRepository.deleteTeam(request.id());
     }
-    public Boolean updateTeam(TeamDeletionRequest request, Team teamNew) {
-        assert false : "updateTeam does not work anymore";
-//        Team teamOld = new Team(
-//                request.id(),
-//                request.name()
-//        );
 
-        return teamRepository.updateTeam(null, teamNew);
-    }
     public List<TeamEntity> getAllTeams() {
         return teamRepository.getAllTeams();
     }
@@ -123,6 +118,6 @@ public class TeamService {
         Account invitee = accountService.getAccountByEmail(request.invitation());
         if (invitee == null) { return false; }
 
-        return membershipService.sendInvitation(request.teamId(), invitee.getId());
+        return membershipService.sendInvitation(request.teamId(), invitee.id());
     }
 }

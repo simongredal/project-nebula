@@ -10,7 +10,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Project {
-
     private Long id;
     private String name;
     private final List<Task> subtasks = new ArrayList<>();
