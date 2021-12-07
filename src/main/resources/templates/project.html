@@ -9,30 +9,48 @@
 <main th:fragment="content">
     <div class="center"><h2 th:text="${project.getName()}"></h2></div>
     <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="row"><strong class="heading">Tasks in This Project</strong></div>
-                <div class="row">
-                    <table class="table-group">
-                        <thead><tr><td>Name</td><td>Date</td><td>Remaining time</td><td>Edit</td></tr></thead>
-                        <tbody th:insert="fragments/components :: task-tr" th:with="tasks=${project.getSubtasks()}, indent=0"></tbody>
-                    </table>
-                </div>
+        <div class="tab-group">
+            <div class="tab-menu">
+                <a data-target="#tabA">Project Shit</a>
+                <a data-target="#tabB">Insight Shit</a>
             </div>
-        </div>
+            <div class="tab-folder">
+                <div id="tabA" class="tab-content active">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="row"><strong class="heading">Tasks in This Project</strong></div>
+                                <div class="row">
+                                    <table class="table-group">
+                                        <thead><tr><td>Name</td><td>Date</td><td>Remaining time</td><td>Edit</td></tr></thead>
+                                        <tbody th:insert="fragments/components :: task-tr" th:with="tasks=${project.getSubtasks()}, indent=0"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="col">
-            <div class="card">
-                <div class="tab-group">
-                    <div class="tab-menu">
-                        <a href="#tab1">Create task</a>
-                        <a href="#tab2">Edit task</a>
-                        <a href="#tab3">Delete task</a>
+                        <div class="col">
+                            <div class="card">
+                                <div class="tab-group">
+                                    <div class="tab-menu">
+                                        <a data-target="#tab1">Create task</a>
+                                        <a data-target="#tab2">Edit task</a>
+                                        <a data-target="#tab3">Delete task</a>
+                                    </div>
+                                    <div class="tab-folder">
+                                        <div id="tab1" class="tab-content active" th:insert="fragments/components :: createTaskTab"></div>
+                                        <div id="tab2" class="tab-content">TBD 2</div>
+                                        <div id="tab3" class="tab-content">TBD 3</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-folder">
-                        <div id="tab2" class="tab-content">TBD 2</div>
-                        <div id="tab3" class="tab-content">TBD 3</div>
-                        <div id="tab1" class="tab-content" th:insert="fragments/components :: createTaskTab"></div>
+                </div>
+
+                <div id="tabB" class="tab-content">
+                    <div class="row">
+                        Insightsss yo, science bitch!
                     </div>
                 </div>
             </div>

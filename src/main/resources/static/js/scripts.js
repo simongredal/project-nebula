@@ -1,3 +1,22 @@
+// Runs when document is "ready"
+document.addEventListener("DOMContentLoaded", (event) => {
+    const tabs = document.querySelectorAll(".tab-group>.tab-menu>*");
+
+    // Adds an onclick function to each tab
+    for (const tab of tabs) {
+        tab.addEventListener("click", switchToTab);
+    }
+})
+
+function switchToTab(event) {
+    const tabTarget = document.querySelector(event.target.dataset.target);
+    const allTabs = tabTarget.parentNode.children;
+
+    for (const tab of allTabs) { tab.classList.remove("active"); }
+    tabTarget.classList.add("active");
+}
+
+
 function passwordVisibility() {
     const password_input = document.querySelector("#password");
     const password_repeat = document.querySelector("#repeat-password");

@@ -283,6 +283,7 @@ input[type=datetime-local]{
 }
 
 .tab-group {
+    width: 100%;
     margin: -1rem;
     padding: 0.5rem;
     border-radius: 0.6rem;
@@ -319,10 +320,10 @@ input[type=datetime-local]{
 }
 
 /* tab behaviour */
-.tab-folder > .tab-content:target ~ .tab-content:last-child, .tab-folder > .tab-content {
+.tab-folder > .tab-content {
     display: none;
 }
-.tab-folder > :last-child, .tab-folder > .tab-content:target {
+.tab-folder > .tab-content.active {
     display: flex;
 }
 
