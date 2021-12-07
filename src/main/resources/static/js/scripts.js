@@ -9,9 +9,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
 })
 
 function switchToTab(event) {
-    const tabTarget = document.querySelector(event.target.dataset.target);
-    const allTabs = tabTarget.parentNode.children;
+    const clickedTabButton = event.target;
+    const tabTarget = document.querySelector(clickedTabButton.dataset.target);
 
+    const tabButtons = event.target.parentNode.children;
+    for (const tab of tabButtons) { tab.classList.remove("active"); }
+    event.target.classList.add("active");
+
+    const allTabs = tabTarget.parentNode.children;
     for (const tab of allTabs) { tab.classList.remove("active"); }
     tabTarget.classList.add("active");
 }

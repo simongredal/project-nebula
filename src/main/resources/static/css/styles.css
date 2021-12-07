@@ -93,6 +93,7 @@ p {
     flex-direction: column;
     flex-grow: 1;
     background-color: white;
+    border: 1pt solid hsl(0deg, 0%, 90%);
     border-radius: 0.6rem;
     margin: 0.5rem;
     padding: 1rem;
@@ -284,10 +285,9 @@ input[type=datetime-local]{
 
 .tab-group {
     width: 100%;
-    margin: -1rem;
-    padding: 0.5rem;
     border-radius: 0.6rem;
 }
+
 /* Tab styling */
 .tab-menu {
     display: flex;
@@ -296,7 +296,7 @@ input[type=datetime-local]{
     display: flex;
     flex: 1 0 auto;
     justify-content: center;
-    padding: 0.5rem 0;
+    padding: 0.25rem 0;
     border-left: 1pt solid hsl(0deg, 0%, 90%);
     border-right: 1pt solid hsl(0deg, 0%, 90%);
     border-bottom: 2pt solid hsl(0deg, 0%, 90%);
@@ -307,6 +307,12 @@ input[type=datetime-local]{
     text-decoration-color: blue;
     text-decoration-thickness: 1pt;
 }
+
+.tab-menu > .active {
+    background-color: blueviolet;
+}
+
+
 .tab-menu > :hover { text-decoration: underline; }
 .tab-menu > :first-child { border-left: none; }
 .tab-menu > :last-child { border-right: none; }
