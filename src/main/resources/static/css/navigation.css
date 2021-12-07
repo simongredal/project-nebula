@@ -12,6 +12,8 @@
   height: var(--navbar-height);
   padding: 0 2rem;
 
+  column-gap: 2rem;
+
 
   color: var(--primary-text-color);
   background-color: var(--navbar-color);
@@ -25,7 +27,6 @@
   align-items: center;
 }
 .navbar *, .footer * { color: inherit; }
-.navbar > *, .footer > * { margin: 0 1rem; }
 .navbar > :first-child, .footer > :first-child { padding-left: 0; }
 .navbar > :last-child, .footer > :last-child { padding-right: 0; }
 

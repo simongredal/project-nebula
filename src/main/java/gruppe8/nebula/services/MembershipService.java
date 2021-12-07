@@ -19,10 +19,10 @@ public class MembershipService {
 
 
     public Boolean addMembership(TeamEntity from, Account to) {
-        return membershipRepository.createMembership(from.id(), to.getId(), true);
+        return membershipRepository.createMembership(from.id(), to.id(), true);
     }
     public Boolean sendInvitation(TeamEntity from, Account to) {
-        return membershipRepository.createMembership(from.id(), to.getId(), false);
+        return membershipRepository.createMembership(from.id(), to.id(), false);
     }
     public Boolean sendInvitation(Long teamId, Long accountId) {
         return membershipRepository.createMembership(teamId, accountId, false);
@@ -30,7 +30,7 @@ public class MembershipService {
 
 
     public List<MembershipEntity> getMembershipsForAccount(Account account, Boolean membershipAccepted) {
-        return membershipRepository.getMembershipsForAccount(account.getId(), membershipAccepted);
+        return membershipRepository.getMembershipsForAccount(account.id(), membershipAccepted);
     }
     public List<MembershipEntity> getMembershipsForTeam(Long teamId, Boolean membershipAccepted) {
         return membershipRepository.getMembershipsForTeam(teamId, membershipAccepted);
@@ -38,10 +38,10 @@ public class MembershipService {
 
 
     public Boolean accountOwnsMembership(Account account, MembershipUpdateRequest request) {
-        return membershipRepository.accountOwnsMembership(account.getId(), request.membershipId());
+        return membershipRepository.accountOwnsMembership(account.id(), request.membershipId());
     }
     public Boolean accountHasMembershipInTeam(Account account, Long teamId) {
-        return membershipRepository.accountHasMembershipInTeam(account.getId(), teamId);
+        return membershipRepository.accountHasMembershipInTeam(account.id(), teamId);
     }
 
 

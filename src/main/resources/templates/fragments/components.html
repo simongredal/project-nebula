@@ -40,7 +40,7 @@
     <div class="card">
         <div class="row no-wrap space-between">
             <strong class="heading"><a th:href="'/teams/'+${membership.teamId()}" th:text="${membership.teamName()}"></a></strong>
-            <form th:action="@{delete}" method="POST">
+            <form th:action="@{/teams/delete}" method="POST">
                 <input type="hidden" name="id" th:value="${membership.teamId()}">
                 <button type="submit" class="btn btn-danger"><i class="bi-trash"></i></button>
             </form>
