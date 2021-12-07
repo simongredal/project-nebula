@@ -38,12 +38,34 @@
 
 <th:block th:fragment="message" th:with="message=${message}" th:if="${message != null}">
     <!--/*@thymesVar id="message" type="gruppe8.nebula.models.Message"*/-->
-    <div class="message row no-wrap space-between"
-         th:classappend="|${message.type() == T(gruppe8.nebula.models.Message.Type).INFO ? 'message-info' : ''} ${message.type() == T(gruppe8.nebula.models.Message.Type).WARNING ? 'message-warning' : ''} ${message.type() == T(gruppe8.nebula.models.Message.Type).ERROR ? 'message-error' : ''}|">
+    <div class="message message-success row no-wrap space-between"
+         th:if="${message.type() == T(gruppe8.nebula.models.Message.Type).SUCCESS}">
         <div>
-            <span th:if="${message.type() == T(gruppe8.nebula.models.Message.Type).INFO}" class="bi-info-circle"></span>
-            <span th:if="${message.type() == T(gruppe8.nebula.models.Message.Type).WARNING}" class="bi-exclamation-triangle"></span>
-            <span th:if="${message.type() == T(gruppe8.nebula.models.Message.Type).ERROR}" class="bi-x-circle"></span>
+            <span class="bi-check-circle"></span>
+            <span th:text="${message.text()}"></span>
+        </div>
+        <span class="message-close" onclick="this.parentNode.remove()">✕</span>
+    </div>
+    <div class="message message-info row no-wrap space-between"
+         th:if="${message.type() == T(gruppe8.nebula.models.Message.Type).INFO}">
+        <div>
+            <span class="bi-info-circle"></span>
+            <span th:text="${message.text()}"></span>
+        </div>
+        <span class="message-close" onclick="this.parentNode.remove()">✕</span>
+    </div>
+    <div class="message message-warning row no-wrap space-between"
+         th:if="${message.type() == T(gruppe8.nebula.models.Message.Type).WARNING}">
+        <div>
+            <span class="bi-exclamation-triangle"></span>
+            <span th:text="${message.text()}"></span>
+        </div>
+        <span class="message-close" onclick="this.parentNode.remove()">✕</span>
+    </div>
+    <div class="message message-error row no-wrap space-between"
+         th:if="${message.type() == T(gruppe8.nebula.models.Message.Type).ERROR}">
+        <div>
+            <span class="bi-x-circle"></span>
             <span th:text="${message.text()}"></span>
         </div>
         <span class="message-close" onclick="this.parentNode.remove()">✕</span>

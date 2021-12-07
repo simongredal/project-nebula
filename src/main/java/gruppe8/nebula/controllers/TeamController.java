@@ -6,7 +6,6 @@ import gruppe8.nebula.models.Message;
 import gruppe8.nebula.models.Team;
 import gruppe8.nebula.requests.*;
 import gruppe8.nebula.services.AccountService;
-import gruppe8.nebula.services.ProjectService;
 import gruppe8.nebula.services.TeamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,7 +106,7 @@ public class TeamController {
         Boolean success = teamService.createTeam(account, request);
 
         Message message;
-        if (success) { message = new Message(Message.Type.INFO, "Team has been created."); }
+        if (success) { message = new Message(Message.Type.SUCCESS, "Team has been created."); }
         else { message = new Message(Message.Type.WARNING, "Team could not be created."); }
         redirectAttributes.addFlashAttribute("message", message);
 

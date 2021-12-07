@@ -36,6 +36,7 @@ p {
     color: white;
 }
 
+.message-info { background-color: forestgreen; }
 .message-info { background-color: dodgerblue; }
 .message-warning {background-color: orange; }
 .message-error { background-color: crimson; }

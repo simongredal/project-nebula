@@ -1,6 +1,7 @@
 package gruppe8.nebula.controllers;
 
 
+import gruppe8.nebula.models.Message;
 import gruppe8.nebula.services.AccountService;
 import gruppe8.nebula.requests.AccountCreationRequest;
 import org.slf4j.Logger;
@@ -16,11 +17,11 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @RequestMapping("/signup")
 public class SignupController {
-    private final AccountService signupService;
+    private final AccountService accountService;
     private final Logger log;
 
-    public SignupController(AccountService signupService) {
-        this.signupService = signupService;
+    public SignupController(AccountService accountService) {
+        this.accountService = accountService;
         this.log = LoggerFactory.getLogger(this.getClass());
     }
 
@@ -35,11 +36,15 @@ public class SignupController {
     public RedirectView addUser(AccountCreationRequest request, RedirectAttributes redirectAttributes) {
         log.info("POST /signup: SignupRequest=" + request.toString());
 
-        Boolean signupWasSuccessful = signupService.register(request);
-        redirectAttributes.addFlashAttribute("signupWasSuccessful", signupWasSuccessful);
+        Boolean success = accountService.register(request);
+        Message message;
+        if (success) { message = new Message(Message.Type.SUCCESS, "Account successfully created."); }
+        else { message = new Message(Message.Type.ERROR, "Account could not be created."); }
+        redirectAttributes.addFlashAttribute("message", message);
 
-        if (signupWasSuccessful) { return new RedirectView("/login"); }
-        return new RedirectView("/signup");
+
+        if (success) { return new RedirectView("/login"); }
+        else { return new RedirectView("/signup"); }
     }
 
 }
