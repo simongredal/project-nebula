@@ -5,6 +5,7 @@ import gruppe8.nebula.entities.TaskEntity;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Task {
@@ -56,11 +57,11 @@ public class Task {
         for (Task task : subtasks) { tasks.addAll(task.getAllTasks()); }
         return tasks;
     }
+
     public String getDates() {
         String startDate = getStartDate().toString().replace("T"," ")+":00.0";
         String endDate = getEndDate().toString().replace("T"," ")+":00.0";
-        String dates= "sun/mon";//startDate+ "/"+endDate;
-        dates= startDate+ "/"+endDate;
+        String dates= startDate + "/" + endDate;
         return dates;
     }
 
@@ -77,7 +78,16 @@ public class Task {
 
     }
 
+    public int getTotalTaskSpanDays(){
+        if (startDate==null || endDate==null) {
+            return -1;
+        }
+        return (int) ChronoUnit.DAYS.between(startDate, endDate)+1;
+    }
 
-
-
+    public double getHoursPerDay(){
+        double days = getTotalTaskSpanDays();
+        double hours = duration;
+        return hours / days;
+    }
 }

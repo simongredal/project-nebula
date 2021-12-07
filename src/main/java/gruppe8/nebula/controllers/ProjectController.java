@@ -79,6 +79,7 @@ public class ProjectController {
         log.info("POST /teams/create: TaskCreationRequest=%s, Account=%s".formatted(request, account));
 
         Boolean success = taskService.createTask(request);
+
         if (success) {
             log.info("Successful Task create");
             return "redirect:/projects/"+request.projectId();

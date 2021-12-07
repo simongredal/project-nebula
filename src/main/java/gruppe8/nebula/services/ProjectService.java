@@ -7,6 +7,7 @@ import gruppe8.nebula.entities.TaskEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Membership;
 import gruppe8.nebula.models.Project;
+import gruppe8.nebula.models.ProjectFormatter;
 import gruppe8.nebula.repositories.ProjectRepository;
 import gruppe8.nebula.requests.CreateProjectRequest;
 import gruppe8.nebula.requests.DeleteProjectRequest;
@@ -34,11 +35,13 @@ public class ProjectService {
         List<TaskEntity> taskEntities = taskService.getTasksFromProject(id);
         List<ResourceEntity> resourceEntities = resourceService.getResourcesFromProject(id);
 
-        Project project = new Project(id,projectEntity.name());
+        ProjectFormatter project = new ProjectFormatter(id,projectEntity.name());
         project.setProjectEntity(projectEntity);
         project.setSubtasks(taskEntities);
         project.setResources(resourceEntities);
 
+        //project.getDurationLayers();
+        project.getInsights();
         return project;
     }
 
