@@ -17,6 +17,7 @@ public class Task {
     private Long resourceId;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private final List<Task> subtasks = new ArrayList<>();
+    private final Integer estimatedCost;
 
     public Task(TaskEntity taskEntity){
         this.id = taskEntity.id();
@@ -25,6 +26,7 @@ public class Task {
         this.endDate = taskEntity.endDate();
         this.duration = taskEntity.duration();
         this.resourceId = taskEntity.resourceId();
+        this.estimatedCost = taskEntity.estimatedCost();
     }
 
     public Task(TaskEntity task, List<TaskEntity> tasks){
@@ -34,6 +36,7 @@ public class Task {
         this.endDate = task.endDate();
         this.duration = task.duration();
         this.resourceId = task.resourceId();
+        this.estimatedCost = task.estimatedCost();
         tasks.stream()
                 .filter(taskEntity -> task.id().equals(taskEntity.parent()))
                 .forEach( t -> this.subtasks.add(new Task(t, tasks)) );
@@ -90,4 +93,9 @@ public class Task {
         double hours = duration;
         return hours / days;
     }
+
+    public Integer getEstimatedCost() {
+        return estimatedCost;
+    }
+
 }

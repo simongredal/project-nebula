@@ -15,5 +15,6 @@ public record TaskCreationRequest(
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
         Long duration,
         Long resourceId,
-        Membership membership) {
+        Membership membership,
+        Integer estimatedCost) {
 }

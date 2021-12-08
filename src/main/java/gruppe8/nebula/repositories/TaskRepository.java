@@ -41,7 +41,8 @@ public class TaskRepository {
                         resultSet.getTimestamp("startDate").toLocalDateTime(),
                         resultSet.getTimestamp("endDate").toLocalDateTime(),
                         resultSet.getLong("duration"),
-                        resultSet.getLong("resource_id")
+                        resultSet.getLong("resource_id"),
+                        resultSet.getInt("estimated_cost")
                 ));
             }
         } catch (SQLException e) {
@@ -53,7 +54,7 @@ public class TaskRepository {
 
     public boolean createTask(TaskEntity task){
         try(Connection connection = databaseManager.getConnection()){
-            String query = "insert into tasks (project_id,parent_id,name,startDate,endDate,duration,resource_id) VALUES (?,?,?,?,?,?,?)";
+            String query = "insert into tasks (project_id,parent_id,name,startDate,endDate,duration,resource_id,estimated_cost) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setLong(1,task.projectId());
@@ -63,6 +64,7 @@ public class TaskRepository {
             preparedStatement.setTimestamp(5,Timestamp.valueOf( task.endDate() ));
             preparedStatement.setObject(6,task.duration());
             preparedStatement.setObject(7,task.resourceId());
+            preparedStatement.setInt(8,task.estimatedCost());
             preparedStatement.execute();
 
             return preparedStatement.getUpdateCount() == 1;
@@ -74,7 +76,7 @@ public class TaskRepository {
     }
     public boolean editTask(Task task){
         try(Connection connection = databaseManager.getConnection()){
-            String query = "UPDATE tasks (name,startDate,endDate,duration,resource_id) VALUES (?,?,?,?,?) "+"WHERE id=(?)";
+            String query = "UPDATE Nebula.tasks (name,startDate,endDate,duration,resource_id,estimated_cost) VALUES (?,?,?,?,?,?) "+"WHERE id=(?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1,task.getName());
@@ -83,6 +85,7 @@ public class TaskRepository {
             preparedStatement.setObject(4,task.getDuration());
             preparedStatement.setObject(5,task.getResource());
             preparedStatement.setObject(6,task.getId());
+            preparedStatement.setInt(7,task.getEstimatedCost());
             preparedStatement.execute();
 
             return preparedStatement.getUpdateCount() == 1;

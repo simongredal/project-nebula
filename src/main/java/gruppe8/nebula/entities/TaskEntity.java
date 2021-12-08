@@ -13,7 +13,8 @@ public record TaskEntity(Long id, Long projectId,
                          LocalDateTime startDate,
                          LocalDateTime endDate,
                          Long duration,
-                         Long resourceId) implements CharSequence {
+                         Long resourceId,
+                         Integer estimatedCost) implements CharSequence {
     @Override
     public int length() {
         return this.toString().length();

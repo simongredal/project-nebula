@@ -12,5 +12,6 @@ public record TaskUpdateRequest(
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
         Long duration,
-        Long resourceId) {
+        Long resourceId,
+        Integer estimatedCost) {
 }

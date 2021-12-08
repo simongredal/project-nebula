@@ -30,7 +30,8 @@ public class TaskService {
                                             request.startDate(),
                                             request.endDate(),
                                             request.duration(),
-                                            request.resourceId());
+                                            request.resourceId(),
+                                            request.estimatedCost());
 
         return taskRepository.createTask(task);
     }
@@ -43,7 +44,9 @@ public class TaskService {
                 request.startDate(),
                 request.endDate(),
                 request.duration(),
-                request.resourceId()));
+                request.resourceId(),
+                request.estimatedCost()));
+
         return taskRepository.editTask(task);
     }
 

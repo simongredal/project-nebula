@@ -151,6 +151,11 @@
 
             <td th:text="${task.getRemainingTimeForTask()}" ></td>
 
+            <td th:text="${task.getDuration() + ' hours'}"></td>
+
+            <!-- TODO: Selective currency -->
+            <td th:text="${task.getEstimatedCost() + ' DKK'}"></td>
+
             <td>
                 <div class="row no-gap">
                     <form class="form-wrapper" th:action="@{/projects/update}" method="POST">
@@ -212,7 +217,8 @@
         <!-- Estimated cost -->
         <div class="row form-control">
             <label> Estimated cost</label>
-            <input type="number" min="0.01" step="0.01" max="99999" placeholder="0" name="Estimated cost"/>
+            <!-- TODO: Selective currency -->
+            <input type="number" min="0.01" step="0.01" max="99999" placeholder="0" name="estimatedCost"/>
             <span>DKK</span>
         </div>
             <!-- resource? -->
