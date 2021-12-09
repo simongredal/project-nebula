@@ -34,7 +34,7 @@ public class TaskService {
                                             request.estimatedCost());
 
         // If stardate is bigger than enddate the task is invalid
-        if (task.startDate().compareTo(task.endDate()) < 0) {
+        if (task.startDate().compareTo(task.endDate()) > 0) {
             return false;
         }
 
