@@ -19,10 +19,10 @@ public class Account implements UserDetails {
 
     public static Account of(AccountEntity entity) {
         Account account = new Account();
-        account.id = entity.id();
-        account.email = entity.email();
-        account.password = entity.password();
-        account.name = entity.name();
+        account.id = entity.getId();
+        account.email = entity.getEmail();
+        account.password = entity.getPassword();
+        account.name = entity.getName();
         return account;
     }
 

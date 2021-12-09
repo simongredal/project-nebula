@@ -64,8 +64,6 @@
 			<artifactId>sql2o</artifactId>
 			<version>1.6.0</version>
 		</dependency>
-
-
 	</dependencies>
 
 	<build>

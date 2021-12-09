@@ -64,7 +64,7 @@ public class TaskRepository {
             preparedStatement.setTimestamp(5,Timestamp.valueOf( task.endDate() ));
             preparedStatement.setObject(6,task.duration());
             preparedStatement.setObject(7,task.resourceId());
-            preparedStatement.setInt(8,task.estimatedCost());
+            preparedStatement.setObject(8,task.estimatedCost());
             preparedStatement.execute();
 
             return preparedStatement.getUpdateCount() == 1;
@@ -76,7 +76,7 @@ public class TaskRepository {
     }
     public boolean editTask(Task task){
         try(Connection connection = databaseManager.getConnection()){
-            String query = "UPDATE Nebula.tasks (name,startDate,endDate,duration,resource_id,estimated_cost) VALUES (?,?,?,?,?,?) "+"WHERE id=(?)";
+            String query = "UPDATE tasks (name,startDate,endDate,duration,resource_id,estimated_cost) VALUES (?,?,?,?,?,?) "+"WHERE id=(?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1,task.getName());
