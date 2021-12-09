@@ -1,9 +1,9 @@
 package gruppe8.nebula.models;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ProjectFormatter extends Project {
     public ProjectFormatter(Long id, String name) {
@@ -42,10 +42,10 @@ public class ProjectFormatter extends Project {
     public List<Insight> getInsights(){
         List<Insight> insights = new ArrayList<>();
 
-        for (Task t : getAllTasks().stream().filter(Predicate.not(t -> DurationCheck(t)==null)).collect(Collectors.toList())) {
+        for (Task t : getAllTasks().stream().filter(Predicate.not(t -> DurationCheck(t) == null)).toList()) {
             insights.add(DurationCheck(t));
         }
-        for (Task t : getAllTasks().stream().filter(Predicate.not(t -> AverageWorkHoursCheck(t)==null)).collect(Collectors.toList())) {
+        for (Task t : getAllTasks().stream().filter(Predicate.not(t -> AverageWorkHoursCheck(t) == null)).toList()) {
             insights.add(AverageWorkHoursCheck(t));
         }
 
