@@ -33,6 +33,11 @@ public class TaskService {
                                             request.resourceId(),
                                             request.estimatedCost());
 
+        // If enddate is less than startdate the task is invalid,
+        if (task.startDate().compareTo(task.endDate()) < 0) {
+            return false;
+        }
+
         return taskRepository.createTask(task);
     }
 

@@ -2,6 +2,7 @@ package gruppe8.nebula.controllers;
 
 import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.models.Account;
+import gruppe8.nebula.models.Message;
 import gruppe8.nebula.models.Project;
 import gruppe8.nebula.models.Team;
 import gruppe8.nebula.requests.*;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -73,20 +76,18 @@ public class ProjectController {
     }
 
     @PostMapping("/create")
-    public String addTask(TaskCreationRequest request, Authentication authentication) {
+    public RedirectView addTask(TaskCreationRequest request, Authentication authentication, RedirectAttributes redirectAttributes) {
         Account account = (Account) authentication.getPrincipal();
 
-        log.info("POST /teams/create: TaskCreationRequest=%s, Account=%s".formatted(request, account));
-
+        log.info("POST /projects/create: TaskCreationRequest=%s, Account=%s".formatted(request, account));
         Boolean success = taskService.createTask(request);
 
-        if (success) {
-            log.info("Successful Task create");
-            return "redirect:/projects/"+request.projectId();
-        }
+        Message message;
+        if (success) { message = new Message(Message.Type.SUCCESS, "Task created successfully."); }
+        else { message = new Message(Message.Type.WARNING, "Task could not be created successfully."); }
+        redirectAttributes.addFlashAttribute("message", message);
 
-        log.info("Unsuccessful Task create");
-        return "redirect:/projects/"+request.projectId();
+        return new RedirectView("/projects/"+request.projectId());
     }
     @PostMapping("/delete")
     public String removeTask(TaskDeletionRequest request, Authentication authentication) {
