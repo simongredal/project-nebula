@@ -239,12 +239,71 @@
     </form>
 </th:block>
 
+<th:block th:fragment="editTaskTab">
+    <div class="row"><strong>Edit a Task</strong></div>
+    <form class="col form-wrapper" th:action="@{create}" method="POST">
+        <!-- The create task form -->
+        <!-- name -->
+        <div class="row form-control">
+            <label for="name">Task Name*</label>
+            <input type="text" name="name" placeholder="Give your task a good name" required>
+        </div>
+        <!-- start date -->
+        <div class="row form-control">
+            <label for="startDate">Start Date*</label>
+            <input type="datetime-local" name="startDate" required>
+        </div>
+        <!-- end date -->
+        <div class="row form-control">
+            <label for="endDate">End Date*</label>
+            <input type="datetime-local" name="endDate" required>
+        </div>
+        <!-- duration (hours) -->
+        <div class="row form-control">
+            <label for="endDate">Duration</label>
+            <input type="number" placeholder="0" min="0" step="1" name="duration">
+            <span>hours</span>
+        </div>
+        <!-- parent? -->
+        <div class="row form-control">
+            <label for="parentId">does task have parent?</label>
+            <select name="parentId" list="tasks" autocomplete="off">
+                <option value="">none</option>
+                <option th:each="Task : ${project.getAllTasks()}"
+                        th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
+            </select>
+        </div>
+        <!-- Estimated cost -->
+        <div class="row form-control">
+            <label> Estimated cost</label>
+            <!-- TODO: Selective currency -->
+            <input type="number" min="0" step="0.01" max="99999" placeholder="0" name="estimatedCost"/>
+            <span>DKK</span>
+        </div>
+        <!-- resource? -->
+        <div class="row form-control">
+            <label for="resourceList">what type of resource?</label>
+            <select name="resourceId" autocomplete="off">
+                <option value="">none</option>
+                <option th:each="entry : ${project.getResources()}" th:text="${entry.value.getName()}" th:value="${entry.key}">
+                </option>
+            </select>
+        </div>
+
+        <input type="hidden" name="projectId" th:value="${project.getId()}">
+
+        <div class="row form-control">
+            <button class="w-12 btn btn-wow" type="submit" id="submit">Update Task</button>
+        </div>
+    </form>
+</th:block>
+
 <th:block th:fragment="deleteTaskTab">
     <div class="row"><strong>Delete a Task</strong></div>
     <form class="col form-wrapper" th:action="@{delete}" method="POST">
         <!-- The delete task form -->
         <!-- name -->
-        <select name="id" list="tasks" autocomplete="off">
+        <select name="taskId" list="tasks" autocomplete="off">
             <option th:each="Task : ${project.getAllTasks()}"
                     th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
         </select>
