@@ -10,11 +10,17 @@ public class ProjectFormatter extends Project {
         super(id, name);
     }
 
-    public String getOverview() {
-        String overview = "OVERVIEW";
-        overview = overview.concat("\nThe project " + getName() + " is spanning a total of " + getTotalProjectSpanDays() +
-                " days, from the dates: " + getStartDate() + "-" + getEndDate());
-        overview = overview.concat("\nMAIN TASKS");
+    public List<String> getOverview() {
+        List<String> overview = new ArrayList<>();
+        overview.add("OVERVIEW");
+
+        overview.add(
+                "Your project \"" + getName() + "\" spans a total of " + getTotalProjectSpanDays() +
+                " days, from the dates: " + getStartDate() + "-" + getEndDate()
+        );
+
+        overview.add("MAIN TASKS");
+
         int totalDuration = 0;
         //parentless task list
         for (Task task : getSubtasks()) {
@@ -23,13 +29,12 @@ public class ProjectFormatter extends Project {
                     .max().orElseThrow(NoSuchElementException::new);
             totalDuration += maxDuration;
 
-            overview = overview.concat("\n[%s] duration: %s hours, from %s to %s"
+            overview.add("[%s] duration: %s hours, from %s to %s"
                     .formatted(task.getName(), maxDuration, task.getStartDate(), task.getEndDate()));
 
             double avgWorkHours = (double) maxDuration / (double) task.getTotalTaskSpanDays();
 
-            overview = overview.concat(("\n - To meet deadline, this task requires an average of %s " +
-                    "hours of work per day").formatted(avgWorkHours));
+            overview.add(" - To meet deadline, this task requires an average of %s hours of work per day".formatted(avgWorkHours));
         }
         return overview;
     }
@@ -44,12 +49,6 @@ public class ProjectFormatter extends Project {
             insights.add(AverageWorkHoursCheck(t));
         }
 
-
-        System.out.println("INSIGHTS:");
-        for (Insight i : insights) {
-            System.out.println(i);
-        }
-        //System.out.println(getOverview());
         return insights;
     }
 
