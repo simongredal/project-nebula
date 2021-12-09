@@ -34,7 +34,7 @@ function createChart(e) {
         // apply css
         el.style.left = `${left}px`;
         el.style.width = `${width}px`;
-        if (e.type == "load") {
+        if (e.type == "click") {
             el.style.backgroundColor = el.dataset.color;
             el.style.opacity = 1;
         }
@@ -43,3 +43,4 @@ function createChart(e) {
 
 window.addEventListener("load", createChart);
 window.addEventListener("resize", createChart);
+window.addEventListener("click", createChart);

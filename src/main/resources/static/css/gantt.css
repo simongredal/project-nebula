@@ -52,7 +52,7 @@
     content: '';
     position: absolute;
     right: 0;
-    height: 510px;
+    height: 100%;
     border-right: 1px solid var(--divider);
 }
 
