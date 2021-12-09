@@ -92,7 +92,7 @@ public class ProjectController {
     public String removeTask(TaskDeletionRequest request, Authentication authentication) {
         Account account = (Account) authentication.getPrincipal();
 
-        log.info("POST /teams/create: TaskCreationRequest=%s, Account=%s".formatted(request, account));
+        log.info("POST /projects/delete: TaskDeletionRequest=%s, Account=%s".formatted(request, account));
 
         Boolean success = taskService.deleteTask(request);
 
@@ -102,8 +102,25 @@ public class ProjectController {
         }
 
         log.info("Unsuccessful Task deletion");
-        return "redirect:/projects/"+request.projectId();
+            return "redirect:/projects/"+request.projectId();
     }
+
+    @PostMapping("/update")
+    public String editTask(TaskUpdateRequest request, Authentication authentication){
+        Account account = (Account) authentication.getPrincipal();
+
+        log.info("POST /projects/update: TaskUpdateRequest=%s, Account=%s".formatted(request,account));
+
+        Boolean success = taskService.updateTask(request);
+
+        if (success){
+            log.info("Successful task edit");
+            return "redirect:/edit-task/" + request.projectId();
+        }
+        log.info("Unsuccessful Task update");
+            return "redirect:/projects/"+request.projectId();
+    }
+
     @PostMapping("/new-resource")
     public String createResource(ResourceCreationRequest request, Authentication authentication) {
         Account account = (Account) authentication.getPrincipal();

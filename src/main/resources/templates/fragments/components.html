@@ -239,6 +239,66 @@
     </form>
 </th:block>
 
+<th:block th:fragment="editTask">
+    <div class="row"><strong>Edit a task</strong></div>
+    <form class="col form-wrapper" th:action="@{/update}" method="POST">
+        <!-- The edit task form -->
+        <!-- name -->
+        <!--/*@thymesVar id="task" type="gruppe8.nebula.models.Task"*/-->
+        <div class="row form-control">
+            <label for="name">Task Name*</label>
+            <input type="text" id="name" name="name" th:value="${task.getName()}" required>
+        </div>
+        <!-- start date -->
+        <div class="row form-control">
+            <label for="startDate">Start Date*</label>
+            <input type="datetime-local" id="startDate" th:value="${task.getStartDate()}" name="startDate" required>
+        </div>
+        <!-- end date -->
+        <div class="row form-control">
+            <label for="endDate">End Date*</label>
+            <input type="datetime-local" id="endDate" th:value="${task.getEndDate()}" name="endDate" required>
+        </div>
+        <!-- duration (hours) -->
+        <div class="row form-control">
+            <label for="endDate">Duration</label>
+            <input type="number" placeholder="0" min="0" step="1" th:value="${task.getDuration()}" id="duration" name="duration">
+            <span>hours</span>
+        </div>
+        <!-- parent? -->
+        <div class="row form-control">
+            <label for="parentId">does task have parent?</label>
+            <select id="parentId" name="parentId" list="tasks" autocomplete="off">
+                <option value="">none</option>
+                <option th:each="Task : ${project.getAllTasks()}"
+                        th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
+            </select>
+        </div>
+        <!-- Estimated cost -->
+        <div class="row form-control">
+            <label> Estimated cost</label>
+            <!-- TODO: Selective currency -->
+            <input type="number" min="0" step="0.01" max="99999" th:placeholder="${task.getEstimatedCost()}" name="estimatedCost"/>
+            <span>DKK</span>
+        </div>
+        <!-- resource? -->
+        <div class="row form-control">
+            <label for="resourceList">what type of resource?</label>
+            <select id="resourceList" name="resourceId" autocomplete="off">
+                <option value="">none</option>
+                <option th:each="entry : ${project.getResources()}" th:text="${entry.value.getName()}" th:value="${entry.key}">
+                </option>
+            </select>
+        </div>
+
+        <input type="hidden" name="projectId" th:value="${project.getId()}">
+
+        <div class="row form-control">
+            <button class="w-12 btn btn-wow" type="submit" id="submit">Edit Task</button>
+        </div>
+    </form>
+</th:block>
+
 <th:block th:fragment="resource-tr">
     <!--/*@thymesVar id="tasks" type="java.util.List<gruppe8.nebula.models.Task>"*/-->
     <!--/*@thymesVar id="project" type="gruppe8.nebula.models.Project"*/-->
