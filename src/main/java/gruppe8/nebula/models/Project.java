@@ -113,8 +113,7 @@ public class Project {
                 System.out.print(p.getDuration() + " ");
                 // Enqueue all children of
                 // the dequeued item
-                for (int i = 0; i < p.getSubtasks().size(); i++)
-                    q.add(p.getSubtasks().get(i));
+                q.addAll(p.getSubtasks());
                 n--;
             }
             durationLayerList.add((int) durationTotal);
