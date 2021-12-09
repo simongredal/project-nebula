@@ -31,7 +31,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/simongredal/project-nebula/">
-    <img src="resources/static/images/starry-round-logo.svg" alt="Logo" width="80" height="80">
+    <img src="src/main/resources/static/images/starry-round-logo.svg" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Project Nebula</h3>
