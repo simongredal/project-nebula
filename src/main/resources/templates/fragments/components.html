@@ -310,6 +310,9 @@
                 <span th:text="${entry.value.getName()}" th:remove="tag"></span>
             </td>
             <td>
+                <div class="foo" th:style="'background : ' + ${entry.value.getColor()}"></div>
+            </td>
+            <td>
                 <form class="form-wrapper" th:action="@{/projects/delete-resource}" method="POST">
                     <input type="hidden" name="resourceId" th:value="${entry.key}">
                     <input type="hidden" name="project_id" th:value="${project.getId()}">

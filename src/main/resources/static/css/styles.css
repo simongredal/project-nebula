@@ -350,3 +350,12 @@ input[type=datetime-local]{
 .AquaCol        {background:#00FFFF;}
 .PurpleCol      {background: #ab3fdd;}
 .WineCol        {background: #ae163e;}
+
+/* this makes small box to show colors with */
+.foo {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
