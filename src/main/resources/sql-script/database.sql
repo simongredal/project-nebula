@@ -44,6 +44,7 @@ create table if not exists tasks (
     endDate     datetime not null,
     resource_id int          null,
     duration    int          null,
+    estimated_cost int       null,
     constraint tasks_projects_fkindex foreign key (project_id) references projects (id)
        on delete cascade,
     constraint tasks_tasks_fkindex foreign key (parent_id) references tasks (id)
