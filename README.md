@@ -49,57 +49,58 @@ One for deploying Nebula to Heroku and one for hacking on Nebula locally.
 ### Deploy to Heroku
 
 #### Prerequisites
-First you need a Heroku account with payment information attached to enable add-ons even if you only use their free-tier.  
+First you need a Heroku account with payment information attached to enable add-ons, even if you only use their free-tier.  
 Second you need to [install git](https://git-scm.com/downloads) and you need to [install Heroku's CLI tool](https://devcenter.heroku.com/articles/heroku-cli).  
 
 #### Guide 
 1. Clone this git repository to your computer.  
-```sh
-git clone "https://github.com/simongredal/project-nebula"
-cd project-nebula/
-```
+   ```sh
+   git clone "https://github.com/simongredal/project-nebula"
+   ```
 
-2. Activate the Heroku CLI tool by running the following command in a terminal and following the instructions.
-```sh
-heroku login
-```
+2. Go to the cloned git repository.
+   ```sh
+   cd project-nebula/
+   ```
 
-3. Create a new Heroku App, if you don't specify a name Heroku will generate one for you.
+3. Activate the Heroku CLI tool by running the following command in a terminal and following the instructions.
+   ```sh
+   heroku login
+   ```
+
+4. Create a new Heroku App, if you don't specify a name Heroku will generate one for you.
    Every App on Heroku must have a unique name.
-   
-```sh
-heroku apps:create YOUR_UNIQUE_APP_NAME_HERE
-```
+   ```sh
+   heroku apps:create YOUR_UNIQUE_APP_NAME_HERE
+   ```
 
-4. Create an add-on for your app.
+5. Create an add-on for your app.
    We are using the [JawsDB add-on](https://elements.heroku.com/addons/jawsdb) because it provides MySQL 8.
    We are also specifying to use the kitefin tier because it is free.
-   
-```sh
-heroku addons:create jawsdb:kitefin --version=8.0
-```
+   ```sh
+   heroku addons:create jawsdb:kitefin --version=8.0
+   ```
 
-5. Show all the current environment variables.
+6. Show all the current environment variables.
    The JawsDB add-on should have created a config variable for us, but we need to copy it so it can get the name that our code expects.
-```sh
-heroku config
-```
-
-6. Copy the `mysql://...` part
-7. Save the `mysql://` url
-```sh
-heroku config:set DB_URL=YOUR_MYSQL_URL_HERE
-```
+   ```sh
+   heroku config
+   ```
+   
+7. Copy the `mysql://...` part and save it as a new config variable.
+   ```sh
+   heroku config:set DB_URL=YOUR_MYSQL_URL_HERE
+   ```
 
 8. Set up your Heroku App as an extra remote for your cloned git repository
-```sh
-heroku git:remote -a YOUR_UNIQUE_APP_NAME_HERE
-```
+   ```sh
+   heroku git:remote -a YOUR_UNIQUE_APP_NAME_HERE
+   ```
 
 9. Finally push the code from the your cloned git repository to your Heroku App.
-```sh
-git push remote main
-```
+   ```sh
+   git push remote main
+   ```
 
 
 ### Begin Developing Locally
