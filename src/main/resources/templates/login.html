@@ -10,16 +10,16 @@
     <div class="row">
         <div class="card">
             <form id="login" class="col form-wrapper" th:action="@{/login}" method="POST">
-                <div class="row form-control">
+                <div class="form-control">
                     <label for="email">Email</label>
                     <input placeholder="user@example.com" autocomplete="email" type="email" id="email" name="email" required>
                 </div>
-                <div class="row form-control">
+                <div class="form-control">
                     <label for="password">Password</label>
                     <input placeholder="••••••••••" type="password" autocomplete="current-password" id="password" name="password" required>
                     <button type="button" id="password-toggle" class="btn" onclick="passwordVisibility()"><i class="bi-eye"></i></button>
                 </div>
-                <div class="row form-control">
+                <div class="form-control">
                     <button class="btn btn-wow w-12" type="submit">Log In</button>
                 </div>
             </form>

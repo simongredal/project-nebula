@@ -12,18 +12,18 @@
         <div class="row">
         <div class="card">
             <form class="col form-wrapper" th:action="@{/signup}" method="POST">
-                <div class="row form-control">
+                <div class="form-control">
                     <label for="name">Name</label>
                     <input placeholder="Name" autocomplete="name" type="text" id="name" name="name" required>
                 </div>
 
-                <div class="row form-control">
+                <div class="form-control">
                     <label for="email">Email</label>
                     <input placeholder="user@example.com" autocomplete="email" type="email" id="email" name="email"
                            required>
                 </div>
 
-                <div class="row form-control">
+                <div class="form-control">
                     <label for="password">Password</label>
                     <input placeholder="••••••••••" type="password" autocomplete="new-password" id="password"
                            name="password" required>
@@ -31,14 +31,14 @@
                             class="bi-eye"></i></button>
                 </div>
 
-                <div class="row form-control">
+                <div class="form-control">
                     <!-- TODO: I don't do anything yet-->
                     <label for="repeat-password">Repeat password</label>
                     <input placeholder="••••••••••" type="password" autocomplete="new-password" id="repeat-password"
                            required>
                 </div>
 
-                <div class="row form-control">
+                <div class="form-control">
                     <button type="submit" class="btn btn-wow w-12">Sign up</button>
                 </div>
             </form>

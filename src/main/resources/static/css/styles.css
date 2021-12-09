@@ -52,6 +52,7 @@ p {
 
 .form-control {
     display: flex;
+    flex-direction: row;
     align-items: baseline;
 }
 
@@ -130,7 +131,7 @@ p {
     flex-direction: row;
     flex-wrap: wrap;
     flex: 0 1 auto;
-    align-items: baseline;
+    align-items: flex-start;
     gap: 1rem;
 }
 
@@ -138,7 +139,7 @@ p {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    flex: 1 0 0;
+    flex: 1 0 auto;
     gap: 1rem;
 }
 
@@ -312,10 +313,16 @@ input[type=datetime-local]{
     box-shadow: var(--shadow-elevation-reverse-medium);
 }
 
+.card > .tab-group > .tab-menu {
+    margin-top: -1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+
 
 .tab-menu > :hover { text-decoration: underline; }
-.tab-menu > :first-child { border-left: none; }
-.tab-menu > :last-child { border-right: none; }
+.tab-menu > :first-child { border-left: none; border-top-left-radius: 0.6rem; }
+.tab-menu > :last-child { border-right: none; border-top-right-radius: 0.6rem; }
 .tab-folder {
     padding: 0.5rem;
 }
