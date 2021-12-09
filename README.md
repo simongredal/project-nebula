@@ -1,6 +1,4 @@
 # dat21v2-nebula
-EXAMPLE TEXT
-
 <div id="top"></div>
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
@@ -36,7 +34,7 @@ EXAMPLE TEXT
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Project Nebula</h3>
 
   <p align="center">
     An awesome README template to jumpstart your projects!
