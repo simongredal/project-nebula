@@ -13,8 +13,8 @@ public class Team {
     public Team() {}
 
     public Team(TeamEntity teamEntity) {
-        this.id = teamEntity.id();
-        this.name = teamEntity.name();
+        this.id = teamEntity.getId();
+        this.name = teamEntity.getName();
     }
 
     public List<Project> getProjects() {

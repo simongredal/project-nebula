@@ -1,6 +1,5 @@
 package gruppe8.nebula.repositories;
 
-import gruppe8.nebula.models.Membership;
 import gruppe8.nebula.models.Task;
 import gruppe8.nebula.services.DatabaseManager;
 import gruppe8.nebula.entities.TaskEntity;
@@ -8,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Member;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +14,11 @@ import java.util.List;
 @Repository
 public class TaskRepository {
     private final DatabaseManager databaseManager;
-    private final Logger logger;
+    private final Logger log;
 
     public TaskRepository(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
-        this.logger = LoggerFactory.getLogger(this.getClass());
+        this.log = LoggerFactory.getLogger(this.getClass());
     }
 
     public List<TaskEntity> getTasksForProject(Long projectId) {
@@ -46,7 +44,8 @@ public class TaskRepository {
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return tasks;
@@ -70,7 +69,8 @@ public class TaskRepository {
             return preparedStatement.getUpdateCount() == 1;
 
         } catch (SQLException e){
-            logger.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
@@ -91,7 +91,8 @@ public class TaskRepository {
             return preparedStatement.getUpdateCount() == 1;
 
         } catch (SQLException e){
-            logger.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
@@ -111,7 +112,8 @@ public class TaskRepository {
             }
             connection.rollback();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }

@@ -19,10 +19,10 @@ public class MembershipService {
 
 
     public Boolean addMembership(TeamEntity from, Account to) {
-        return membershipRepository.createMembership(from.id(), to.id(), true);
+        return membershipRepository.createMembership(from.getId(), to.id(), true);
     }
     public Boolean sendInvitation(TeamEntity from, Account to) {
-        return membershipRepository.createMembership(from.id(), to.id(), false);
+        return membershipRepository.createMembership(from.getId(), to.id(), false);
     }
     public Boolean sendInvitation(Long teamId, Long accountId) {
         return membershipRepository.createMembership(teamId, accountId, false);

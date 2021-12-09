@@ -34,7 +34,8 @@ public class AccountRepository {
                 return true;
             }
         } catch (Sql2oException e){
-            log.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
@@ -48,7 +49,8 @@ public class AccountRepository {
                     .executeAndFetchFirst(AccountEntity.class);
             return entity;
         } catch (Sql2oException e) {
-            log.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return null;
     }
@@ -59,7 +61,8 @@ public class AccountRepository {
             return connection.createQuery(query)
                     .executeAndFetch(AccountEntity.class);
         } catch (Sql2oException e) {
-            log.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return null;
     }

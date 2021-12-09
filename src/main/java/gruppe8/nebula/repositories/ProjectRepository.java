@@ -38,7 +38,8 @@ public class ProjectRepository {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return null;
@@ -59,7 +60,8 @@ public class ProjectRepository {
             }
             return true;
         } catch (SQLException e) {
-            log.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
@@ -81,7 +83,8 @@ public class ProjectRepository {
             }
             connection.rollback();
         } catch (SQLException e) {
-            log.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
@@ -103,7 +106,8 @@ public class ProjectRepository {
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return projectEntities;

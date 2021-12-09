@@ -1,7 +1,6 @@
 package gruppe8.nebula.repositories;
 
 import gruppe8.nebula.entities.ResourceEntity;
-import gruppe8.nebula.entities.TaskEntity;
 import gruppe8.nebula.services.DatabaseManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +13,11 @@ import java.util.List;
 @Repository
 public class ResourceRepository {
     private final DatabaseManager databaseManager;
-    private final Logger logger;
+    private final Logger log;
 
     public ResourceRepository(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
-        this.logger = LoggerFactory.getLogger(this.getClass());
+        this.log = LoggerFactory.getLogger(this.getClass());
     }
     public List<ResourceEntity> getResourcesForProject(Long projectId) {
         List<ResourceEntity> resources = new ArrayList<>();
@@ -38,7 +37,8 @@ public class ResourceRepository {
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return resources;
@@ -57,7 +57,8 @@ public class ResourceRepository {
             return preparedStatement.getUpdateCount() == 1;
 
         } catch (SQLException e){
-            logger.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
@@ -75,7 +76,7 @@ public class ResourceRepository {
             return preparedStatement.getUpdateCount() == 1;
 
         } catch (SQLException e){
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
         }
         return false;
     }
@@ -95,7 +96,8 @@ public class ResourceRepository {
             }
             connection.rollback();
         } catch (SQLException e) {
-            logger.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }

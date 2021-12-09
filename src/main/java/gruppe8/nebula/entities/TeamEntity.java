@@ -1,14 +1,14 @@
 package gruppe8.nebula.entities;
 
-public final class TeamEntity {
+public class TeamEntity {
     private Long id;
     private String name;
 
     public TeamEntity() {}
 
-    public Long id() { return id; }
+    public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String name() { return name; }
+    public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 }

@@ -1,7 +1,6 @@
 package gruppe8.nebula.repositories;
 
 import gruppe8.nebula.entities.TeamEntity;
-import gruppe8.nebula.models.Team;
 import gruppe8.nebula.services.DatabaseManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,11 +9,6 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2oException;
 
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -31,7 +25,7 @@ public class TeamRepository {
         String query = "INSERT INTO teams (name) VALUES (:name)";
         try (Connection connection = databaseManager.beginTransaction()){
             connection.createQuery(query, true)
-                    .addParameter("name", entity.name())
+                    .addParameter("name", entity.getName())
                     .executeUpdate();
 
             if (connection.getResult() == 1) {
@@ -39,7 +33,8 @@ public class TeamRepository {
                 return getTeamById( connection.getKey(Long.class) );
             }
         } catch (Sql2oException e){
-            log.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return null;
     }
@@ -55,7 +50,8 @@ public class TeamRepository {
 
                 return entity;
         } catch (Sql2oException e) {
-            log.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return null;
@@ -73,7 +69,8 @@ public class TeamRepository {
                 return true;
             }
         } catch (Sql2oException e) {
-            log.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
@@ -86,7 +83,8 @@ public class TeamRepository {
                     .setAutoDeriveColumnNames(true)
                     .executeAndFetch(TeamEntity.class);
         } catch (Sql2oException e) {
-            log.error(e.getMessage());
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return null;
