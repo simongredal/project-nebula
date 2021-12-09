@@ -41,10 +41,6 @@ public class Project {
         }
     }
 
-    /*
-    public List<Resource> getResources() {
-        return resources;
-    }*/
     public HashMap<Long,Resource> getResources() {
         return resources;
     }

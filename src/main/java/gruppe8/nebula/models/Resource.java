@@ -2,9 +2,6 @@ package gruppe8.nebula.models;
 
 import gruppe8.nebula.entities.ResourceEntity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class Resource {
     private Long id;
     private String name;

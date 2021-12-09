@@ -4,7 +4,6 @@ import gruppe8.nebula.entities.AccountEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.repositories.AccountRepository;
 import gruppe8.nebula.requests.AccountCreationRequest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

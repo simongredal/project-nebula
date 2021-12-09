@@ -1,7 +1,6 @@
 package gruppe8.nebula.services;
 
 import gruppe8.nebula.entities.ResourceEntity;
-import gruppe8.nebula.entities.TaskEntity;
 import gruppe8.nebula.repositories.ResourceRepository;
 import gruppe8.nebula.requests.*;
 import org.springframework.stereotype.Service;

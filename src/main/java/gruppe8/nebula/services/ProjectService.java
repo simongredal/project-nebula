@@ -1,11 +1,9 @@
 package gruppe8.nebula.services;
 
-import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.entities.ProjectEntity;
 import gruppe8.nebula.entities.ResourceEntity;
 import gruppe8.nebula.entities.TaskEntity;
 import gruppe8.nebula.models.Account;
-import gruppe8.nebula.models.Membership;
 import gruppe8.nebula.models.Project;
 import gruppe8.nebula.models.ProjectFormatter;
 import gruppe8.nebula.repositories.ProjectRepository;

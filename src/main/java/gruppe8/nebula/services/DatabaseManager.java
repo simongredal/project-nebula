@@ -9,7 +9,6 @@ import org.springframework.core.env.Environment;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 

@@ -1,7 +1,6 @@
 package gruppe8.nebula.models;
 
 import gruppe8.nebula.entities.AccountEntity;
-import gruppe8.nebula.services.TeamService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

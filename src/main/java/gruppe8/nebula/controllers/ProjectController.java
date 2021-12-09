@@ -1,6 +1,5 @@
 package gruppe8.nebula.controllers;
 
-import gruppe8.nebula.entities.MembershipEntity;
 import gruppe8.nebula.models.Account;
 import gruppe8.nebula.models.Message;
 import gruppe8.nebula.models.Project;
