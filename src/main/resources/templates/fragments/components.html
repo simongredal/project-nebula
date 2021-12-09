@@ -239,6 +239,25 @@
     </form>
 </th:block>
 
+<th:block th:fragment="deleteTaskTab">
+    <div class="row"><strong>Delete a Task</strong></div>
+    <form class="col form-wrapper" th:action="@{delete}" method="POST">
+        <!-- The delete task form -->
+        <!-- name -->
+        <select name="id" list="tasks" autocomplete="off">
+            <option th:each="Task : ${project.getAllTasks()}"
+                    th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
+        </select>
+
+        <input type="hidden" name="projectId" th:value="${project.getId()}">
+
+        <div class="row form-control">
+            <button class="w-12 btn btn-wow" type="submit" id="submit">Delete Task</button>
+        </div>
+    </form>
+</th:block>
+
+
 <th:block th:fragment="resource-tr">
     <!--/*@thymesVar id="tasks" type="java.util.List<gruppe8.nebula.models.Task>"*/-->
     <!--/*@thymesVar id="project" type="gruppe8.nebula.models.Project"*/-->
