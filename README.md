@@ -37,7 +37,7 @@
   <h3 align="center">Project Nebula</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    2. Semesters eksamensprojekt
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
