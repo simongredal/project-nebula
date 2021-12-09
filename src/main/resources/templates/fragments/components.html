@@ -364,6 +364,7 @@
     <!--/*@thymesVar id="task" type="java.util.List<gruppe8.nebula.models.Resource>"*/-->
     <!--/*@thymesVar id="project" type="gruppe8.nebula.models.Project"*/-->
     <div class="card" th:if="${not #lists.isEmpty(project.getAllTasks())}">
+        <div style="overflow-x: auto;">
         <div class="chart-wrapper">
             <ul class="chart-values">
                 <li th:each="String : ${project.getTotalProjectSpanDates()}" th:text="${String}"></li>
@@ -380,6 +381,7 @@
                     <span th:text="${Task.getName()}"></span>
                 </li>
             </ul>
+        </div>
         </div>
     </div>
 
