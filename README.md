@@ -1,41 +1,18 @@
-# dat21v2-nebula
-<div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
+<div align="center">
+  <a href="https://github.com/simongredal/project-nebula/">
+    <img src="src/main/resources/static/images/starry-round-logo.svg" alt="Logo" width="100" height="100">
+  </a>
 
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
+  <h2 align="center">Nebula Project Manager</h2>
+  <div align="center">
+  
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/simongredal/project-nebula/">
-    <img src="src/main/resources/static/images/starry-round-logo.svg" alt="Logo" width="80" height="80">
-  </a>
-
-  <h3 align="center">Project Nebula</h3>
-
+  
+  </div>
   <p align="center">
     2. Semesters eksamensprojekt
     <br />
@@ -48,123 +25,92 @@
     ·
     <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
   </p>
+  
+  ![Product Screenshot][product-screenshot]
 </div>
 
 
+## Built With
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+* [Java 17](https://jdk.java.net/17/)
+* [MySQL 8](https://dev.mysql.com/downloads/mysql/)
+* [Maven](https://maven.apache.org)
+* [Spring Boot](https://spring.io/projects/spring-boot)
+* [Bouncy Castle](https://www.bouncycastle.org/java.html)
+* [SQL2O](https://www.sql2o.org)
+* [Gantt.js](https://webdesign.tutsplus.com/tutorials/build-a-simple-gantt-chart-with-css-and-javascript--cms-33813)
 
 
-
-<!-- ABOUT THE PROJECT -->
-## Kørselsvejledning
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-
-### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Below are two guides on how to get started with this repository.
+One for deploying Nebula to Heroku and one for hacking on Nebula locally.
 
-### Prerequisites
+### Deploy to Heroku
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+#### Prerequisites
+First you need a Heroku account with payment information attached to enable add-ons even if you only use their free-tier.  
+Second you need to [install git](https://git-scm.com/downloads) and you need to [install Heroku's CLI tool](https://devcenter.heroku.com/articles/heroku-cli).  
 
-### Installation
+#### Guide 
+1. Clone this git repository to your computer.  
+```sh
+git clone "https://github.com/simongredal/project-nebula"
+cd project-nebula/
+```
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+2. Activate the Heroku CLI tool by running the following command in a terminal and following the instructions.
+```sh
+heroku login
+```
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+3. Create a new Heroku App, if you don't specify a name Heroku will generate one for you.
+   Every App on Heroku must have a unique name.
+   
+```sh
+heroku apps:create YOUR_UNIQUE_APP_NAME_HERE
+```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+4. Create an add-on for your app.
+   We are using the [JawsDB add-on](https://elements.heroku.com/addons/jawsdb) because it provides MySQL 8.
+   We are also specifying to use the kitefin tier because it is free.
+   
+```sh
+heroku addons:create jawsdb:kitefin --version=8.0
+```
 
+5. Show all the current environment variables.
+   The JawsDB add-on should have created a config variable for us, but we need to copy it so it can get the name that our code expects.
+```sh
+heroku config
+```
+
+6. Copy the `mysql://...` part
+7. Save the `mysql://` url
+```sh
+heroku config:set DB_URL=YOUR_MYSQL_URL_HERE
+```
+
+8. Set up your Heroku App as an extra remote for your cloned git repository
+```sh
+heroku git:remote -a YOUR_UNIQUE_APP_NAME_HERE
+```
+
+9. Finally push the code from the your cloned git repository to your Heroku App.
+```sh
+git push remote main
+```
+
+
+### Begin Developing Locally
+
+TBD
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
@@ -241,18 +187,19 @@ Use this space to list resources you find helpful and would like to give credit 
 
 
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/simongredal/project-nebula.svg?style=for-the-badge
 [contributors-url]: https://github.com/simongredal/project-nebula/graphs/contributors
+
 [forks-shield]: https://img.shields.io/github/forks/simongredal/project-nebula.svg?style=for-the-badge
 [forks-url]: https://github.com/simongredal/project-nebula/network/members
+
 [stars-shield]: https://img.shields.io/github/stars/simongredal/project-nebula.svg?style=for-the-badge
 [stars-url]: https://github.com/simongredal/project-nebula/stargazers
+
 [issues-shield]: https://img.shields.io/github/issues/simongredal/project-nebula.svg?style=for-the-badge
 [issues-url]: https://github.com/simongredal/project-nebula/issues
+
 [license-shield]: https://img.shields.io/github/license/simongredal/project-nebula.svg?style=for-the-badge
 [license-url]: https://github.com/simongredal/project-nebula/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+
 [product-screenshot]: images/screenshot.png
