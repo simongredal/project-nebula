@@ -12,7 +12,7 @@
         <div class="tab-group">
             <div class="tab-menu">
                 <a class="active" data-target="#tabA">Project Shit</a>
-                <a data-target="#tabB">Insight Shit</a>
+                <a data-target="#tabB">Insight</a>
                 <a data-target="#tabC">Gantt</a>
                 <a data-target="#tabD">Resources</a>
             </div>
@@ -47,53 +47,36 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Insights -->
-                    <div th:replace="fragments/components :: insights"></div>
+
                 </div>
                 <div id="tabB" class="tab-content">
-                    <div class="row">
-
-
-                    </div>
+                    <!-- Insights -->
+                    <div th:replace="fragments/components :: insights"></div>
                 </div>
                 <div id="tabC" class="tab-content">
                     <!-- gantt diagram -->
                     <main th:replace="fragments/components :: Gantt"></main>
-
                 </div>
                 <div id="tabD" class="tab-content">
-                    <div class="row"></div>
-
-                    <!--<input type="submit" value="Submit task!">-->
-
-                    <div class="col">
-                        <div class="row">
-                            <div class="card">
-                                <main th:replace="fragments/components :: createResourceTab"></main>
+                    <div class="row">
+                        <!-- resource overview and editor -->
+                        <div class="card w-7">
+                            <div class="row"><strong class="heading">Resources in This Project</strong></div>
+                            <div class="row">
+                                <table class="table-group">
+                                    <thead><tr><td>Name</td></tr></thead>
+                                    <tbody th:insert="fragments/components :: resource-tr" th:with="tasks=${project.getSubtasks()}, indent=0"></tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- resource overview and editor -->
-                    <div class="row">
-                        <div class="col">
-                            <div class="card">
-                                <div class="row"><strong class="heading">Resources in This Project</strong></div>
-                                <div class="row">
-                                    <table class="table-group">
-                                        <thead><tr><td>Name</td></tr></thead>
-                                        <tbody th:insert="fragments/components :: resource-tr" th:with="tasks=${project.getSubtasks()}, indent=0"></tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        <div class="card">
+                            <main th:replace="fragments/components :: createResourceTab"></main>
                         </div>
                     </div>
                 </div>
-
-
+            </div>
         </div>
-    </div>
-
     </div>
 
 </main>

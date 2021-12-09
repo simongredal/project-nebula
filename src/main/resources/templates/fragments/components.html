@@ -378,28 +378,29 @@
     <!--/*@thymesVar id="task" type="java.util.List<gruppe8.nebula.models.Task>"*/-->
     <!--/*@thymesVar id="task" type="java.util.List<gruppe8.nebula.models.Resource>"*/-->
     <!--/*@thymesVar id="project" type="gruppe8.nebula.models.Project"*/-->
-    <div class="row">
-        <div class="card">
-            <div class="row overflow">
-                <div class="chart-wrapper">
-                    <ul class="chart-values">
-                        <li th:each="String : ${project.getTotalProjectSpanDates()}" th:text="${String}"></li>
-                    </ul>
-                    <ul class="chart-bars">
+    <div class="card" th:if="${not #lists.isEmpty(project.getAllTasks())}">
+        
+        <div class="chart-wrapper">
+            <ul class="chart-values">
+                <li th:each="String : ${project.getTotalProjectSpanDates()}" th:text="${String}"></li>
+            </ul>
+            <ul class="chart-bars">
 
-                        <li th:if="${project.getResources().get(Task.getResource())}==null" class="tooltip" th:each="Task : ${project.getAllTasks()}" th:data-duration="${Task.getDates()}" data-color="#808080" >
-                            <span class="tooltip-text" th:utext="${Task.getRemainingTimeForTask() + ' left' + '<br>' + ' Estimated cost: ' + Task.getEstimatedCost() }"></span>
-                            <span th:text="${Task.getName()}"></span>
-                        </li>
+                <li th:if="${project.getResources().get(Task.getResource())}==null" class="tooltip" th:each="Task : ${project.getAllTasks()}" th:data-duration="${Task.getDates()}" data-color="#808080" >
+                    <span class="tooltip-text" th:utext="${Task.getRemainingTimeForTask() + ' left' + '<br>' + ' Estimated cost: ' + Task.getEstimatedCost() }"></span>
+                    <span th:text="${Task.getName()}"></span>
+                </li>
 
-                        <li th:unless="${project.getResources().get(Task.getResource())}==null" class="tooltip" th:each="Task : ${project.getAllTasks()}" th:data-duration="${Task.getDates()}" th:data-color="${project.getResources().get(Task.getResource()).getColor()}" >
-                            <span class="tooltip-text" th:utext="${Task.getRemainingTimeForTask() + ' left' + '<br>' + ' Estimated cost: ' + Task.getEstimatedCost() }"></span>
-                            <span th:text="${Task.getName()}"></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                <li th:unless="${project.getResources().get(Task.getResource())}==null" class="tooltip" th:each="Task : ${project.getAllTasks()}" th:data-duration="${Task.getDates()}" th:data-color="${project.getResources().get(Task.getResource()).getColor()}" >
+                    <span class="tooltip-text" th:utext="${Task.getRemainingTimeForTask() + ' left' + '<br>' + ' Estimated cost: ' + Task.getEstimatedCost() }"></span>
+                    <span th:text="${Task.getName()}"></span>
+                </li>
+            </ul>
         </div>
+    </div>
+
+    <div class="card" th:if="${#lists.isEmpty(project.getAllTasks())}">
+        <p class="center">No tasks are currently available. Add some to your project to see the gantt chart here..</p>
     </div>
 
 </th:block>
@@ -416,12 +417,10 @@
                 <p th:text="${entry.getTitle()}"></p>
                 <p th:text="${entry.getBody()}"></p>
             </div>
-
         </div>
-
-
-
-
+    </div>
+    <div class="card" th:if="${#lists.isEmpty(project.getInsights())}">
+        <p class="center">no insights are currently available...</p>
     </div>
 </th:block>
 
