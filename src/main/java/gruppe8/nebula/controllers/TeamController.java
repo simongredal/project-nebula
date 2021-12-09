@@ -95,7 +95,7 @@ public class TeamController {
             return "redirect:/teams"+request.teamId();
         }
         log.info("unsuccessful uninvite");
-        return "/redirect:/teams";
+        return "redirect:/teams";
     }
 
     @PostMapping("create")

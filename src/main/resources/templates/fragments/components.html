@@ -208,7 +208,7 @@
         <!-- parent? -->
         <div class="row form-control">
             <label for="parentId">does task have parent?</label>
-            <select id="parentId" name="parentId" list="tasks" autocomplete="off">
+            <select id="parentId" name="parentId" autocomplete="off">
                 <option value="">none</option>
                 <option th:each="Task : ${project.getAllTasks()}"
                         th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
@@ -268,7 +268,7 @@
         <!-- parent? -->
         <div class="row form-control">
             <label for="parentId">does task have parent?</label>
-            <select id="parentId" name="parentId" list="tasks" autocomplete="off">
+            <select id="parentId" name="parentId" autocomplete="off">
                 <option value="">none</option>
                 <option th:each="Task : ${project.getAllTasks()}"
                         th:text="${Task.getName()}" th:value="${Task.getId()}"></option>
@@ -340,13 +340,13 @@
                 <label for="color">if you want, select color coding</label>
                 <select class="none" id="color" name="color">
                     <option class="none" value="#808080" >none</option>
-                    <option class="BlueCol" value="#13b4ff" background="#800000">Blue</option>
+                    <option class="BlueCol" value="#13b4ff">Blue</option>
                     <option class="MaroonCol" value="#800000" >Maroon</option>
                     <option class="OliveCol" value="#808000" >Olive</option>
-                    <option class="LimeCol" value="#00FF00" >Limecol</option>
-                    <option class="AquaCol" value="00FFFF" >Aqua</option>
+                    <option class="LimeCol" value="#00FF00" >Lime</option>
+                    <option class="AquaCol" value="#00FFFF" >Aqua</option>
                     <option class="PurpleCol" value="#ab3fdd" >Purple</option>
-                    <option class="WineCol" value="#ae163e" >Winecol</option>
+                    <option class="WineCol" value="#ae163e" >Wine</option>
                 </select>
             </div>
 

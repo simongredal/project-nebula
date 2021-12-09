@@ -87,7 +87,7 @@ public class Project {
     /* for more info see: https://www.geeksforgeeks.org/generic-tree-level-order-traversal/*/
     // Prints the n-ary tree level wise
     public List<Integer> LevelOrderTraversal(Task root) {
-        List<Integer> durationLayerList = new ArrayList<Integer>();
+        List<Integer> durationLayerList = new ArrayList<>();
         if (root == null) {
             return durationLayerList;
         }

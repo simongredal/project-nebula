@@ -340,7 +340,7 @@ input[type=datetime-local]{
     display: flex;
 }
 
-/* colorcoding options selection should probably not be here :v but im tired of working tbh*/
+/* color coding options selection should probably not be here :v but im tired of working tbh*/
 /* also there is no easy way to add colored dot on option tags, but we should do this in the future imo:*/
 /* https://stackoverflow.com/questions/12744708/add-a-color-box-in-select-box*/
 .BlueCol        {background:#13b4ff;}
