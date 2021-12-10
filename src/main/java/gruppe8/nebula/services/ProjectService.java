@@ -46,19 +46,23 @@ public class ProjectService {
     }
 
     public Boolean accountOwnsProject(Account account, Long projectId) {
-        // Converting null to false
+        // Converting null to false and true to true
         Boolean accountOwnsProject = projectRepository.accountOwnsProject(account.id(), projectId);
-        return (accountOwnsProject == null ? false : accountOwnsProject);
+        return (accountOwnsProject != null && accountOwnsProject);
     }
 
     public Boolean createProject(Account account, CreateProjectRequest request) {
-        Project project = new Project(request.teamId(), request.projectName());
-        return projectRepository.createProject(project, account);
+        Boolean allowed = membershipService.accountHasMembershipInTeam(account, request.teamId());
+        if (!allowed) { return false; }
+
+        ProjectEntity entity = new ProjectEntity(null, request.teamId(), request.projectName());
+        return projectRepository.createProject(entity);
     }
 
     public boolean deleteProject(Account account, DeleteProjectRequest request) {
-        Project project = new Project(request.id(), null);
-        return projectRepository.deleteProject(project, account);
+        Boolean allowed = accountOwnsProject(account, request.id());
+        if (!allowed) { return false; }
+        return projectRepository.deleteProject(request.id());
     }
 
     public List<Project> getProjectsByTeamId(Long teamId) {
