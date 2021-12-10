@@ -36,7 +36,7 @@ public class MembershipRepository{
             return preparedStatement.getUpdateCount() == 1;
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return false;
@@ -70,7 +70,7 @@ public class MembershipRepository{
 
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return Collections.unmodifiableList(memberships);
@@ -101,7 +101,7 @@ public class MembershipRepository{
 
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return Collections.unmodifiableList(memberships);
     }
@@ -121,7 +121,7 @@ public class MembershipRepository{
             }
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return false;
@@ -140,7 +140,7 @@ public class MembershipRepository{
             }
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return false;
@@ -157,7 +157,7 @@ public class MembershipRepository{
             return preparedStatement.getUpdateCount() == 1;
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return false;
@@ -177,7 +177,7 @@ public class MembershipRepository{
             return preparedStatement.getUpdateCount() == 1;
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return false;
@@ -197,7 +197,7 @@ public class MembershipRepository{
             }
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return false;

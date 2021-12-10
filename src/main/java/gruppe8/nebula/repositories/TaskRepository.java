@@ -45,7 +45,7 @@ public class TaskRepository {
             }
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return tasks;
@@ -70,7 +70,7 @@ public class TaskRepository {
 
         } catch (SQLException e){
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
@@ -92,7 +92,7 @@ public class TaskRepository {
 
         } catch (SQLException e){
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
@@ -113,7 +113,7 @@ public class TaskRepository {
             connection.rollback();
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }

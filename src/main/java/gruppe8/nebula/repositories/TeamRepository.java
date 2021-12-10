@@ -34,7 +34,7 @@ public class TeamRepository {
             }
         } catch (Sql2oException e){
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return null;
     }
@@ -51,7 +51,7 @@ public class TeamRepository {
                 return entity;
         } catch (Sql2oException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return null;
@@ -70,7 +70,7 @@ public class TeamRepository {
             }
         } catch (Sql2oException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
@@ -84,7 +84,7 @@ public class TeamRepository {
                     .executeAndFetch(TeamEntity.class);
         } catch (Sql2oException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return null;

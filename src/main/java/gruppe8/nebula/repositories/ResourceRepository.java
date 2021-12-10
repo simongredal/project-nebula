@@ -38,7 +38,7 @@ public class ResourceRepository {
             }
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
 
         return resources;
@@ -58,7 +58,7 @@ public class ResourceRepository {
 
         } catch (SQLException e){
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
@@ -97,7 +97,7 @@ public class ResourceRepository {
             connection.rollback();
         } catch (SQLException e) {
             String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
-            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+            log.error("%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
         }
         return false;
     }
