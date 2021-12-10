@@ -7,95 +7,78 @@
 <body>
 <main th:fragment="content">
     <th:block th:unless="${team} == null">
-    <div class="center"><h1 th:text="${team.getName()}"></h1> </div>
-    <div class="row wrap">
-        <div class="col">
-            <div class="row center"><h2 class="heading">Projects</h2></div>
+    <h1 class="heading center" th:text="${team.getName()}"></h1>
+    <div class="row">
+    <div class="col">
+        <h2 class="heading center">Projects</h2>
 
-            <div class="row">
-                <div class="card w-12"
-                     th:each="project : ${team.getProjects()}"
-                     th:insert="fragments/components :: project-card"
-                     th:with="project=${project}">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="card">
-                    <div class="row"><strong>Create Project</strong></div>
-                    <div class="row">
-                        <form th:action="@{/projects/new-project}" method="POST" class="col form-wrapper">
-                            <div class="row form-control">
-                                <label for="teamId">Project Name</label>
-                                <input type="hidden" name="teamId" th:value="${team.getId()}">
-                                <input type="text" id="teamId" name="projectName" autocomplete="off" placeholder="My Awesome Project">
-                            </div>
-                            <div class="row form-control">
-
-                                <button type="submit" class="w-12 btn btn-wow">Create Project</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div class="card"
+             th:each="project : ${team.getProjects()}"
+             th:insert="fragments/components :: project-card"
+             th:with="project=${project}">
         </div>
 
-        <div class="col">
-            <div class="row center"><h2 class="heading">Memberships</h2></div>
-            <div class="row">
-                <div class="card">
-                    <div class="row"><strong class="heading">Current Members</strong></div>
-                    <div class="row">
-                        <ul class="list-group">
-                            <li class="no-wrap space-between"
-                                th:each="member : ${members}"
-                                th:include="fragments/components :: membership-card"
-                                th:with="membership=${member}">
-                            </li>
-                        </ul>
-                    </div>
+        <div class="card">
+            <strong>Create Project</strong>
+            <form th:action="@{/projects/new-project}" method="POST" class="col form-wrapper">
+                <div class="form-control">
+                    <label for="teamId">Project Name</label>
+                    <input type="text" id="teamId" name="projectName" autocomplete="off" placeholder="My Awesome Project">
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="card">
-                    <div class="row"><strong class="heading">Active Invitations</strong></div>
-                    <div class="row">
-                        <ul class="list-group">
-                            <li class="no-wrap space-between"
-                                th:each="invite : ${invites}"
-                                th:include="fragments/components :: membership-card"
-                                th:with="membership=${invite}">
-                            </li>
-                        </ul>
-                    </div>
+                <input type="hidden" name="teamId" th:value="${team.getId()}">
+                <div class="form-control">
+                    <button type="submit" class="w-12 btn btn-wow">Create Project</button>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="card">
-                    <div class="row"><strong>Send More Invitations</strong></div>
-                    <div class="row">
-                        <form th:action="@{invite}" method="post" class="col form-wrapper">
-                            <div class="row form-control">
-                                <input type="email" list="accounts" id="invitation" name="invitation" autocomplete="off" placeholder="user@example.com">
-                            </div>
-                            <datalist id="accounts">
-                                <option th:each="account : ${allAccounts}"
-                                        th:text="${account.email()}"></option>
-                                <!-- TODO: MAKE IT POSSIBLE TO ALSO GE THE NAME
-                                    https://stackoverflow.com/questions/29882361/show-datalist-labels-but-submit-the-actual-value/61328832#61328832
-                                -->
-                            </datalist>
-                            <input type="hidden" name="teamId" th:value="${team.getId()}">
-                            <div class="row form-control">
-                                <button type="submit" class="w-12 btn btn-wow">Send Invitation</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
+    </div>
+
+    <div class="col">
+        <h2 class="heading center">Memberships</h2>
+        <div class="card">
+            <strong class="heading">Current Members</strong>
+            <ul class="list-group">
+                <li class="no-wrap space-between"
+                    th:each="member : ${members}"
+                    th:include="fragments/components :: membership-card"
+                    th:with="membership=${member}">
+                </li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <strong class="heading">Active Invitations</strong>
+            <ul class="list-group">
+                <li class="no-wrap space-between"
+                    th:each="invite : ${invites}"
+                    th:include="fragments/components :: membership-card"
+                    th:with="membership=${invite}">
+                </li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <strong>Send More Invitations</strong>
+            <form th:action="@{invite}" method="post" class="col form-wrapper">
+                <div class="form-control">
+                    <input type="email" list="accounts" id="invitation" name="invitation" autocomplete="off" placeholder="user@example.com">
+                </div>
+                <datalist id="accounts">
+                    <option th:each="account : ${allAccounts}" th:text="${account.email()}"></option>
+                    <!--
+                    TODO: MAKE IT POSSIBLE TO ALSO GE THE NAME
+                    https://stackoverflow.com/questions/29882361/show-datalist-labels-but-submit-the-actual-value/61328832#61328832
+                    -->
+                </datalist>
+
+                <input type="hidden" name="teamId" th:value="${team.getId()}">
+
+                <div class="form-control">
+                    <button type="submit" class="w-12 btn btn-wow">Send Invitation</button>
+                </div>
+            </form>
+        </div>
+    </div>
     </div>
     </th:block>
 </main>
