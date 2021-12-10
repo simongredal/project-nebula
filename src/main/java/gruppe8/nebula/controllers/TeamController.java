@@ -72,6 +72,7 @@ public class TeamController {
 
         Account account = (Account) authentication.getPrincipal();
         Boolean success = teamService.createInvitation(account, request);
+
         if (success) {
             log.info("Successful invite");
             return "redirect:/teams"+request.teamId();
@@ -131,6 +132,7 @@ public class TeamController {
         Account account = (Account) authentication.getPrincipal();
         log.info("POST /teams/accept request=" + request);
 
+        // TODO: Check authorization?
         Boolean success = teamService.acceptMembership(account, request);
         if (success) {
             log.info("Successful accept");
@@ -147,6 +149,7 @@ public class TeamController {
         Account account = (Account) authentication.getPrincipal();
         log.info("POST /teams/reject request=" + request);
 
+        // TODO: Check authorization?
         Boolean success = teamService.rejectMembership(account, request);
         if (success) {
             log.info("Successful reject");

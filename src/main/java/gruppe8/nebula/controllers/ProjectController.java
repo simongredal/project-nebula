@@ -75,6 +75,7 @@ public class ProjectController {
         return "project";
     }
 
+    // TODO: Maybe move task related stuff to a task controller?
     @PostMapping("/create")
     public RedirectView addTask(TaskCreationRequest request, Authentication authentication, RedirectAttributes redirectAttributes) {
         Account account = (Account) authentication.getPrincipal();
@@ -95,6 +96,7 @@ public class ProjectController {
 
         log.info("POST /projects/delete: TaskDeletionRequest=%s, Account=%s".formatted(request, account));
 
+        // TODO: Check authorization
         Boolean success = taskService.deleteTask(request);
 
         if (success) {
@@ -112,6 +114,7 @@ public class ProjectController {
 
         log.info("POST /projects/update: TaskUpdateRequest=%s, Account=%s".formatted(request,account));
 
+        // TODO: Check authorization
         Boolean success = taskService.updateTask(request);
 
         if (success){
@@ -128,6 +131,7 @@ public class ProjectController {
 
         log.info("POST /teams/create: TaskCreationRequest=%s, Account=%s".formatted(request,account));
 
+        // TODO: Check authorization
         Boolean success = resourceService.createResource(request);
         if (success) {
             log.info("Successful Resource create");
@@ -137,12 +141,14 @@ public class ProjectController {
         log.info("Unsuccessful Resource create");
         return "redirect:/projects/"+request.project_id();
     }
+
     @PostMapping("/delete-resource")
     public String deleteResource(ResourceDeletionRequest request, Authentication authentication) {
         Account account = (Account) authentication.getPrincipal();
 
         log.info("POST /teams/create: TaskCreationRequest=%s, Account=%s".formatted(request,account));
 
+        // TODO: Check authorization
         Boolean success = resourceService.deleteResource(request);
         if (success) {
             log.info("Successful Resource delete");
@@ -158,8 +164,8 @@ public class ProjectController {
         Account account = (Account) authentication.getPrincipal();
         log.info("POST /projects/new-project: CreateProjectRequest=%s, Account=%s".formatted(request, account));
 
+        // TODO: Check authorization
         Boolean success = projectService.createProject(account,request);
-
         if (success){
             log.info("Successful Project Create");
             return "redirect:/teams/"+ request.teamId();

@@ -29,9 +29,7 @@ public class ProjectService {
     }
 
     public Project getProjectById(Account account, Long id) {
-        // TODO: Check that account is allowed to get this project
         Boolean allowed = accountOwnsProject(account, id);
-
         if (!allowed) { return null; }
 
         ProjectEntity projectEntity = projectRepository.getProjectById(id);
@@ -43,7 +41,6 @@ public class ProjectService {
         project.setSubtasks(taskEntities);
         project.setResources(resourceEntities);
 
-        //project.getDurationLayers();
         project.getInsights();
         return project;
     }
