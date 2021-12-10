@@ -160,17 +160,16 @@ public class ProjectController {
     }
 
     @PostMapping("/new-project")
-    public String newProject(CreateProjectRequest request, Authentication authentication){
+    public RedirectView newProject(CreateProjectRequest request, Authentication authentication, RedirectAttributes redirectAttributes){
         Account account = (Account) authentication.getPrincipal();
         log.info("POST /projects/new-project: CreateProjectRequest=%s, Account=%s".formatted(request, account));
 
-        // TODO: Check authorization
-        Boolean success = projectService.createProject(account,request);
-        if (success){
-            log.info("Successful Project Create");
-            return "redirect:/teams/"+ request.teamId();
-        }
-        log.info("Unsuccessful Project create");
-        return "redirect:/teams";
+        Boolean success = projectService.createProject(account, request);
+        Message message;
+        if (success) { message = new Message(Message.Type.SUCCESS, "New project created succesfully."); }
+        else { message = new Message(Message.Type.ERROR, "Could not create new project."); }
+        redirectAttributes.addFlashAttribute(message);
+
+        return new RedirectView("/teams/" + request.teamId());
     }
 }
