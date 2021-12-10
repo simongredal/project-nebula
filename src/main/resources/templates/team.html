@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org" th:include="fragments/layout :: layout">
 <head>
     <meta charset="UTF-8">
-    <title th:fragment="page" th:inline="text">[['Team '+${team.getName()}]]</title>
+    <title th:fragment="page" th:inline="text">[['Team ' + ${team == null ? 'Not Found' : team.getName()}]]</title>
 </head>
 <body>
 <main th:fragment="content">
-
+    <th:block th:unless="${team} == null">
     <div class="center"><h1 th:text="${team.getName()}"></h1> </div>
     <div class="row wrap">
         <div class="col">
@@ -97,6 +97,7 @@
             </div>
         </div>
     </div>
+    </th:block>
 </main>
 </body>
 </html>

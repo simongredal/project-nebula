@@ -52,6 +52,13 @@ public class TeamController {
 
         Account account = (Account) authentication.getPrincipal();
         Team team = teamService.getTeam(account, teamId);
+
+        if (team == null) {
+           Message message = new Message(Message.Type.WARNING, "Something went wrong and we couldn't fetch the team. Maybe you aren't a part of the team yet?");
+           model.addAttribute("message", message);
+           return "team";
+        }
+
         List<MembershipEntity> members = teamService.getMembersForTeam(account, teamId);
         List<MembershipEntity> invites = teamService.getInvitationsForTeam(account, teamId);
         List<Account> allAccounts = accountService.loadAllAccounts();
