@@ -65,12 +65,14 @@ public class ProjectController {
         log.info("GET /projects/"+projectId);
 
         Account account = (Account) authentication.getPrincipal();
-        Project project = projectService.getProjectById(projectId);
+        Project project = projectService.getProjectById(account, projectId);
 
-        model.addAttribute("account", account);
+        if (project == null) {
+            Message message = new Message(Message.Type.WARNING, "Something went wrong and we couldn't fetch the project. Maybe you aren't a part of the team yet?");
+            model.addAttribute("message", message);
+        }
+
         model.addAttribute("project", project);
-
-        log.info("getAllTasks=" + project.getAllTasks() );
         return "project";
     }
 

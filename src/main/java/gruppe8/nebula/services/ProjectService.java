@@ -28,12 +28,17 @@ public class ProjectService {
         this.membershipService = membershipService;
     }
 
-    public Project getProjectById(Long id) {
+    public Project getProjectById(Account account, Long id) {
+        // TODO: Check that account is allowed to get this project
+        Boolean allowed = accountOwnsProject(account, id);
+
+        if (!allowed) { return null; }
+
         ProjectEntity projectEntity = projectRepository.getProjectById(id);
         List<TaskEntity> taskEntities = taskService.getTasksFromProject(id);
         List<ResourceEntity> resourceEntities = resourceService.getResourcesFromProject(id);
 
-        ProjectFormatter project = new ProjectFormatter(id,projectEntity.name());
+        ProjectFormatter project = new ProjectFormatter(id, projectEntity.name());
         project.setProjectEntity(projectEntity);
         project.setSubtasks(taskEntities);
         project.setResources(resourceEntities);
@@ -41,6 +46,12 @@ public class ProjectService {
         //project.getDurationLayers();
         project.getInsights();
         return project;
+    }
+
+    public Boolean accountOwnsProject(Account account, Long projectId) {
+        // Converting null to false
+        Boolean accountOwnsProject = projectRepository.accountOwnsProject(account.id(), projectId);
+        return (accountOwnsProject == null ? false : accountOwnsProject);
     }
 
     public Boolean createProject(Account account, CreateProjectRequest request) {

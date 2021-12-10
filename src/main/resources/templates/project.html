@@ -7,6 +7,7 @@
 </head>
 <body>
 <main th:fragment="content">
+    <th:block th:unless="${project}==null">
     <div class="center">
         <h2 th:text="${project.getName()}"></h2>
     </div>
@@ -75,6 +76,7 @@
             </div>
         </div>
     </div>
+    </th:block>
 
 </main>
 </body>

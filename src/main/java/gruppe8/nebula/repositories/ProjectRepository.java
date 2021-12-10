@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sql2o.Sql2oException;
 
 @Repository
 public class ProjectRepository {
@@ -111,5 +112,28 @@ public class ProjectRepository {
         }
 
         return projectEntities;
+    }
+
+    public Boolean accountOwnsProject(Long accountId, Long projectId) {
+        String query = """
+                      SELECT EXISTS( SELECT * FROM projects p
+                      JOIN teams t ON p.team_id = t.id
+                      JOIN memberships m ON t.id = m.team_id
+                      JOIN accounts a ON m.account_id = a.id
+                      WHERE a.id = :accountId AND p.id = :projectId AND m.accepted = TRUE );
+                       """;
+
+        try (org.sql2o.Connection connection = databaseManager.openConnection()) {
+            return connection.createQuery(query)
+                    .addParameter("accountId", accountId)
+                    .addParameter("projectId", projectId)
+                    .executeScalar(Boolean.class);
+
+        } catch (Sql2oException e) {
+            String currentMethod = Thread.currentThread().getStackTrace()[2].getMethodName();
+            log.error(currentMethod + "%s() threw exception with message '%s'".formatted(currentMethod, e.getMessage()));
+        }
+
+        return null;
     }
 }
