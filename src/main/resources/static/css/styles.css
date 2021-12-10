@@ -48,11 +48,13 @@ p {
 
 .form-wrapper {
     display: flex;
+    gap: 1rem;
 }
 
 .form-control {
     display: flex;
     flex-direction: row;
+    gap: 1rem;
     align-items: baseline;
 }
 

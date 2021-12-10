@@ -17,7 +17,7 @@
     </th:block>
 </head>
 <body>
-<header class="navbar" th:fragment="navbar" th:with="account=${account}">
+<header class="navbar" th:fragment="navbar">
     <!--/*@thymesVar id="account" type="gruppe8.nebula.models.Account"*/-->
     <a href="/">
         <div class="navbar-brand">
@@ -28,12 +28,12 @@
         </div>
     </a>
     <div class="navbar-spacer"></div>
-    <div th:if="${account} == null" class="navbar-text"><a th:href="@{/signup}">Signup!</a></div>
-    <div th:if="${account} == null" class="navbar-text"><a th:href="@{/login}">Login</a></div>
-    <div th:unless="${account} == null" class="navbar-text"><p th:text="'Welcome '+ ${account.name()}"></p></div>
-    <div th:unless="${account} == null" class="navbar-text"><a th:href="@{/projects}">Projects</a></div>
-    <div th:unless="${account} == null" class="navbar-text"><a th:href="@{/teams}">Teams</a></div>
-    <div th:unless="${account} == null" class="navbar-text"><a th:href="@{/logout}">Logout</a></div>
+    <div th:unless="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/signup}">Signup!</a></div>
+    <div th:unless="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/login}">Login</a></div>
+    <div th:if="${#authentication.authenticated}" class="navbar-text"><p th:text="'Welcome '+ ${#authentication.name}"></p></div>
+    <div th:if="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/projects}">Projects</a></div>
+    <div th:if="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/teams}">Teams</a></div>
+    <div th:if="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/logout}">Logout</a></div>
 </header>
 
 <th:block th:fragment="message" th:with="message=${message}" th:if="${message != null}">
