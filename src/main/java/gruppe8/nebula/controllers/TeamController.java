@@ -38,7 +38,6 @@ public class TeamController {
         List<MembershipEntity> invites = teamService.getInvitationsForAccount(account);
         List<Account> allAccounts = accountService.loadAllAccounts();
 
-        model.addAttribute("account", account);
         model.addAttribute("teams", teams);
         model.addAttribute("invites", invites);
         model.addAttribute("allAccounts", allAccounts);
@@ -57,7 +56,6 @@ public class TeamController {
         List<MembershipEntity> invites = teamService.getInvitationsForTeam(account, teamId);
         List<Account> allAccounts = accountService.loadAllAccounts();
 
-        model.addAttribute("account", account);
         model.addAttribute("team", team);
         model.addAttribute("members", members);
         model.addAttribute("invites", invites);

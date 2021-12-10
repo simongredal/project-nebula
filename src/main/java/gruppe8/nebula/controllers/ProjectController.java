@@ -52,7 +52,6 @@ public class ProjectController {
                 .map(membershipEntity -> teamService.getTeam(account, membershipEntity.teamId()))
                 .toList();
 
-        model.addAttribute("account", account);
         model.addAttribute("allTeams", allTeams);
 
         log.info("GET /projects: Model="+model);
