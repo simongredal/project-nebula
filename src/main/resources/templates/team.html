@@ -12,8 +12,7 @@
     <div class="col">
         <h2 class="heading center">Projects</h2>
 
-        <div class="card"
-             th:each="project : ${team.getProjects()}"
+        <div class="card" th:each="project : ${team.getProjects()}"
              th:insert="fragments/components :: project-card"
              th:with="project=${project}">
         </div>

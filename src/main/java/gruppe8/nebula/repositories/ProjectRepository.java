@@ -26,7 +26,7 @@ public class ProjectRepository {
 
     public ProjectEntity getProjectById(Long id) {
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "SELECT * FROM projects WHERE projects.id = ?";
+            String query = "SELECT (id, team_id, name) FROM projects WHERE projects.id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
 
@@ -35,6 +35,7 @@ public class ProjectRepository {
             if (resultSet.next()) {
                 return new ProjectEntity(
                         resultSet.getLong("id"),
+                        resultSet.getLong("team_id"),
                         resultSet.getString("name")
                 );
             }
@@ -46,13 +47,13 @@ public class ProjectRepository {
         return null;
     }
 
-    public boolean createProject(Project project, Account account) {
+    public boolean createProject(ProjectEntity entity) {
         try (Connection connection = databaseManager.getConnection()) {
             String query = "INSERT INTO projects (name, team_id) VALUES (?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, project.getName());
-            preparedStatement.setLong(2, project.getId());
+            preparedStatement.setString(1, entity.name());
+            preparedStatement.setLong(2, entity.teamId());
 
             int updatedRows = preparedStatement.executeUpdate();
             if (updatedRows != 1) {
@@ -67,14 +68,13 @@ public class ProjectRepository {
         return false;
     }
 
-    public boolean deleteProject(Project project, Account account) {
+    public boolean deleteProject(Long projectId) {
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "DELETE FROM projects WHERE (name = ? AND id = ?);";
+            String query = "DELETE FROM projects WHERE id = ?;";
             connection.setAutoCommit(false);
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, Long.parseLong(project.getName()));
-            preparedStatement.setLong(2, project.getId());
+            preparedStatement.setLong(1, projectId);
 
             log.info("deletion of project initialized");
             int changedRows = preparedStatement.executeUpdate();
@@ -94,7 +94,7 @@ public class ProjectRepository {
         List<ProjectEntity> projectEntities = new ArrayList<>();
 
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "SELECT * FROM projects WHERE projects.team_id = ?";
+            String query = "SELECT id, team_id, name FROM projects WHERE team_id = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, teamId);
 
@@ -103,6 +103,7 @@ public class ProjectRepository {
             while (resultSet.next()) {
                 projectEntities.add(new ProjectEntity(
                         resultSet.getLong("id"),
+                        resultSet.getLong("team_id"),
                         resultSet.getString("name")
                 ));
             }
