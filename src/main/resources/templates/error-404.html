@@ -34,6 +34,8 @@
 <main style="text-align: center">
     <h1>Oops!</h1>
     <h3>You tried to access a wrong page</h3>
+    <!-- Prints the endpoint which was tried to access -->
+    <h4 th:text="${#httpServletRequest.getAttribute('javax.servlet.error.request_uri')} + ' is not a page of ours!'"></h4>
 
     <p>🤔</p>
 
