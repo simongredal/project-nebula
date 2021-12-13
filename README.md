@@ -105,7 +105,15 @@ Second you need to [install git](https://git-scm.com/downloads) and you need to 
 
 ### Begin Developing Locally
 
-TBD
+1. Clone this git repository to your computer using the following command:  
+   ```sh
+   git clone "https://github.com/simongredal/project-nebula"
+   ```
+2. Open your editor, we are currently using IntelliJ. Make sure to check the _built with_ section, to check if your editor support these languages. 
+
+3. You are now ready to start developing locally on your own computer. 
+
+
 
 
 <!-- USAGE EXAMPLES -->
