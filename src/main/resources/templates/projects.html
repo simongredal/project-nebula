@@ -7,7 +7,9 @@
 <body>
 <main th:fragment="content">
     <div class="row center"><h2 class="heading">All Your Projects</h2></div>
-    <div class="row"></div>
+    <div class="row center" th:if="${allTeams.isEmpty()}">
+        <h3><a th:href="@{teams}">To create a Team and project go here!</a></h3>
+    </div>
     <div class="row" th:if="${allTeams}">
         <div class="col" th:each="team: ${allTeams}">
             <div class="row center">
