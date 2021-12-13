@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Fragments</title>
@@ -17,8 +17,9 @@
     </th:block>
 </head>
 <body>
-<header class="navbar" th:fragment="navbar">
-    <!--/*@thymesVar id="account" type="gruppe8.nebula.models.Account"*/-->
+<header class="navbar"
+        th:fragment="navbar"
+        th:with="authenticated = ${#authentication instanceof T(org.springframework.security.authentication.UsernamePasswordAuthenticationToken)}">
     <a href="/">
         <div class="navbar-brand">
             <img class="navbar-logo" th:src="@{/images/starry-round-logo.svg}" alt="logo">
@@ -28,12 +29,12 @@
         </div>
     </a>
     <div class="navbar-spacer"></div>
-    <div th:unless="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/signup}">Signup!</a></div>
-    <div th:unless="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/login}">Login</a></div>
-    <div th:if="${#authentication.authenticated}" class="navbar-text"><p th:text="'Welcome '+ ${#authentication.name}"></p></div>
-    <div th:if="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/projects}">Your projects</a></div>
-    <div th:if="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/teams}">Manage teams</a></div>
-    <div th:if="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/logout}">Logout</a></div>
+    <div th:unless="${authenticated}" class="navbar-text"><a th:href="@{/signup}">Signup!</a></div>
+    <div th:unless="${authenticated}" class="navbar-text"><a th:href="@{/login}">Login</a></div>
+    <div th:if="${authenticated}" class="navbar-text"><p th:text="'Welcome '+ ${#authentication.name}"></p></div>
+    <div th:if="${authenticated}" class="navbar-text"><a th:href="@{/projects}">Your projects</a></div>
+    <div th:if="${authenticated}" class="navbar-text"><a th:href="@{/teams}">Manage teams</a></div>
+    <div th:if="${authenticated}" class="navbar-text"><a th:href="@{/logout}">Logout</a></div>
 </header>
 
 <th:block th:fragment="message" th:with="message=${message}" th:if="${message != null}">
