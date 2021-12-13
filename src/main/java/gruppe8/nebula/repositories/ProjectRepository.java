@@ -26,7 +26,7 @@ public class ProjectRepository {
 
     public ProjectEntity getProjectById(Long id) {
         try (Connection connection = databaseManager.getConnection()) {
-            String query = "SELECT (id, team_id, name) FROM projects WHERE projects.id = ?";
+            String query = "SELECT id, team_id, name FROM projects WHERE projects.id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
 
