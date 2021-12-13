@@ -94,7 +94,6 @@ p {
 .card {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     background-color: white;
     border: 1pt solid hsl(0deg, 0%, 90%);
     border-radius: 0.6rem;
@@ -141,7 +140,7 @@ p {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    flex: 1 0 auto;
+    flex: 1 0 0;
     gap: 1rem;
 }
 
