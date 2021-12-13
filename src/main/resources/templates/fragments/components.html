@@ -31,8 +31,8 @@
     <div th:unless="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/signup}">Signup!</a></div>
     <div th:unless="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/login}">Login</a></div>
     <div th:if="${#authentication.authenticated}" class="navbar-text"><p th:text="'Welcome '+ ${#authentication.name}"></p></div>
-    <div th:if="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/projects}">Projects</a></div>
-    <div th:if="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/teams}">Teams</a></div>
+    <div th:if="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/projects}">Your projects</a></div>
+    <div th:if="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/teams}">Manage teams</a></div>
     <div th:if="${#authentication.authenticated}" class="navbar-text"><a th:href="@{/logout}">Logout</a></div>
 </header>
 
