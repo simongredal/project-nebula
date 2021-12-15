@@ -21,11 +21,13 @@ import java.util.NoSuchElementException;
 class ProjectTest {
 
     Project project;
+    Project projectEmpty;
 
     @BeforeEach
     public void init() {
         //Arrange
         project = new Project(1L,"testproject");
+        projectEmpty = new Project(1L,"testprojectEmpty");
         ArrayList<TaskEntity> list = new ArrayList<>();
         LocalDateTime dt1s = LocalDateTime.of(2015, Month.JULY, 22, 19, 30, 40);
         LocalDateTime dt1e = LocalDateTime.of(2015, Month.JULY, 29, 19, 30, 40);
@@ -60,9 +62,11 @@ class ProjectTest {
     void getTotalProjectSpanDays() {
         // Act
         int days = project.getTotalProjectSpanDays();
+        int daysNull = projectEmpty.getTotalProjectSpanDays();
 
         //Assert
         assertEquals(8,days);
+        assertEquals(0,daysNull);
     }
 
     @Test
