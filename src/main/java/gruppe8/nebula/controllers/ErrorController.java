@@ -28,7 +28,7 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
         // Returns the page which was tried to access
         logger.info((String) request.getAttribute("javax.servlet.error.request_uri"));
 
-        return switch (status.toString()) {
+        return switch (String.valueOf(status)) {
             case "400","401","403","404" -> "error-404";
             case "500","503" -> "error-500";
 
