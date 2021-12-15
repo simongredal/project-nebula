@@ -78,7 +78,7 @@ public class Project {
         LocalDateTime date2 = getEndDate();
 
         if (date1 == null|date2 ==null) {
-            return -1;
+            return 0;
         }
         return (int) ChronoUnit.DAYS.between(date1, date2) + 1;
     }
