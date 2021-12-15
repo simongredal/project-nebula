@@ -17,6 +17,8 @@ public class Account implements UserDetails {
     public Account() {}
 
     public static Account of(AccountEntity entity) {
+        if (entity == null) { return null; }
+
         Account account = new Account();
         account.id = entity.getId();
         account.email = entity.getEmail();
