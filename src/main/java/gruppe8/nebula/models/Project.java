@@ -79,7 +79,7 @@ public class Project {
         if (date1==null || date2==null) {
             return -1;
         }
-        return (int) ChronoUnit.DAYS.between(date1, date2);
+        return (int) ChronoUnit.DAYS.between(date1, date2) + 1;
     }
 
     /* below is a task tree algorithm that finds the total duration of each layer, adds it together and returns
@@ -104,7 +104,6 @@ public class Project {
             // If this node has children
             while (n > 0)
             {
-
                 // Dequeue an item from queue
                 // and print it
                 Task p = q.peek();
@@ -127,7 +126,7 @@ public class Project {
     public List<String> getTotalProjectSpanDates() {
         List<String> dates = new ArrayList<>();
 
-        for (int i=0; i<=getTotalProjectSpanDays();i++) {
+        for (int i=0; i<getTotalProjectSpanDays();i++) {
             Date currentDate = java.sql.Timestamp.valueOf(getStartDate().plusDays(i));
             String[] dateString= currentDate.toString().split(" ",0);
             String dateFormatted = dateString[0];
