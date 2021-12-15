@@ -45,7 +45,7 @@ class ProjectTest {
 
         LocalDateTime dt5s = LocalDateTime.of(2015, Month.JULY, 25, 19, 30, 40);
         LocalDateTime dt5e = LocalDateTime.of(2015, Month.JULY, 29, 19, 30, 40);
-        TaskEntity e5 = new TaskEntity(4L,1L,1L,"task1",dt1s,dt1e,5L,null,null);
+        TaskEntity e5 = new TaskEntity(5L,1L,1L,"task1",dt1s,dt1e,5L,null,null);
 
         list.add(e1);
         list.add(e2);
@@ -71,20 +71,23 @@ class ProjectTest {
         // Arrange
 
         List<List<Integer>> layers = new ArrayList<>();
-        List<Integer> parentless1 = new ArrayList<>();
-        List<Integer> parentless2 = new ArrayList<>();
+        List<Integer> emptyList = new ArrayList<>();
+        List<Integer> whenTaskNull = new ArrayList<>();
 
         // Act
         for (Task task : project.getSubtasks()) {
             layers.add(project.LevelOrderTraversal(task));
         }
 
+        whenTaskNull = project.LevelOrderTraversal(null);
         // Assert
         assertEquals(10, layers.get(0).get(0));
         assertEquals(13, layers.get(0).get(1));
         assertEquals(11, layers.get(0).get(2));
 
         assertEquals(30, layers.get(1).get(0));
+
+        assertEquals(emptyList, whenTaskNull);
 
     }
 
@@ -103,5 +106,7 @@ class ProjectTest {
         assertEquals("2015-07-27",projectSpan.get(5));
         assertEquals("2015-07-28",projectSpan.get(6));
         assertEquals("2015-07-29",projectSpan.get(projectSpan.size()-1));
+
+
     }
 }
