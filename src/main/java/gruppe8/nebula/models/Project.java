@@ -76,7 +76,10 @@ public class Project {
     public int getTotalProjectSpanDays() {
         LocalDateTime date1 = getStartDate();
         LocalDateTime date2 = getEndDate();
-        
+
+        if (date1 == null|date2 ==null) {
+            return -1;
+        }
         return (int) ChronoUnit.DAYS.between(date1, date2) + 1;
     }
 
