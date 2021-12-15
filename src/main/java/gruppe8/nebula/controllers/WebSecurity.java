@@ -38,7 +38,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 // antMatchers allows us to decide which pages are accessible without having logged in. We've split it up into our post and get mappings
                 .antMatchers(HttpMethod.GET,"/js/*", "/css/*", "/images/*", "/fonts/*", "/videos/*").permitAll() // static content
-                .antMatchers(HttpMethod.GET,"/", "/login*", "/signup*", "/contact").permitAll() // HTML templates
+                .antMatchers(HttpMethod.GET,"/", "/login*", "/signup*", "/contact*", "/error*").permitAll() // HTML templates
                 .antMatchers(HttpMethod.POST,"/login", "/signup").permitAll()
                 // Everything else requires a log in
                 .anyRequest().authenticated()
