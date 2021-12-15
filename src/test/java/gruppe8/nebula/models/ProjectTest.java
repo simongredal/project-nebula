@@ -96,6 +96,12 @@ class ProjectTest {
         // Assert
         assertEquals(project.getTotalProjectSpanDays(),projectSpan.size());
         assertEquals("2015-07-22",projectSpan.get(0));
+        assertEquals("2015-07-23",projectSpan.get(1));
+        assertEquals("2015-07-24",projectSpan.get(2));
+        assertEquals("2015-07-25",projectSpan.get(3));
+        assertEquals("2015-07-26",projectSpan.get(4));
+        assertEquals("2015-07-27",projectSpan.get(5));
+        assertEquals("2015-07-28",projectSpan.get(6));
         assertEquals("2015-07-29",projectSpan.get(projectSpan.size()-1));
     }
 }
