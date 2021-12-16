@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-		<log4j2.version>2.15.0</log4j2.version> <!-- Upgrade Log4J to fix CVE-2021-44228 (needed until Spring makes a new release -->
+		<log4j2.version>2.16.0</log4j2.version> <!-- Upgrade Log4J to fix CVE-2021-44228 (needed until Spring makes a new release -->
 	</properties>
 	<dependencies>
 		<dependency>
