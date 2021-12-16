@@ -1,3 +1,14 @@
+begin;
+set foreign_key_checks = 0;
+drop table if exists accounts;
+drop table if exists teams;
+drop table if exists memberships;
+drop table if exists projects;
+drop table if exists resources;
+drop table if exists tasks;
+drop table if exists assignments;
+set foreign_key_checks = 1;
+
 create table if not exists accounts (
     id       int auto_increment primary key,
     email    varchar(255) not null,
