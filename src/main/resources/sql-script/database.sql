@@ -1,3 +1,4 @@
+# Authors Simon Gredal & Malthe Gram & Mark Friis Larsen
 begin;
 set foreign_key_checks = 0;
 drop table if exists accounts;

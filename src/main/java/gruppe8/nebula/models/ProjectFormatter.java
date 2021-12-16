@@ -1,3 +1,4 @@
+// Authors Simon Gredal & Mark Friis Larsen
 package gruppe8.nebula.models;
 
 import java.util.ArrayList;

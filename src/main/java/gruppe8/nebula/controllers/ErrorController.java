@@ -1,3 +1,4 @@
+// Authors Malthe Gram
 package gruppe8.nebula.controllers;
 
 /* Documentation for the error handler

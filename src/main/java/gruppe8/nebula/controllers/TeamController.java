@@ -1,3 +1,4 @@
+// Authors Frederik Vilhelmsen & Mark Friis Larsen & Malthe Gram & Simon Gredal
 package gruppe8.nebula.controllers;
 
 import gruppe8.nebula.entities.MembershipEntity;

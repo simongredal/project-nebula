@@ -1,3 +1,4 @@
+// Authors Simon Gredal
 package gruppe8.nebula.models;
 
 public record Message(Type type, String text) {

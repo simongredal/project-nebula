@@ -1,7 +1,6 @@
+// Authors Simon Gredal
 package gruppe8.nebula.controllers;
 
-import gruppe8.nebula.models.Account;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

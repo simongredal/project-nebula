@@ -1,3 +1,4 @@
+// Authors Simon Gredal & Malthe Gram
 // Runs when document is "ready"
 document.addEventListener("DOMContentLoaded", (event) => {
     const tabs = document.querySelectorAll(".tab-group>.tab-menu>*");

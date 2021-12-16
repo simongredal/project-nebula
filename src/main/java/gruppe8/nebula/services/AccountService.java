@@ -1,3 +1,4 @@
+// Authors Simon Gredal & Malthe Gram
 package gruppe8.nebula.services;
 
 import gruppe8.nebula.entities.AccountEntity;

@@ -1,3 +1,4 @@
+// Authors Mark Friis Larsen
 //example:
 //https://webdesign.tutsplus.com/tutorials/build-a-simple-gantt-chart-with-css-and-javascript--cms-33813
 

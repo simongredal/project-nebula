@@ -1,3 +1,4 @@
+// Authors Simon Gredal & Malthe Gram & Mark Friis Larsen & Frederik Vilhelmsen
 package gruppe8.nebula.services;
 
 import gruppe8.nebula.models.Task;

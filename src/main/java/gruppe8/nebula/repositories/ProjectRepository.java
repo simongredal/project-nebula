@@ -1,7 +1,6 @@
+// Authors Simon Gredal & Malthe Gram & Mark Friis Larsen & Frederik Vilhelmsen
 package gruppe8.nebula.repositories;
 
-import gruppe8.nebula.models.Account;
-import gruppe8.nebula.models.Project;
 import gruppe8.nebula.services.DatabaseManager;
 import gruppe8.nebula.entities.ProjectEntity;
 import org.springframework.stereotype.Repository;

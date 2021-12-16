@@ -1,3 +1,4 @@
+# Authors Malthe Gram
 INSERT INTO Nebula.accounts (id, email, password, name) VALUES (1, 'testcase1@live.dk', '$argon2id$v=19$m=32768,t=5,p=1$rqyHSg5luQsKKL01UPCmfg$q++9dwpqivBvaNy7TFkPcq/KIFDcBRNr7+s7Cwk2ECI', 'Test Case 1');
 INSERT INTO Nebula.accounts (id, email, password, name) VALUES (2, 'testcase2@live.dk', '$argon2id$v=19$m=32768,t=5,p=1$c0WWya9gtUzhDW2uy4mIVg$RJeabEudSk+WWE+UN5JitBSREdajvtCCIeiwnQ0OPd4', 'Test Case 2');
 INSERT INTO Nebula.accounts (id, email, password, name) VALUES (3, 'testcase3@live.dk', '$argon2id$v=19$m=32768,t=5,p=1$wKKjouBF6FQNTzNx40VlWw$bTfIJ+fQN0tThLz3rxz0xFSfXuHWrVZcZNJgRsD4eQc', 'Test Case 3');

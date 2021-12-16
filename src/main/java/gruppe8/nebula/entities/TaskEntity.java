@@ -1,3 +1,4 @@
+// Authors Malthe Gram & Simon Gredal
 package gruppe8.nebula.entities;
 
 import java.time.LocalDateTime;

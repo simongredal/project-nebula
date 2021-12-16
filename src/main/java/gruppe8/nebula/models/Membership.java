@@ -1,3 +1,4 @@
+// Authors Mark Friis Larsen
 package gruppe8.nebula.models;
 
 public class Membership {

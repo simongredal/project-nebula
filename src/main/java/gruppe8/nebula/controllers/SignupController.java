@@ -1,3 +1,4 @@
+// Authors Simon Gredal & Malthe Gram
 package gruppe8.nebula.controllers;
 
 

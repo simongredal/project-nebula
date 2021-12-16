@@ -1,3 +1,4 @@
+// Authors Malthe Gram & Simon Gredal
 package gruppe8.nebula.controllers;
 
 import org.slf4j.Logger;

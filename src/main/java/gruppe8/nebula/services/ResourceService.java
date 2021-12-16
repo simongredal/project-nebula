@@ -1,3 +1,4 @@
+// Authors Mark Friis Larsen
 package gruppe8.nebula.services;
 
 import gruppe8.nebula.entities.ResourceEntity;

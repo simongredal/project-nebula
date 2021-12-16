@@ -1,3 +1,4 @@
+// Authors Simon Gredal
 package gruppe8.nebula;
 
 import org.springframework.boot.SpringApplication;

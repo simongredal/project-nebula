@@ -1,3 +1,4 @@
+// Authors Mark Friis Larsen & Frederik Vilhelmsen
 package gruppe8.nebula.controllers;
 
 import gruppe8.nebula.models.Account;

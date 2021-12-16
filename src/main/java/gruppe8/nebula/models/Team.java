@@ -1,3 +1,5 @@
+// Authors Simon Gredal & Mark Friis Larsen
+
 package gruppe8.nebula.models;
 
 import gruppe8.nebula.entities.TeamEntity;

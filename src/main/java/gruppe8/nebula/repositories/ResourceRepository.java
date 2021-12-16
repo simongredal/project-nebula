@@ -1,3 +1,4 @@
+// Authors Simon Gredal & Malthe Gram & Mark Friis Larsen & Frederik Vilhelmsen
 package gruppe8.nebula.repositories;
 
 import gruppe8.nebula.entities.ResourceEntity;
