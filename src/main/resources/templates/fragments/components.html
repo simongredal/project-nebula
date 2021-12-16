@@ -159,7 +159,7 @@
 
             <td>
                 <div class="row no-gap">
-                    <form class="form-wrapper" th:action="@{/projects/update}" method="POST">
+                    <form class="form-wrapper" th:action="@{/} " method="POST">
                         <input type="hidden" name="taskId" th:value="${task.getId()}">
                         <input type="hidden" name="projectId" th:value="${project.getId()}">
                         <button type="submit" class="btn btn-success"><i class="bi-pencil"></i></button>
