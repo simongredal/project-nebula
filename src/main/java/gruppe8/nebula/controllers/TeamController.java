@@ -82,7 +82,7 @@ public class TeamController {
 
         if (success) {
             log.info("Successful invite");
-            return "redirect:/teams"+request.teamId();
+            return "redirect:/teams/"+request.teamId();
         }
         log.info("unsuccessful invite");
         return "redirect:/teams";
@@ -98,7 +98,7 @@ public class TeamController {
         Boolean success = teamService.removeMembershipFromTeam(account, request);
         if (success){
             log.info("Successful uninvite");
-            return "redirect:/teams"+request.teamId();
+            return "redirect:/teams/"+request.teamId();
         }
         log.info("unsuccessful uninvite");
         return "redirect:/teams";
